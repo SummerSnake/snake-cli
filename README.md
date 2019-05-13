@@ -1,0 +1,45 @@
+# 项目
+
+snake-cli
+
+# 说明
+
+从零开始搭建 React 脚手架
+
+# 项目运行
+
+```
+
+git clone https://github.com/SummerSnake/snake-cli.git
+
+cd snake-cli
+
+# 安装项目依赖
+yarn -i
+
+# 项目启动
+yarn start
+
+# 项目构建
+yarn build
+
+```
+
+# 业务介绍
+
+目录结构
+
+    ├── build                   // 编译结果目录
+    ├── config                 // webpack配置目录
+    │   ├── webpack.dev.js     // 开发时配置
+    │   └── product.dev.js     // 打包时配置
+    ├── src                    // 源码目录
+    │   ├── components             // 组件
+    │   ├── pages                  // 页面文件目录
+    │   │   └── index
+    │   │       ├── index.js           // 页面逻辑
+    │   │       ├── index.scss         // 页面样式
+    │   ├── utils              // 常用工具类
+    │   ├── index.js             // 入口文件
+    │   └── index.html
+    └── package.json            // 项目依赖
