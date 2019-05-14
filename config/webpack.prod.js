@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const os = require('os');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
@@ -10,7 +11,7 @@ module.exports = {
     },
     output: {
         // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
-        filename: '[name].[hash:8].js',
+        filename: '[name].[contenthash:8].js',
         path: resolve(__dirname, '../build') // 输出目录
     },
     module: {
@@ -45,6 +46,7 @@ module.exports = {
                             {
                                 loader: 'thread-loader',
                                 options: {
+                                    // 产生的 worker 的数量，默认是 cpu 的核心数
                                     workers: os.cpus().length
                                 }
                             },
@@ -66,13 +68,17 @@ module.exports = {
                     {
                         test: /\.(scss)$/,
                         use: [
-                            { loader: 'style-loader' },
+                            // 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件
+                            MiniCssExtractPlugin.loader,
                             {
                                 loader: 'css-loader', options: {
                                 modules: true,
                                 localIdentName: '[local]--[hash:base64:6]'
                             }
                             },
+                            // postcss把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（Abstract Syntax Tree，AST），
+                            // 然后调用插件来处理 AST 并得到结果
+                            { loader: 'postcss-loader' },
                             { loader: 'sass-loader' }
                         ]
                     },
@@ -82,12 +88,41 @@ module.exports = {
                      */
                     {
                         test: /\.(jpg|jpeg|bmp|svg|png|webp|gif)$/,
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8 * 1024,
-                            name: '[name].[hash:8].[ext]'
-
-                        }
+                        use: [
+                            {
+                                loader: 'url-loader',
+                                options: {
+                                    limit: 8 * 1024,
+                                    name: '[name].[hash:8].[ext]',
+                                    outputPath: '/img'
+                                }
+                            },
+                            // 压缩图片
+                            {
+                                loader: 'img-loader',
+                                options: {
+                                    plugins: [
+                                        require('imagemin-gifsicle')({
+                                            interlaced: false
+                                        }),
+                                        require('imagemin-mozjpeg')({
+                                            progressive: true,
+                                            arithmetic: false
+                                        }),
+                                        require('imagemin-pngquant')({
+                                            floyd: 0.5,
+                                            speed: 2
+                                        }),
+                                        require('imagemin-svgo')({
+                                            plugins: [
+                                                { removeTitle: true },
+                                                { convertPathData: false }
+                                            ]
+                                        })
+                                    ]
+                                }
+                            }
+                        ]
                     },
                     /**
                      * 将静态资源 图片、视频、字体文件等，在进行一些处理后（主要是文件名和路径），移动到打包后的目录中
@@ -97,7 +132,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             outputPath: 'asset/',
-                            name: '[name].[hash].[ext]'
+                            name: '[name].[contenthash:8].[ext]'
                         }
                     }
                 ]
@@ -114,14 +149,8 @@ module.exports = {
         // 当开启 HotModuleReplacementPlugin 的时候使用该插件直接返回更新文件名，而不是文件的id
         new webpack.NamedModulesPlugin()
     ],
-    mode: 'development', // 开发模式
+    mode: 'production', // 开发模式
     resolve: { // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在。
         extensions: [".js", ".json", ".jsx", ".ts", ".tsx"]
-    },
-    devServer: {
-        contentBase: resolve(__dirname, "../build"),
-        open: true,
-        port: 3000,
-        hot: true
-    },
+    }
 };
