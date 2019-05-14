@@ -67,16 +67,18 @@ module.exports = {
                     },
                     /**
                      * 加入 sass-loader 解析 scss 文件
+                     * modules 为 true scss引入方式为 import styles from './styles', 为 false，则为 import './styles'
+                     * [local] 为class名称, [name] 为文件名称
                      */
                     {
-                        test: /\.(scss)$/,
+                        test: /\.scss$/,
                         use: [
                             // 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件
                             MiniCssExtractPlugin.loader,
                             {
                                 loader: 'css-loader', options: {
-                                modules: true,
-                                localIdentName: '[local]--[hash:base64:6]'
+                                // modules: true,
+                                // localIdentName: '[name]_[local]--[hash:base64:6]'
                             }
                             },
                             // postcss把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（Abstract Syntax Tree，AST）

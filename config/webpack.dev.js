@@ -63,15 +63,17 @@ module.exports = {
                     },
                     /**
                      * 加入 sass-loader 解析 scss 文件
+                     * modules 为 true scss引入方式为 import styles from './styles', 为 false，则为 import './styles'
+                     * [local] 为class名称, [name] 为文件名称
                      */
                     {
-                        test: /\.(scss)$/,
+                        test: /\.scss$/,
                         use: [
                             { loader: 'style-loader' },
                             {
                                 loader: 'css-loader', options: {
-                                modules: true,
-                                localIdentName: '[local]--[hash:base64:6]'
+                                // modules: true,
+                                // localIdentName: '[name]_[local]--[hash:base64:6]'
                             }
                             },
                             { loader: 'sass-loader' }

@@ -8,18 +8,8 @@ snake-cli
 
 # 注意事项
 
-1. webpack4中除了正常安装 webpack 之外，需要再单独安一个 webpack-cli 。
-
-2. 以下是webpack的正常配置模块 
-       module.exports = {
-         entry: '',               // 入口文件
-         output: {},              // 出口文件
-         module: {},              // 处理对应模块
-         plugins: [],             // 对应的插件
-         devServer: {},           // 开发服务器配置
-         mode: 'development'      // 模式配置
-       }
-3. 启动 devServer 需要安装 webpack-dev-server
+1. webpack4中除了正常安装 webpack 之外，需要再单独安一个 webpack-cli
+2. 启动 devServer 需要安装 webpack-dev-server
 
 # 项目运行
 
