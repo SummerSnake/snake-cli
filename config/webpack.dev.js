@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development', // 开发模式
     entry: {
         app: ['./src/index.js'], // 入口文件
         vendors: ['react'] // 所引入的公共库
@@ -114,7 +115,6 @@ module.exports = {
         // 当开启 HotModuleReplacementPlugin 的时候使用该插件直接返回更新文件名，而不是文件的id
         new webpack.NamedModulesPlugin()
     ],
-    mode: 'development', // 开发模式
     resolve: { // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在。
         extensions: [".js", ".json", ".jsx", ".ts", ".tsx"]
     },

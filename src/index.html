@@ -11,16 +11,4 @@
 <body>
 <div id="root"></div><!--这是一个注释 -->
 </body>
-<script>
-    //这是一个JS注释
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js').then((registration) => {
-                console.log('SW registered: ', registration);
-            }).catch((registrationError) => {
-                console.log('SW registration failed: ', registrationError);
-            });
-        });
-    }</script>
-
 </html>

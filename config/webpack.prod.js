@@ -3,8 +3,11 @@ const os = require('os');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
+    mode: 'production', // 开发模式
     entry: {
         app: ['./src/index.js'], // 入口文件
         vendors: ['react'] // 所引入的公共库
@@ -12,7 +15,7 @@ module.exports = {
     output: {
         // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
         filename: '[name].[contenthash:8].js',
-        path: resolve(__dirname, '../build') // 输出目录
+        path: resolve(__dirname, '../dist') // 输出目录
     },
     module: {
         rules: [
@@ -76,7 +79,7 @@ module.exports = {
                                 localIdentName: '[local]--[hash:base64:6]'
                             }
                             },
-                            // postcss把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（Abstract Syntax Tree，AST），
+                            // postcss把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（Abstract Syntax Tree，AST）
                             // 然后调用插件来处理 AST 并得到结果
                             { loader: 'postcss-loader' },
                             { loader: 'sass-loader' }
@@ -142,15 +145,50 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             // 指定生成的文件所依赖哪一个html文件模板，模板类型可以是html、jade、ejs等
-            template: './src/index.html'
+            template: './src/index.html',
+            favicon: '',
+            // 清除 html 一些没用的代码
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+            }
         }),
-        // 模块热更新
-        new webpack.HotModuleReplacementPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash:8].css'
+        }),
+        // 每次打包输出文件清空上次打包文件的插件
+        new CleanWebpackPlugin(),
+        // 压缩单独的css文件
+        new OptimizeCssAssetsWebpackPlugin({
+            cssProcessPluginOptions: {
+                preset: ['default',
+                    {
+                        // 对注释的处理
+                        discardComments: { removeAll: true }
+                    }]
+            }
+        }),
         // 当开启 HotModuleReplacementPlugin 的时候使用该插件直接返回更新文件名，而不是文件的id
         new webpack.NamedModulesPlugin()
     ],
-    mode: 'production', // 开发模式
-    resolve: { // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在。
+    resolve: { // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在
         extensions: [".js", ".json", ".jsx", ".ts", ".tsx"]
+    },
+    // code splitting 代码分割
+    optimization: {
+        //设置为 true, 一个 chunk 打包后就是一个文件，一个chunk对应`一些js css 图片`等
+        runtimeChunk: true,
+        splitChunks: {
+            // 默认 entry 的 chunk 不会被拆分, 配置成 all, 就可以了拆分了，一个入口`JS`打包后就生成一个单独的文件
+            chunks: 'all'
+        }
     }
 };
