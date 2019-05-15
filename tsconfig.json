@@ -4,10 +4,8 @@
     "baseUrl": "./",
     //解析非相对模块的基准目录
     "paths": {
-      //路径映射，如在文件中使用‘~/’相当于‘src/’
-      "@": [
-        "src/*"
-      ]
+      //路径映射，如在文件中使用‘@’相当于‘src/’
+      "@": ["src/*"]
     },
     //在tsx文件里支持jsx
     "jsx": "react",
@@ -25,14 +23,8 @@
     "allowJs": true,
     "esModuleInterop": true,
     "sourceMap": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "global.d.ts"
-    ]
+    "typeRoots": ["node_modules/@types", "global.d.ts"]
   },
   //编译时排除 dist、node_modules文件夹
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }
