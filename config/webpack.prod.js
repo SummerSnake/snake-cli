@@ -63,7 +63,6 @@ module.exports = {
 
                             }
                         ],
-                        include: resolve(__dirname, '/src'),
                         exclude: /node_modules/,
 
                     },
@@ -73,7 +72,6 @@ module.exports = {
                     {
                         test: /\.(ts|tsx)?$/,
                         use: 'ts-loader',
-                        include: resolve(__dirname, '/src'),
                         exclude: /node_modules/,
                     },
                     /**
@@ -193,7 +191,7 @@ module.exports = {
         new webpack.NamedModulesPlugin()
     ],
     resolve: { // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在
-        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"]
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
     },
     // code splitting 代码分割
     optimization: {
