@@ -6,13 +6,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development', // 开发模式
     entry: {
-        app: ['./src/index.js'], // 入口文件
+        app: ['./src/index.tsx'], // 入口文件
         vendors: ['react'] // 所引入的公共库
     },
     output: {
         // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
         filename: '[name].[hash:8].js',
-        path: resolve(__dirname, '../build') // 输出目录
+        path: resolve(__dirname, '../build'), // 输出目录
     },
     module: {
         rules: [
@@ -35,7 +35,7 @@ module.exports = {
                     /**
                      * 加入 babel-loader 还有 解析JSX ES6语法的 babel preset
                      * @babel/preset-react解析 jsx语法
-                     * @babel/preset-env解析es6语法
+                     * @babel/preset-env解析es6语法，modules: false 关掉babel将ES6模块化转化为commonjs
                      * @babel/plugin-syntax-dynamic-import解析react-loadable的import按需加载，附带code spliting功能
                      * cacheDirectory 开启babel编译缓存
                      */
@@ -58,8 +58,18 @@ module.exports = {
                                 }
 
                             }
-                        ]
-
+                        ],
+                        include: resolve(__dirname, '/src'),
+                        exclude: /node_modules/,
+                    },
+                    /**
+                     * 加入 ts-loader 解析 TypeScript 文件
+                     */
+                    {
+                        test: /\.(ts|tsx)?$/,
+                        use: 'ts-loader',
+                        include: resolve(__dirname, '/src'),
+                        exclude: /node_modules/,
                     },
                     /**
                      * 加入 sass-loader 解析 scss 文件

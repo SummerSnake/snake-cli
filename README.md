@@ -42,9 +42,9 @@ yarn build
     │   ├── components             // 组件
     │   ├── pages                  // 页面文件目录
     │   │   └── index
-    │   │       ├── index.js           // 页面逻辑
+    │   │       ├── index.tsx           // 页面逻辑
     │   │       ├── index.scss         // 页面样式
     │   ├── utils              // 常用工具类
-    │   ├── index.js             // 入口文件
+    │   ├── index.tsx             // 入口文件
     │   └── index.html
     └── package.json            // 项目依赖
