@@ -23,7 +23,8 @@
     "allowJs": true,
     "esModuleInterop": true,
     "sourceMap": true,
-    "typeRoots": ["node_modules/@types", "global.d.ts"]
+    "typeRoots": ["node_modules/@types", "global.d.ts"],
+    "lib": ["dom", "esNext"]
   },
   //编译时排除 dist、node_modules文件夹
   "exclude": ["dist", "node_modules"]
