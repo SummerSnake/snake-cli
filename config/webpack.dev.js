@@ -1,6 +1,7 @@
 const { resolve } = require('path');
 const os = require('os');
 const webpack = require('webpack');
+const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -16,13 +17,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        include: resolve(__dirname, '/src/js'),
-        loader: 'eslint-loader',
-      },
       {
         oneOf: [
           // oneOf 规则数组，当规则匹配时，只使用第一个匹配规则
@@ -47,6 +41,7 @@ module.exports = {
               {
                 loader: 'thread-loader',
                 options: {
+                  // 产生的 worker 的数量，默认是 cpu 的核心数
                   workers: os.cpus().length,
                 },
               },
@@ -66,25 +61,28 @@ module.exports = {
            */
           {
             test: /\.(ts|tsx)?$/,
-            use: 'ts-loader',
-              // antd 按需加载
-              options: {
+            use: [
+              {
+                loader: 'ts-loader',
+                options: {
                   transpileOnly: true, // 加快打包速度
                   happyPackMode: true, // 使用 thread-loader 需设为 true
                   experimentalWatchApi: true,
                   getCustomTransformers: () => ({
-                      before: [
-                          tsImportPluginFactory({
-                              libraryName: 'antd',
-                              libraryDirectory: 'lib',
-                              style: 'css',
-                          }),
-                      ],
+                    before: [
+                      tsImportPluginFactory({
+                        libraryName: 'antd',
+                        libraryDirectory: 'lib',
+                        style: 'css',
+                      }),
+                    ],
                   }),
                   compilerOptions: {
-                      module: 'es2015',
+                    module: 'es2015',
                   },
+                },
               },
+            ],
             exclude: /node_modules/,
           },
           /**
@@ -93,7 +91,7 @@ module.exports = {
            * [local] 为class名称, [name] 为文件名称
            */
           {
-            test: /\.scss$/,
+            test: /\.(css|less|scss)?$/,
             use: [
               { loader: 'style-loader' },
               {

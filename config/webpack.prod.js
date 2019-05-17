@@ -21,13 +21,6 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        include: resolve(__dirname, '/src'),
-        loader: 'eslint-loader',
-      },
-      {
         oneOf: [
           // oneOf 规则数组，当规则匹配时，只使用第一个匹配规则
           /**
