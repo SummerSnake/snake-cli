@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import SubPage from '../pages/subPage/subPage.tsx';
+import Login from '../pages/Login/index.tsx';
 
 export default class Routers extends React.Component {
   constructor(props) {
@@ -10,8 +10,7 @@ export default class Routers extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={SubPage} />
-          <Route path="/subpage" component={SubPage} />
+          <Route path="/" component={Login} />
         </Switch>
       </BrowserRouter>
     );

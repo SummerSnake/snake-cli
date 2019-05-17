@@ -1,0 +1,107 @@
+.loginWrap {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Microsoft YaHei UI', serif;
+  .loginWrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 50%;
+    height: 60%;
+    .loginLeft {
+      flex: 1;
+      background: url('https://haifeng-1258278342.cos.ap-chengdu.myqcloud.com/images/haiqi_logoBG.png')
+        no-repeat;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-origin: content-box;
+      > i {
+        position: absolute;
+        z-index: 99;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background-color: rgba(64, 169, 255, 0.7);
+      }
+      > div {
+        background: url('https://haifeng-1258278342.cos.ap-chengdu.myqcloud.com/village/village_PC_logo_02.png')
+          no-repeat;
+        -webkit-background-size: 85px 50px;
+        background-size: 85px 50px;
+        background-position: 20px 20px;
+        color: #fff;
+        font-size: 24px;
+        position: relative;
+        z-index: 199;
+        height: 100%;
+        > p:first-child {
+          padding: 30px 0 0 110px;
+          font-size: 24px;
+        }
+        > p:last-child {
+          position: absolute;
+          bottom: 20px;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          > span {
+            flex: 1;
+            text-align: center;
+          }
+        }
+      }
+    }
+    .loginRight {
+      flex: 1;
+      text-align: center;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      > div {
+        width: 60%;
+      }
+      h3 {
+        font-size: 22px;
+        margin: 20px 0;
+      }
+      input {
+        outline: none;
+        border: none;
+        color: #666;
+        box-sizing: border-box;
+        padding-left: 48px !important;
+        border-bottom: 1px solid #efebed;
+        border-radius: 0;
+      }
+      input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #fff inset;
+        -webkit-text-fill-color: #666;
+        caret-color: #333;
+      }
+      input[type='text']:focus,
+      input[type='password']:focus {
+        -webkit-box-shadow: 0 0 0 1000px #fff inset;
+        -webkit-text-fill-color: #666;
+        caret-color: #333;
+      }
+      .inputDom,
+      .btnDom {
+        width: 100%;
+        height: 46px;
+        line-height: 46px;
+        font-size: 16px;
+      }
+      .btnDom {
+        margin-top: 40px;
+      }
+    }
+  }
+}
