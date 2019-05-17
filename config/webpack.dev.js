@@ -67,6 +67,24 @@ module.exports = {
           {
             test: /\.(ts|tsx)?$/,
             use: 'ts-loader',
+              // antd 按需加载
+              options: {
+                  transpileOnly: true, // 加快打包速度
+                  happyPackMode: true, // 使用 thread-loader 需设为 true
+                  experimentalWatchApi: true,
+                  getCustomTransformers: () => ({
+                      before: [
+                          tsImportPluginFactory({
+                              libraryName: 'antd',
+                              libraryDirectory: 'lib',
+                              style: 'css',
+                          }),
+                      ],
+                  }),
+                  compilerOptions: {
+                      module: 'es2015',
+                  },
+              },
             exclude: /node_modules/,
           },
           /**

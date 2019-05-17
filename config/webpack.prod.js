@@ -1,13 +1,14 @@
 const { resolve } = require('path');
 const os = require('os');
 const webpack = require('webpack');
+const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  mode: 'production', // 开发模式
+  mode: 'production', // 生产模式
   entry: {
     app: ['./src/index.tsx'], // 入口文件
     vendors: ['react'], // 所引入的公共库
@@ -71,6 +72,24 @@ module.exports = {
           {
             test: /\.(ts|tsx)?$/,
             use: 'ts-loader',
+            // antd 按需加载
+            options: {
+              transpileOnly: true, // 加快打包速度
+              happyPackMode: true, // 使用 thread-loader 需设为 true
+              experimentalWatchApi: true,
+              getCustomTransformers: () => ({
+                before: [
+                  tsImportPluginFactory({
+                    libraryName: 'antd',
+                    libraryDirectory: 'lib',
+                    style: 'css',
+                  }),
+                ],
+              }),
+              compilerOptions: {
+                module: 'es2015',
+              },
+            },
             exclude: /node_modules/,
           },
           /**

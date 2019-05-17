@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
+    "antd": "^3.18.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
@@ -48,6 +49,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "thread-loader": "^2.1.2",
+    "ts-import-plugin": "^1.5.5",
     "ts-loader": "^6.0.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.31.0",
