@@ -2,30 +2,32 @@
   "version": "1.0.0",
   "compilerOptions": {
     "baseUrl": "./",
-    //解析非相对模块的基准目录
-    "paths": {
-      //路径映射，如在文件中使用‘@’相当于‘src/’
-      "@": ["src/*"]
-    },
-    //在tsx文件里支持jsx
+    // 在tsx文件里支持jsx
     "jsx": "react",
-    //指定生成哪个模块系统的代码
+    // 指定生成哪个模块系统的代码
     "module": "commonjs",
-    //生成es5的js文件
+    // 生成es5的js文件
     "target": "es5",
-    //决定如何处理模块
+    // 决定如何处理模块
     "moduleResolution": "node",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "dist",
-    //允许编译js文件
+    // 允许编译js文件
     "allowJs": true,
     "esModuleInterop": true,
     "sourceMap": true,
     "typeRoots": ["node_modules/@types", "global.d.ts"],
-    "lib": ["dom", "esNext"]
+    "lib": ["dom", "esNext"],
+    // 解析非相对模块的基准目录
+    "paths": {
+      // alias 路径映射，如在文件中使用‘@’相当于‘src/’
+      "@": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
-  //编译时排除 dist、node_modules文件夹
+  // 编译时排除 dist、node_modules文件夹
   "exclude": ["dist", "node_modules"]
 }
