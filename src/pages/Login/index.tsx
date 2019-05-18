@@ -2,11 +2,18 @@ import React from 'react';
 import { Input, Button, Icon } from 'antd';
 import './index.scss';
 
-export default class Login extends React.Component {
-  state = {
-    userName: 'admin',
-    passWord: '123456',
-  };
+interface InitState {
+  userName: string;
+  passWord: string;
+}
+export default class Login extends React.Component<{}, InitState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      userName: 'admin',
+      passWord: '123456',
+    };
+  }
 
   render() {
     return (
@@ -17,15 +24,15 @@ export default class Login extends React.Component {
           }
         }}
       >
-        <div className="loginWrap">
-          <div className="loginLeft">
+        <div className="formDom center">
+          <div className="formLeft">
             <i />
             <div>
               <p>snake-cli</p>
-              <p />
+              <p>SummerSnake</p>
             </div>
           </div>
-          <div className="loginRight">
+          <div className="formRight">
             <div>
               <h3>登陆</h3>
               <Input
@@ -39,7 +46,6 @@ export default class Login extends React.Component {
                     userName: e.target.value,
                   });
                 }}
-                name="loginName"
                 placeholder="请输入用户名"
               />
               <Input
@@ -48,7 +54,6 @@ export default class Login extends React.Component {
                   <Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)', fontSize: '20px' }} />
                 }
                 className="inputDom"
-                name="passWord"
                 onChange={e => {
                   this.setState({
                     passWord: e.target.value,
@@ -56,7 +61,9 @@ export default class Login extends React.Component {
                 }}
                 placeholder="请输入密码"
               />
-              <Button type="primary" className="btnDom">登陆</Button>
+              <Button type="primary" className="btnDom">
+                登陆
+              </Button>
             </div>
           </div>
         </div>

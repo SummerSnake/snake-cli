@@ -3,15 +3,7 @@
 // 背景图片地址和大小
 @mixin bg($url) {
   background: url($url) no-repeat;
-  background-size: 100% 100%;
-}
-
-// 定位上下左右居中
-@mixin center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background-size: cover;
 }
 
 // 宽高
