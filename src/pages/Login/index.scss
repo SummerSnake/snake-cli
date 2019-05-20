@@ -7,6 +7,10 @@
   .formDom {
     @include wh(50%, 60%);
     display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     .formLeft {
       @include bg('https://gitee.com/summersnake/images/raw/master/snake-cli/login_logoBG.png');
       flex: 1;

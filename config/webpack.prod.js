@@ -64,42 +64,46 @@ module.exports = {
            */
           {
             test: /\.(ts|tsx)?$/,
-            use: 'ts-loader',
-            // antd 按需加载
-            options: {
-              transpileOnly: true, // 加快打包速度
-              happyPackMode: true, // 使用 thread-loader 需设为 true
-              experimentalWatchApi: true,
-              getCustomTransformers: () => ({
-                before: [
-                  tsImportPluginFactory({
-                    libraryName: 'antd',
-                    libraryDirectory: 'lib',
-                    style: 'css',
+            use: [
+              {
+                loader: 'ts-loader',
+                options: {
+                  transpileOnly: true, // 加快打包速度
+                  happyPackMode: true, // 使用 thread-loader 需设为 true
+                  experimentalWatchApi: true,
+                  getCustomTransformers: () => ({
+                    before: [
+                      tsImportPluginFactory({
+                        libraryName: 'antd',
+                        libraryDirectory: 'lib',
+                        style: 'css',
+                      }),
+                    ],
                   }),
-                ],
-              }),
-              compilerOptions: {
-                module: 'es2015',
+                  compilerOptions: {
+                    module: 'es2015',
+                  },
+                },
               },
-            },
+            ],
             exclude: /node_modules/,
           },
           /**
            * 加入 sass-loader 解析 scss 文件
            * modules 为 true scss引入方式为 import styles from './styles', 为 false，则为 import './styles'
+           * 当 modules 为 true 时, 将启用 css modules, 即为类名前添加额外标识-localIdentName
            * [local] 为class名称, [name] 为文件名称
            */
           {
-            test: /\.scss$/,
+            test: /\.(css|less|scss)?$/,
             use: [
               // 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件
               MiniCssExtractPlugin.loader,
               {
                 loader: 'css-loader',
                 options: {
-                  // modules: true,
-                  // localIdentName: '[name]_[local]--[hash:base64:6]'
+                  modules: true,
+                  localIdentName: '[name]_[local]--[hash:base64:6]',
                 },
               },
               // postcss把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（Abstract Syntax Tree，AST）
@@ -107,6 +111,25 @@ module.exports = {
               { loader: 'postcss-loader' },
               { loader: 'sass-loader' },
             ],
+            exclude: /node_modules/,
+          },
+          /**
+           * 单独处理 ant design css
+           */
+          {
+            test: /\.css$/,
+            use: [
+              {
+                loader: 'style-loader',
+              },
+              {
+                loader: 'css-loader',
+              },
+              {
+                loader: 'postcss-loader',
+              },
+            ],
+            include: /node_modules/,
           },
           /**
            * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能

@@ -88,6 +88,7 @@ module.exports = {
           /**
            * 加入 sass-loader 解析 scss 文件
            * modules 为 true scss引入方式为 import styles from './styles', 为 false，则为 import './styles'
+           * 当 modules 为 true 时, 将启用 css modules, 即为类名前添加额外标识-localIdentName
            * [local] 为class名称, [name] 为文件名称
            */
           {
@@ -97,12 +98,31 @@ module.exports = {
               {
                 loader: 'css-loader',
                 options: {
-                  // modules: true,
-                  // localIdentName: '[name]_[local]--[hash:base64:6]'
+                  modules: true,
+                  localIdentName: '[name]_[local]--[hash:base64:6]',
                 },
               },
               { loader: 'sass-loader' },
             ],
+            exclude: /node_modules/,
+          },
+          /**
+           * 单独处理 ant design css
+           */
+          {
+            test: /\.css$/,
+            use: [
+              {
+                loader: 'style-loader',
+              },
+              {
+                loader: 'css-loader',
+              },
+              {
+                loader: 'postcss-loader',
+              },
+            ],
+            include: /node_modules/,
           },
           /**
            * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
