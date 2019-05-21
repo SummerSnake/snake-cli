@@ -1,2 +1,14 @@
 @import '~antd/dist/antd.css';
-@import 'styles/base';
+@import 'styles/mixin.scss';
+
+body {
+  @include wmh(100vw, 100vh);
+}
+
+img {
+  @include wh(100%, 100%);
+}
+
+button {
+  outline: none;
+}
