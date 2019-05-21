@@ -1,0 +1,7 @@
+@import '../../styles/mixin.scss';
+
+.homeWrap {
+  @include wh(100vw, 100vh);
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+}

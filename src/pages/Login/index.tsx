@@ -1,26 +1,46 @@
 import React from 'react';
-import { Input, Button, Icon } from 'antd';
+import { withRouter } from 'react-router';
+import { Input, Button, Icon, notification } from 'antd';
 import styles from './index.scss';
 
 interface InitState {
   userName: string;
-  passWord: string;
+  password: string;
 }
-export default class Login extends React.Component<{}, InitState> {
+class Login extends React.Component<{}, InitState> {
   constructor(props: any) {
     super(props);
     this.state = {
       userName: 'admin',
-      passWord: '123456',
+      password: '123456',
     };
   }
+
+  /**
+   * 提交登陆
+   */
+  handleSubmit = () => {
+    if (this.state.userName === 'admin' && this.state.password === '123456') {
+      const { history } = this.props;
+      history.push('/home');
+    } else {
+      notification.error({ message: '用户名：admin, 密码：123456' });
+    }
+  };
 
   render() {
     return (
       <div
         className={styles.loginWrap}
         onKeyDown={async e => {
+          const { userName, password } = this.state;
           if (e.keyCode === 13) {
+            if (userName === 'admin' && password === '123456') {
+              const { history } = this.props;
+              history.push('/home');
+            } else {
+              notification.error({ message: '用户名：admin, 密码：123456' });
+            }
           }
         }}
       >
@@ -49,19 +69,23 @@ export default class Login extends React.Component<{}, InitState> {
                 placeholder="请输入用户名"
               />
               <Input
-                defaultValue={this.state.passWord}
+                defaultValue={this.state.password}
                 prefix={
                   <Icon type="lock" style={{ color: 'rgba(0, 0, 0, .25)', fontSize: '20px' }} />
                 }
                 className={styles.inputDom}
                 onChange={e => {
                   this.setState({
-                    passWord: e.target.value,
+                    password: e.target.value,
                   });
                 }}
                 placeholder="请输入密码"
               />
-              <Button type="primary" className={styles.btnDom}>
+              <Button
+                type="primary"
+                className={styles.btnDom}
+                onClick={this.handleSubmit.bind(this)}
+              >
                 登陆
               </Button>
             </div>
@@ -71,3 +95,5 @@ export default class Login extends React.Component<{}, InitState> {
     );
   }
 }
+
+export default withRouter(Login);
