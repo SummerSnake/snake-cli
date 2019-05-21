@@ -28,6 +28,10 @@
       "@utils/*": ["src/utils/*"]
     }
   },
+  "include": [
+    "./src/**/*",
+    "./global.d.ts"
+  ],
   // 编译时排除 dist、node_modules文件夹
   "exclude": ["dist", "node_modules"]
 }

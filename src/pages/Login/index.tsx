@@ -1,13 +1,16 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { Input, Button, Icon, notification } from 'antd';
 import styles from './index.scss';
 
-interface InitState {
+interface InitProps {
+  history: any;
+}
+interface InitStates {
   userName: string;
   password: string;
 }
-class Login extends React.Component<{}, InitState> {
+class Login extends React.Component<InitProps, InitStates> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -22,7 +25,7 @@ class Login extends React.Component<{}, InitState> {
   handleSubmit = () => {
     if (this.state.userName === 'admin' && this.state.password === '123456') {
       const { history } = this.props;
-      history.push('/home');
+      history.push('/layout');
     } else {
       notification.error({ message: '用户名：admin, 密码：123456' });
     }
