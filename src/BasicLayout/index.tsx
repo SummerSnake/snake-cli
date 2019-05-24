@@ -5,7 +5,7 @@ const { Header, Content, Sider, Footer } = Layout;
 import styles from './index.scss';
 
 export default class BasicLayout extends React.Component {
-  constructor(props: any) {
+  constructor(props) {
     super(props);
     this.state = {};
   }

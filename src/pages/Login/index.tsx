@@ -11,7 +11,7 @@ interface InitStates {
   password: string;
 }
 class Login extends React.Component<InitProps, InitStates> {
-  constructor(props: any) {
+  constructor(props) {
     super(props);
     this.state = {
       userName: 'admin',

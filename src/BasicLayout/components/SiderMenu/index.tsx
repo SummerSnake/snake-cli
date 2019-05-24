@@ -12,7 +12,7 @@ interface InitState {
   keys: Array<any>;
 }
 class SiderMenu extends React.Component<InitProp, InitState> {
-  constructor(props: any) {
+  constructor(props) {
     super(props);
     this.state = {
       keys: [],
@@ -22,7 +22,7 @@ class SiderMenu extends React.Component<InitProp, InitState> {
     this.selectKey();
   }
 
-  componentWillReceiveProps(nextProps: any) {
+  componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname != nextProps.location.pathname) {
       this.selectKey();
     }
@@ -34,11 +34,11 @@ class SiderMenu extends React.Component<InitProp, InitState> {
     this.setState({ keys });
   };
 
-  handleSelect = ({ key }: any) => {
+  handleSelect = ({ key }) => {
     this.props.history.push(key);
   };
 
-  titleNode = (item: any) => {
+  titleNode = item => {
     return (
       <span>
         <Icon type={item.icon} />
@@ -57,10 +57,10 @@ class SiderMenu extends React.Component<InitProp, InitState> {
           selectedKeys={this.state.keys}
           defaultOpenKeys={['/' + this.state.keys[0].split('/')[1]]}
         >
-          {menu.map((item: any) =>
+          {menu.map(item =>
             Array.isArray(item.list) && item.list.length > 0 ? (
               <Menu.SubMenu key={item.path} title={this.titleNode(item)}>
-                {item.list.map((listItem: any) => (
+                {item.list.map(listItem => (
                   <Menu.Item key={item.path + listItem.path}>
                     <span>{listItem.name}</span>
                   </Menu.Item>
