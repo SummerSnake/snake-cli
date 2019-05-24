@@ -227,6 +227,12 @@ module.exports = {
   resolve: {
     // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    alias: {
+      '@': resolve(__dirname, '../src'),
+      '@components': resolve(__dirname, '../src/components'),
+      '@config': resolve(__dirname, '../src/config'),
+      '@utils': resolve(__dirname, '../src/utils'),
+    },
   },
   // code splitting 代码分割
   optimization: {

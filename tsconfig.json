@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     // 在tsx文件里支持jsx
     "jsx": "react",
     // 指定生成哪个模块系统的代码
@@ -27,13 +27,11 @@
       // alias 路径映射，如在文件中使用‘@’相当于‘src/’
       "@": ["src/*"],
       "@components/*": ["src/components/*"],
+      "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"]
     }
   },
-  "include": [
-    "./src/**/*",
-    "./global.d.ts"
-  ],
+  "include": ["./src/**/*", "./global.d.ts"],
   // 编译时排除 dist、node_modules文件夹
   "exclude": ["dist", "node_modules"]
 }
