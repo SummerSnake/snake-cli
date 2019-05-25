@@ -1,7 +1,37 @@
 @import '../styles/mixin.scss';
 
-.homeWrap {
+.layoutWrap {
   @include wh(100vw, 100vh);
   position: relative;
-  background: rgba(0, 0, 0, 0.3);
+  .siderDom {
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    .logo {
+      @include sc(24px, #fff);
+      @include bg('https://gitee.com/summersnake/images/raw/master/snake-cli/login_logo.png');
+      height: 60px;
+      line-height: 70px;
+      padding-left: 70px;
+      text-align: center;
+      font-weight: 600;
+      background-position: left;
+      background-size: 85px 50px;
+    }
+  }
+  .contentWrap {
+    margin-left: 200px;
+    .conHeader {
+      background-color: #fff;
+    }
+    .conDom {
+      margin: 24px 16px 0;
+      > div {
+        padding: 24px;
+        background: #fff;
+        text-align: center;
+      }
+    }
+  }
 }

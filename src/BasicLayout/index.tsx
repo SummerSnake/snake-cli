@@ -12,23 +12,16 @@ export default class BasicLayout extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <Sider
-          style={{
-            overflow: 'auto',
-            height: '100vh',
-            position: 'fixed',
-            left: 0,
-          }}
-        >
-          <div className="logo" />
+      <Layout className={styles.layoutWrap}>
+        <Sider className={styles.siderDom}>
+          <div className={styles.logo}>Snake-cli</div>
           <SiderMenu />
         </Sider>
 
-        <Layout style={{ marginLeft: 200 }}>
-          <Header style={{ background: '#fff', padding: 0 }} />
-          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>1</div>
+        <Layout className={styles.contentWrap}>
+          <Header className={styles.conHeader} />
+          <Content className={styles.conDom}>
+            <div>1</div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>SummerSnake</Footer>
         </Layout>
