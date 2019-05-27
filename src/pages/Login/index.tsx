@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Input, Button, Icon, notification } from 'antd';
-import styles from './index.scss';
+import styles from './index.less';
 
 interface InitProps {
   history: any;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
-import menu from '@config/menu.js';
+import menu from '@config/menu';
 import styles from './index.scss';
 
 interface InitProp {
@@ -57,7 +57,7 @@ class SiderMenu extends React.Component<InitProp, InitState> {
           selectedKeys={this.state.keys}
           defaultOpenKeys={['/' + this.state.keys[0].split('/')[1]]}
         >
-          {menu.map(item =>
+          {menu.map((item: any) =>
             Array.isArray(item.list) && item.list.length > 0 ? (
               <Menu.SubMenu key={item.path} title={this.titleNode(item)}>
                 {item.list.map(listItem => (

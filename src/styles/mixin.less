@@ -1,0 +1,25 @@
+/* methods
+-------------------------- */
+// 背景图片地址和大小
+.bg(@url) {
+  background: url(@url) no-repeat;
+  background-size: cover;
+}
+
+// 宽高
+.wh(@width, @height) {
+  width: @width;
+  height: @height;
+}
+
+// 宽最小高
+.wmh(@width, @height) {
+  width: @width;
+  min-height: @height;
+}
+
+// 字体大小，颜色
+.sc(@size, @color) {
+  font-size: @size;
+  color: @color;
+}

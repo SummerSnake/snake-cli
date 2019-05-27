@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from '../pages/Login/index.tsx';
-import BasicLayout from '../BasicLayout/index.tsx';
+import Login from '../pages/Login/index';
+import BasicLayout from '../BasicLayout/index';
 
 export default class Routers extends React.Component {
   render() {

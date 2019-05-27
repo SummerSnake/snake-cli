@@ -1,22 +1,22 @@
-@import '../../styles/mixin.scss';
+@import '../../styles/mixin.less';
 
 .loginWrap {
-  @include wh(100vw, 100vh);
+  .wh(100vw, 100vh);
   position: relative;
   background: rgba(0, 0, 0, 0.3);
   .formDom {
-    @include wh(50%, 60%);
+    .wh(50%, 60%);
     display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     .formLeft {
-      @include bg('https://gitee.com/summersnake/images/raw/master/snake-cli/login_logoBG.png');
+      .bg('https://gitee.com/summersnake/images/raw/master/snake-cli/login_logoBG.png');
       flex: 1;
       background-origin: content-box;
       > i {
-        @include wh(50%, 100%);
+        .wh(50%, 100%);
         position: absolute;
         top: 0;
         left: 0;
@@ -24,8 +24,8 @@
         background-color: rgba(64, 169, 255, 0.7);
       }
       > div {
-        @include bg('https://gitee.com/summersnake/images/raw/master/snake-cli/login_logo.png');
-        @include sc(24px, #fff);
+        .bg('https://gitee.com/summersnake/images/raw/master/snake-cli/login_logo.png');
+        .sc(24px, #fff);
         -webkit-background-size: 85px 50px;
         background-size: 85px 50px;
         background-position: 20px 20px;
@@ -79,12 +79,12 @@
         caret-color: #333;
       }
       .inputDom {
-        @include wh(100%, 46px);
+        .wh(100%, 46px);
         line-height: 46px;
         font-size: 16px;
       }
       .btnDom {
-        @include wh(100%, 46px);
+        .wh(100%, 46px);
         line-height: 46px;
         font-size: 20px;
         margin-top: 60px;
