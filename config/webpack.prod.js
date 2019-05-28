@@ -1,9 +1,9 @@
 const os = require('os');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -14,6 +14,31 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         oneOf: [
+          /**
+           * 加入 less-loader 解析 less 文件
+           * modules 为 true less引入方式为 import styles from './styles', 为 false，则为 import './styles'
+           * 当 modules 为 true 时, 将启用 css modules, 即为类名前添加额外标识-localIdentName
+           * [local] 为class名称, [name] 为文件名称
+           */
+          // {
+          //     test: /\.(css|less)?$/,
+          //     use: [
+          //         // 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件
+          //         MiniCssExtractPlugin.loader,
+          //         {
+          //             loader: 'css-loader',
+          //             options: {
+          //                 modules: true,
+          //                 localIdentName: '[local]_[hash:base64:6]',
+          //             },
+          //         },
+          //         // postcss把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（Abstract Syntax Tree，AST）
+          //         // 然后调用插件来处理 AST 并得到结果
+          //         { loader: 'postcss-loader' },
+          //         { loader: 'less-loader' },
+          //     ],
+          //     exclude: /node_modules/,
+          // },
           /**
            * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
            * [ext] 表示是原文件的扩展名
@@ -76,9 +101,9 @@ module.exports = merge(baseConfig, {
         minifyURLs: true,
       },
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].[contenthash:8].css',
+    // }),
     // 每次打包输出文件清空上次打包文件的插件
     new CleanWebpackPlugin(),
     // 压缩单独的css文件
@@ -93,8 +118,6 @@ module.exports = merge(baseConfig, {
         ],
       },
     }),
-    // 当开启 HotModuleReplacementPlugin 的时候使用该插件直接返回更新文件名，而不是文件的id
-    new webpack.NamedModulesPlugin(),
     // 使用交互式可缩放树映射可视化Webpack输出文件的大小
     new BundleAnalyzerPlugin(),
   ],
