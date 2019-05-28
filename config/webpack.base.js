@@ -1,7 +1,7 @@
 const { resolve } = require('path');
-const os = require('os');
 const webpack = require('webpack');
 const tsImportPluginFactory = require('ts-import-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,7 +9,6 @@ module.exports = {
     vendors: ['react', 'react-dom', 'react-router-dom', 'antd'], // 所引入的公共库
   },
   output: {
-    publicPath: '/',
     // 对应于entry里面生成出来的文件名，
     // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
     filename: '[name].[hash:8].js',
@@ -31,54 +30,76 @@ module.exports = {
            * 加入 ts-loader 解析 TypeScript 文件
            */
           {
-            test: /\.(ts|tsx|js|jsx)?$/,
+            test: /\.(ts|tsx)?$/,
             use: [
               {
                 loader: 'ts-loader',
                 options: {
+                  transpileOnly: true, // 加快打包速度
                   getCustomTransformers: () => ({
-                    transpileOnly: true,
                     before: [
                       tsImportPluginFactory({
-                        libraryDirectory: 'es',
                         libraryName: 'antd',
-                        style: true,
+                        libraryDirectory: 'es',
+                        style: 'css',
                       }),
                     ],
                   }),
+                  compilerOptions: {
+                    module: 'es2015',
+                  },
                 },
               },
             ],
-            include: resolve('src'),
+            exclude: /node_modules/,
           },
-            /**
-             * 加入 less-loader 解析 less 文件
-             * modules 为 true less引入方式为 import styles from './styles', 为 false，则为 import './styles'
-             * 当 modules 为 true 时, 将启用 css modules, 即为类名前添加额外标识-localIdentName
-             * [local] 为class名称, [name] 为文件名称
-             */
+          /**
+           * 加入 less-loader 解析 less 文件;
+           * 加入css-loader 解析 css 文件 modules 为 true less引入方式为 import styles from './styles', 为 false，则为 import './styles';
+           * 当 modules 为 true 时, 将启用 css modules, 即为类名前添加额外标识-localIdentName,[local] 为class名称, [name] 为文件名称;
+           * 加入 style-loader 生成一个内容为最终解析完的css代码的style标签，放到head标签里。
+           */
           {
-            test: /\.(less|css)$/,
+            test: /\.(css|less)?$/,
             use: [
               { loader: 'style-loader' },
               {
                 loader: 'css-loader',
                 options: {
-                  modules: false,
-                  localIdentName: '[local]--[hash:base64:5]',
+                  modules: true,
+                  localIdentName: '[local]_[hash:base64:6]',
                 },
               },
-              {
-                loader: 'less-loader',
-                options: { javascriptEnabled: true },
-              },
+              { loader: 'postcss-loader' },
+              { loader: 'less-loader' },
             ],
+            exclude: /node_modules/,
+          },
+          /**
+           * 单独处理 ant design css
+           */
+          {
+            test: /\.css$/,
+            use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+            include: /node_modules/,
+          },
+          /**
+           * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
+           * [ext] 表示是原文件的扩展名
+           */
+          {
+            test: /\.(jpg|jpeg|bmp|svg|png|webp|gif)$/,
+            loader: 'url-loader',
+            options: {
+              limit: 8 * 1024,
+              name: '[name].[hash:8].[ext]',
+            },
           },
           /**
            * 将静态资源 图片、视频、字体文件等，在进行一些处理后（主要是文件名和路径），移动到打包后的目录中
            */
           {
-            exclude: /\.(js|jsx|json|css|less|tx|tsx)$/,
+            exclude: /\.(css|json|js|jsx|tx|tsx)$/,
             loader: 'file-loader',
             options: {
               outputPath: 'asset/',
@@ -89,6 +110,12 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      // 指定生成的文件所依赖哪一个html文件模板，模板类型可以是html、jade、ejs等
+      template: './src/index.html',
+    }),
+  ],
   resolve: {
     // 在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在。
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],

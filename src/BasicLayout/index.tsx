@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Layout } from 'antd';
 import SiderMenu from './components/SiderMenu/index';
 const { Header, Content, Sider, Footer } = Layout;
