@@ -2,16 +2,17 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
     app: ['./src/index.tsx'], // 入口文件
-    vendors: ['react', 'react-dom', 'react-router-dom', 'antd'], // 所引入的公共库
+    vendors: ['react', 'react-dom', 'react-router-dom'], // 所引入的公共库
   },
   output: {
     // 对应于entry里面生成出来的文件名，
     // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
-    filename: '[name].[hash:8].js',
+    filename: 'js/[name].[hash:8].js',
     path: resolve(__dirname, '../dist'), // 输出目录
   },
   module: {
@@ -62,7 +63,13 @@ module.exports = {
           {
             test: /\.(css|less)?$/,
             use: [
-              { loader: 'style-loader' },
+              // 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件
+              {
+                loader:
+                  process.env.NODE_ENV === 'production'
+                    ? MiniCssExtractPlugin.loader
+                    : 'style-loader',
+              },
               {
                 loader: 'css-loader',
                 options: {
@@ -114,6 +121,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       // 指定生成的文件所依赖哪一个html文件模板，模板类型可以是html、jade、ejs等
       template: './src/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
     }),
   ],
   resolve: {
