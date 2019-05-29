@@ -8,8 +8,8 @@ export default class Routers extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/layout" component={BasicLayout} />
-          <Route path="/" component={Login} />
+          <Route path="/login" component={Login} />
+          <Route path="/" component={BasicLayout} />
         </Switch>
       </BrowserRouter>
     );

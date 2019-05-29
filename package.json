@@ -43,6 +43,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.1",
+    "react-loadable": "^5.5.0",
     "style-loader": "^0.23.1",
     "thread-loader": "^2.1.2",
     "ts-import-plugin": "^1.5.5",
