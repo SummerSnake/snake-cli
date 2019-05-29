@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import menu from '@config/menu';
-import styles from './index.scss';
 
 interface InitProp {
   history: any;
