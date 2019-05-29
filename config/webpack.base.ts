@@ -38,6 +38,7 @@ module.exports = {
                 options: {
                   transpileOnly: true, // 加快打包速度
                   getCustomTransformers: () => ({
+                    // antd 按需加载
                     before: [
                       tsImportPluginFactory({
                         libraryName: 'antd',

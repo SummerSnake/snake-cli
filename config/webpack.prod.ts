@@ -1,6 +1,6 @@
 const os = require('os');
 const webpack = require('webpack');
-const baseConfig = require('./webpack.base');
+const baseConfig = require('./webpack.base.ts');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');

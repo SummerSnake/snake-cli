@@ -36,15 +36,20 @@ yarn build
 
     ├── build                   // 编译结果目录
     ├── config                 // webpack配置目录
-    │   ├── webpack.dev.js     // 开发时配置
+    │   ├── webpack.base.ts     // 公用配置
+    │   ├── webpack.dev.ts     // 开发时配置
     │   └── product.dev.js     // 打包时配置
     ├── src                    // 源码目录
     │   ├── components             // 组件
     │   ├── pages                  // 页面文件目录
     │   │   └── index
     │   │       ├── index.tsx           // 页面逻辑
-    │   │       ├── index.scss         // 页面样式
+    │   │       ├── index.less         // 页面样式
     │   ├── utils              // 常用工具类
     │   ├── index.tsx             // 入口文件
     │   └── index.html
-    └── package.json            // 项目依赖
+    ├── .prettierrc.json            // prettier 配置
+    ├── .global.d.ts            // Typescript 全局声明
+    ├── postcss.config.js            // postcss 配置
+    ├── tsconfig.json            // Typescript 配置
+    └── tslint.json            // Typescript 代码风格检测

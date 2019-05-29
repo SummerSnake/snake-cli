@@ -5,9 +5,9 @@
   "author": "SummerSnake",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.dev.js",
-    "dev": "webpack-dev-server --config ./config/webpack.dev.js",
-    "build": "webpack  --config  ./config/webpack.prod.js ",
+    "start": "webpack-dev-server --config ./config/webpack.dev.ts",
+    "dev": "webpack-dev-server --config ./config/webpack.dev.ts",
+    "build": "webpack  --config  ./config/webpack.prod.ts ",
     "prettier": "node scripts/prettier.ts"
   },
   "dependencies": {
@@ -46,7 +46,7 @@
     "style-loader": "^0.23.1",
     "thread-loader": "^2.1.2",
     "ts-import-plugin": "^1.5.5",
-    "ts-loader": "^6.0.0",
+    "ts-loader": "^6.0.1",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5",
     "url-loader": "^1.1.2",
