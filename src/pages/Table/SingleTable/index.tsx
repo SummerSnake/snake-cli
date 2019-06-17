@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { Table, Tag, Divider } from 'antd';
 import styles from './index.less';
 
 export default function SingleTable() {
@@ -9,7 +9,55 @@ export default function SingleTable() {
    * react 规定我们必须把 hooks 写在函数的最外层，不能写在 if else等条件语句当中，来确保hooks的执行顺序一致;
    * hooks 可以反复多次使用，相互独立。
    */
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState([
+      {
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
+          render: text => <a href="javascript:;">{text}</a>,
+      },
+      {
+          title: 'Age',
+          dataIndex: 'age',
+          key: 'age',
+      },
+      {
+          title: 'Address',
+          dataIndex: 'address',
+          key: 'address',
+      },
+      {
+          title: 'Tags',
+          key: 'tags',
+          dataIndex: 'tags',
+          render: tags => (
+              <span>
+              {tags.map(tag => {
+                  let color = tag.length > 5 ? 'geekblue' : 'green';
+                  if (tag === 'loser') {
+                      color = 'volcano';
+                  }
+                  return (
+                      <Tag color={color} key={tag}>
+                          {tag.toUpperCase()}
+                      </Tag>
+                  );
+              })}
+            </span>
+          ),
+      },
+      {
+          title: 'Action',
+          key: 'action',
+          render: (text, record) => (
+              <span>
+              <a href="javascript:;">Invite {record.name}</a>
+              <Divider type="vertical" />
+              <a href="javascript:;">Delete</a>
+            </span>
+          ),
+      },
+  ]);
   const [dataSource, setDataSource] = useState([]);
 
   /**
@@ -20,8 +68,34 @@ export default function SingleTable() {
    * 用第二个参数来告诉react只有当这个参数的值发生改变时，才执行我们传的副作用函数（第一个参数）。
    */
   useEffect(() => {
-    document.title = 'SingleTable';
-  }, [columns]);
+      setDataSource([
+          {
+              key: '1',
+              name: 'John Brown',
+              age: 32,
+              address: 'New York No. 1 Lake Park',
+              tags: ['nice', 'developer'],
+          },
+          {
+              key: '2',
+              name: 'Jim Green',
+              age: 42,
+              address: 'London No. 1 Lake Park',
+              tags: ['loser'],
+          },
+          {
+              key: '3',
+              name: 'Joe Black',
+              age: 32,
+              address: 'Sidney No. 1 Lake Park',
+              tags: ['cool', 'teacher'],
+          },
+      ]);
+      // componentWillUnMount 时触发
+      return () => {
+          console.log('componentWillUnMount')
+      };
+  }, []);
   return (
     <div className={styles.singleTableWrap}>
       <Table columns={columns} dataSource={dataSource} />
