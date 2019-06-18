@@ -28,6 +28,7 @@
       "@": ["src/*"],
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
+      "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"]
     }
   },

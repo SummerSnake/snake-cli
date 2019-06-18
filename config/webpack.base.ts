@@ -134,6 +134,7 @@ module.exports = {
       '@': resolve(__dirname, '../src'),
       '@components': resolve(__dirname, '../src/components'),
       '@config': resolve(__dirname, '../src/config'),
+      '@services': resolve(__dirname, '../src/services'),
       '@utils': resolve(__dirname, '../src/utils'),
     },
   },
