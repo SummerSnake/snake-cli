@@ -1,14 +1,16 @@
-import React from 'react';
-// import { Input, Button, Icon, notification } from 'antd';
+import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 
-export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return <div className={styles.homeWrap}>home</div>;
-  }
+function Home(props) {
+  useEffect(() => {
+    if (!localStorage.getItem('accessToken')) {
+      props.history.push('/login');
+    }
+    return () => {
+      localStorage.removeItem('accessToken');
+    };
+  }, []);
+  return <div className={styles.homeWrap}>home</div>;
 }
+
+export default Home;

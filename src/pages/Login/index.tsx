@@ -13,6 +13,7 @@ function Login(props) {
     if (userName === 'admin' && password === '123456') {
       const { history } = props;
       history.push('/home');
+      localStorage.setItem('accessToken', 'login');
     } else {
       notification.error({ message: '用户名：admin, 密码：123456' });
     }
