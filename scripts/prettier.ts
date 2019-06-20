@@ -27,7 +27,7 @@ const tsFiles = glob.sync('**/*.ts*', {
 const tsxFiles = glob.sync('**/*.tsx*', {
   ignore: ['**/node_modules/**', 'dist/**', '.git/**', '.idea/**'],
 });
-const cssFiles = glob.sync('**/*.scss*', {
+const cssFiles = glob.sync('**/*.less*', {
   ignore: ['**/node_modules/**', 'dist/**', '.git/**', '.idea/**'],
 });
 const eslintrc = glob.sync('.eslintrc.js');
