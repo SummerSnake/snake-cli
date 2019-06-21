@@ -8,7 +8,7 @@ interface InitProp {
   location: any;
 }
 interface InitState {
-  keys: Array<any>;
+  keys: Array<string>;
 }
 class SiderMenu extends React.Component<InitProp, InitState> {
   constructor(props) {
@@ -17,26 +17,34 @@ class SiderMenu extends React.Component<InitProp, InitState> {
       keys: [],
     };
   }
-  componentWillMount() {
+  componentDidMount = () => {
     this.selectKey();
-  }
+  };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     if (this.props.location.pathname != nextProps.location.pathname) {
       this.selectKey();
     }
-  }
+  };
 
+  /**
+   * 获取路由路径字符串供 menu 使用
+   */
   selectKey = () => {
     let keys = [];
     keys.push(this.props.history.location.pathname);
     this.setState({ keys });
   };
-
+  /**
+   * 处理选中路由
+   */
   handleSelect = ({ key }) => {
     this.props.history.push(key);
   };
 
+  /**
+   * 当前选中项名字
+   */
   titleNode = item => {
     return (
       <span>
