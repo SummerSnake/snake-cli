@@ -17,7 +17,7 @@ class SiderMenu extends React.Component<InitProp, InitState> {
       keys: [],
     };
   }
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.selectKey();
   };
 
