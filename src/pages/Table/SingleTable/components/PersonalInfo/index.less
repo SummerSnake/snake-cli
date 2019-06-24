@@ -1,0 +1,65 @@
+@import '../../../../../styles/mixin.less';
+
+.detailWrap {
+  .topWrap {
+    .wh(100%, 150px);
+    box-sizing: border-box;
+    padding: 0 10px 10px 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(224, 224, 224, 0.5);
+    border-radius: 6px;
+    p {
+      margin: 0;
+    }
+    .cardWrap {
+      display: flex;
+      width: 100%;
+      .cardDom {
+        flex: 1;
+        max-width: 156px;
+        height: 86px;
+        margin-right: 6px;
+        background-color: @primaryColor;
+        border-radius: 6px;
+        .cardTitle {
+          .sc(@txtSize, rgba(255, 255, 255, 0.84));
+          padding: 6px 10px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          .iconDom {
+            padding-right: 12px;
+          }
+        }
+        .cardContent {
+          .ellipsis;
+          .sc(24px, #000);
+          padding: 12px 0 0 12px;
+        }
+      }
+      .cardDom:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .titleDom {
+    height: 42px;
+    line-height: 42px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e4e4e4;
+    > span:first-child {
+      .wh(3px, 14px);
+      display: inline-block;
+      background: @primaryColor;
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+    > span:last-child {
+      .sc(16px, #373737);
+      padding-left: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      vertical-align: middle;
+    }
+  }
+}

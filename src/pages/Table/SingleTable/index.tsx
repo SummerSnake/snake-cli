@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Divider } from 'antd';
+import { Table, Tag, Drawer, Divider } from 'antd';
 import { getRequest } from '@services/api';
+import PersonalInfo from './components/PersonalInfo/index';
 import styles from './index.less';
 import '../../../../mock/singleTableApi';
 
@@ -12,6 +13,8 @@ export default function SingleTable() {
    * hooks 可以反复多次使用，相互独立。
    */
   const [dataSource, setDataSource] = useState([]);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   /**
    * 获取数据
@@ -41,7 +44,16 @@ export default function SingleTable() {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <a href="javascript:;">{text}</a>,
+      render: text => (
+        <a
+          href="javascript:;"
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          {text}
+        </a>
+      ),
     },
     {
       title: 'Age',
@@ -88,6 +100,17 @@ export default function SingleTable() {
   return (
     <div className={styles.singleTableWrap}>
       <Table columns={columns} dataSource={dataSource} />
+
+      <Drawer
+        title="个人信息"
+        placement="right"
+        width="1000px"
+        onClose={() => setIsOpen(false)}
+        visible={isOpen}
+        destroyOnClose
+      >
+        <PersonalInfo />
+      </Drawer>
     </div>
   );
 }
