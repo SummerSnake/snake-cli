@@ -1,13 +1,26 @@
-@import 'styles/mixin.less';
+@import './styles/mixin.less';
 
-body {
-  .wmh(100vw, 100vh);
-}
-
-img {
-  .wh(100%, 100%);
-}
-
-button {
-  outline: none;
+:global {
+  /* Drawer */
+  .ant-drawer-wrapper-body {
+    font-family: 'PingFangSC-Regular', 'Microsoft YaHei UI', serif;
+    background-color: #f3f3f3;
+    padding: 0 10px;
+    .ant-drawer-header {
+      padding: 0;
+      margin-bottom: 10px;
+      background-color: #f3f3f3;
+      border-radius: 0;
+      border-bottom: 1px solid #e4e4e4;
+      .ant-drawer-title {
+        .sc(16px, #373737);
+        height: 48px;
+        line-height: 48px;
+        letter-spacing: 1px;
+      }
+    }
+    .ant-drawer-body {
+      padding: 0;
+    }
+  }
 }
