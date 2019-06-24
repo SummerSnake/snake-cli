@@ -12,14 +12,21 @@ interface infoData {
   hobby?: string;
   [propName: string]: any;
 }
-function PersonalInfo() {
+function PersonalInfo(props) {
   const [infoData, setInfoData] = useState<infoData>({ name: '*' });
   /**
    * 获取数据
    */
   async function fetchData() {
     const data = await getRequest('/api/get_single_table', null);
-    setInfoData({ ...infoData, ...data });
+    const arr = data['data'];
+    if (Array.isArray(arr) && arr.length > 0) {
+      arr.forEach(item => {
+        if (props.infoId === item.key) {
+          setInfoData({ ...infoData, ...item });
+        }
+      });
+    }
   }
 
   useEffect(() => {

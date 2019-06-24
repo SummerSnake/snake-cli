@@ -16,6 +16,8 @@ export default function SingleTable() {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const [infoId, setInfoId] = useState<string>('');
+
   /**
    * 获取数据
    */
@@ -44,10 +46,11 @@ export default function SingleTable() {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => (
+      render: (text, record) => (
         <a
           href="javascript:;"
           onClick={() => {
+            setInfoId(record.key);
             setIsOpen(true);
           }}
         >
@@ -109,7 +112,7 @@ export default function SingleTable() {
         visible={isOpen}
         destroyOnClose
       >
-        <PersonalInfo />
+        <PersonalInfo infoId={infoId} />
       </Drawer>
     </div>
   );
