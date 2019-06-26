@@ -4,7 +4,8 @@ snake-cli
 
 # 说明
 
-从零开始搭建 React 脚手架
+React + React-Router + Typescript + ant design + webpack4.0 脚手架
+使用 React 最近特性 hook 进行开发
 
 # 注意事项
 
@@ -35,16 +36,22 @@ yarn build
 目录结构
 
     ├── build                   // 编译结果目录
-    ├── config                 // webpack配置目录
+    ├── config                 // webpack 配置目录
     │   ├── webpack.base.ts     // 公用配置
     │   ├── webpack.dev.ts     // 开发时配置
     │   └── product.dev.js     // 打包时配置
+    ├── mock                   // mock 数据
+    ├── script                   // node.js 脚本 
     ├── src                    // 源码目录
-    │   ├── components             // 组件
+    │   ├── BasicLayout             // 布局组件
+    │   ├── components             // 公共组件
+    │   ├── config             // 项目配置，路由、sideMenu等等
     │   ├── pages                  // 页面文件目录
     │   │   └── index
     │   │       ├── index.tsx           // 页面逻辑
     │   │       ├── index.less         // 页面样式
+    │   ├── router              // 路由
+    │   ├── services              // ajax 封装
     │   ├── utils              // 常用工具类
     │   ├── index.tsx             // 入口文件
     │   └── index.html
