@@ -81,6 +81,14 @@ function PersonalInfo(props) {
             </p>
             <p className={styles.cardContent}>{infoData.hobby}</p>
           </div>
+
+          <div className={styles.cardDom}>
+            <p className={styles.cardTitle}>
+              <Icon type="slack" className={styles.iconDom} />
+              职业
+            </p>
+            <p className={styles.cardContent}>{infoData.job}</p>
+          </div>
         </div>
       </div>
     </div>
