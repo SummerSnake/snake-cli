@@ -5,7 +5,7 @@ snake-cli
 # 说明
 
 React + React-Router + Typescript + ant design + webpack4.0 脚手架
-使用 React 最近特性 hook 进行开发
+使用 React hook 进行开发
 
 # 注意事项
 

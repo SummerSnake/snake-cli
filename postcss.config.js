@@ -5,7 +5,7 @@
 module.exports = {
   plugins: {
     autoprefixer: {
-      browsers: ['ie >= 8', 'ff >= 30', 'chrome >= 34', 'safari >= 8', 'opera >= 23'],
+      overrideBrowserslist: ['Android 4.1', 'iOS 7.1', 'Chrome > 31', 'ff > 31', 'ie >= 8'],
     },
   },
 };
