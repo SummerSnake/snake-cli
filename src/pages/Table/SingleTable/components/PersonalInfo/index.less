@@ -41,7 +41,34 @@
       }
     }
   }
-
+  .midWrap {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    > div {
+      flex: 1;
+      min-height: 240px;
+      box-sizing: border-box;
+      padding: 0 10px;
+      background-color: #fff;
+      box-shadow: 0 2px 8px 0 rgba(224, 224, 224, 0.5);
+      border-radius: 6px;
+    }
+    > div:first-child {
+      margin-right: 10px;
+    }
+    .itemDom {
+      > p {
+        .sc(@txtSize, @titleColor);
+        padding-bottom: 20px;
+        margin: 0;
+      }
+      > p:first-child {
+        .sc(@txtSize, @txtColor);
+        padding-bottom: 10px;
+      }
+    }
+  }
   .titleDom {
     height: 42px;
     line-height: 42px;

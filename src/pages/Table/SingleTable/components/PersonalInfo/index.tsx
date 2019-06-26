@@ -91,6 +91,41 @@ function PersonalInfo(props) {
           </div>
         </div>
       </div>
+
+      <div className={styles.midWrap}>
+        <div>
+          <div className={styles.titleDom}>
+            <span />
+            <span>工作经历</span>
+          </div>
+          <div className={styles.conWrap}>
+            <div className={styles.itemDom}>
+              <p>2000.03 - 2010.03</p>
+              <p>市政府</p>
+            </div>
+            <div className={styles.itemDom}>
+              <p>2010.03 - 2015.03</p>
+              <p>省政府</p>
+            </div>
+            <div className={styles.itemDom}>
+              <p>2015.03 - 至今</p>
+              <p>国务院</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className={styles.titleDom}>
+            <span />
+            <span>人物评价</span>
+          </div>
+          <div className={styles.itemDom}>
+            <p style={{ textIndent: '28px' }}>
+              毫无保留地把全部精力奉献给了党和人民， 他身上集中体现了中国共产党人的高风亮节。
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
