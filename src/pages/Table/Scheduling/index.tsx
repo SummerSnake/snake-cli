@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Select, Modal } from 'antd';
+import { Table, Button, Select } from 'antd';
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 import moment from 'moment';
@@ -76,9 +76,9 @@ export default function Scheduling() {
   }
 
   /**
-   * 打开选择时段 Modal
+   * 打开选择时段 Modal 回调
    */
-  function handleSubmit() {
+  function onModalCall() {
     setIsModalOpen(false);
   }
 
@@ -147,21 +147,7 @@ export default function Scheduling() {
         ))}
       </Table>
 
-      <Modal
-        title="选择时段"
-        width={500}
-        visible={isModalOpen}
-        onOk={() => {
-          handleSubmit();
-        }}
-        onCancel={() => {
-          setIsModalOpen(false);
-        }}
-        confirmLoading={!isModalOpen}
-        destroyOnClose
-      >
-        <SelectTime />
-      </Modal>
+      <SelectTime onModalCall={onModalCall} isModalOpen={isModalOpen} />
     </div>
   );
 }
