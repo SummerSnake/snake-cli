@@ -13,10 +13,12 @@ export default function Scheduling() {
   const [columns, setColumns] = useState([]);
   // 表格数据
   const [dataSource, setDataSource] = useState([]);
+  // 表格选择框
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // 当前日期
   const [nowDate, setNowDate] = useState(moment());
   // Modal 开关
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const arr = columnsJson(nowDate);
@@ -79,6 +81,18 @@ export default function Scheduling() {
   function handleSubmit() {
     setIsModalOpen(false);
   }
+
+  /**
+   * 表格行选择
+   */
+  const rowSelection = {
+    onChange: (selectRowKeys, selectRows) => {
+      const arr = selectRowKeys.filter(item => {
+        return !selectedRowKeys.includes(item.id);
+      });
+      setSelectedRowKeys([...arr]);
+    },
+  };
   return (
     <div className={styles.schedulingWrap}>
       <div className={styles.topDom}>
@@ -102,12 +116,18 @@ export default function Scheduling() {
         <span onClick={handleLastWeek}>上一周</span>
         <span onClick={handleNowWeek}>当前周</span>
         <span onClick={handleNextWeek}>下一周</span>
-        <Button type="primary" size="small" className={styles.editBtn}>
+        <Button
+          style={{ visibility: selectedRowKeys.length > 0 ? 'visible' : 'hidden' }}
+          type="primary"
+          size="small"
+          className={styles.editBtn}
+          onClick={handleModalOpen}
+        >
           编辑
         </Button>
       </div>
 
-      <Table dataSource={dataSource}>
+      <Table rowKey="id" dataSource={dataSource} rowSelection={rowSelection}>
         <Column title="工程师" dataIndex="engineer" key="engineer" />
         {columns.map(item => (
           <ColumnGroup title={item._date} key={item.id}>

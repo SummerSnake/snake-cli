@@ -17,7 +17,7 @@ export default function SelectTime() {
 
     // componentWillUnMount 时触发
     return () => {
-        setTagArr([]);
+      setTagArr([]);
     };
   }, []);
 

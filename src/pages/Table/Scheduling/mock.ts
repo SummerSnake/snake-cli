@@ -1,6 +1,6 @@
 const mockData = [
   {
-    key: '1',
+    id: 1,
     engineer: 'Jordan',
     type1: 1,
     type2: 2,
@@ -11,7 +11,7 @@ const mockData = [
     type7: 1,
   },
   {
-    key: '2',
+    id: 2,
     engineer: 'Green',
     type1: 1,
     type2: 2,
@@ -22,7 +22,7 @@ const mockData = [
     type7: 2,
   },
   {
-    key: '3',
+    id: 3,
     engineer: 'Willa',
     type1: 2,
     type2: 1,
