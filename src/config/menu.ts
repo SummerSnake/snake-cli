@@ -13,6 +13,10 @@ export default [
         name: '单个表格',
         path: '/SingleTable',
       },
+      {
+        name: '排班表格',
+        path: '/Scheduling',
+      },
     ],
   },
 ];

@@ -12,7 +12,11 @@ const SingleTable = Loadable({
   loading: DelayLoading,
   delay: 3000,
 });
-
+const Scheduling = Loadable({
+  loader: () => import('../pages/Table/Scheduling/index'),
+  loading: DelayLoading,
+  delay: 3000,
+});
 export default [
   {
     path: '/home',
@@ -22,5 +26,9 @@ export default [
   {
     path: '/table/SingleTable',
     component: SingleTable,
+  },
+  {
+    path: '/table/Scheduling',
+    component: Scheduling,
   },
 ];

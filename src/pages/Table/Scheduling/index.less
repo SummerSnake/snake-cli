@@ -1,0 +1,51 @@
+@import '../../../styles/mixin.less';
+
+.singleTableWrap {
+  height: 100%;
+  .topDom {
+    .wh(100%, 50px);
+    display: flex;
+    > div {
+      .sc(@txtSize, @txtColor);
+      flex: 1;
+      text-align: left;
+    }
+    > div:last-child {
+      height: 50px;
+      line-height: 50px;
+      text-align: right;
+      > span:last-child {
+        padding-left: 10px;
+      }
+    }
+  }
+  .btnGroup {
+    .wh(100%, 50px);
+    line-height: 50px;
+    text-align: center;
+    background-color: #f4f4f4;
+    > span {
+      .wh(100px, 30px);
+      display: inline-block;
+      line-height: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    > span:hover {
+      color: #fff;
+      background-color: @primaryColor;
+    }
+    .editBtn {
+      float: right;
+      margin: 12px 50px 0 0;
+    }
+  }
+  :global {
+    .ant-table-thead > tr > th[colspan] {
+      text-align: left;
+      padding-bottom: 0;
+    }
+  }
+}
