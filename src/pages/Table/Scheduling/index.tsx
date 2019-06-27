@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Select } from 'antd';
+import { Table, Button, Select, Modal } from 'antd';
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 import moment from 'moment';
 import { weekFormat, calcWeek, columnsJson } from '@utils/date';
+import SelectTime from './components/SelectTime/index';
 import styles from './index.less';
-import mockData from './mock';
+import { mockData } from './mock';
 
 export default function Scheduling() {
   // 表头
@@ -14,6 +15,8 @@ export default function Scheduling() {
   const [dataSource, setDataSource] = useState([]);
   // 当前日期
   const [nowDate, setNowDate] = useState(moment());
+  // Modal 开关
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const arr = columnsJson(nowDate);
@@ -62,8 +65,22 @@ export default function Scheduling() {
     setColumns([...arr]);
     setNowDate(json['nextWeek']);
   }
+
+  /**
+   * 打开选择时段 Modal
+   */
+  function handleModalOpen() {
+    setIsModalOpen(true);
+  }
+
+  /**
+   * 打开选择时段 Modal
+   */
+  function handleSubmit() {
+    setIsModalOpen(false);
+  }
   return (
-    <div className={styles.singleTableWrap}>
+    <div className={styles.schedulingWrap}>
       <div className={styles.topDom}>
         <div>
           <span>选择年份：</span>
@@ -99,12 +116,32 @@ export default function Scheduling() {
               dataIndex={`type${item.id}`}
               key={item.id}
               render={text => {
-                return text === 1 ? '已排班' : '';
+                return (
+                  <a href="javascript:;" onClick={handleModalOpen}>
+                    {text === 1 ? '已排班' : '---'}
+                  </a>
+                );
               }}
             />
           </ColumnGroup>
         ))}
       </Table>
+
+      <Modal
+        title="选择时段"
+        width={500}
+        visible={isModalOpen}
+        onOk={() => {
+          handleSubmit();
+        }}
+        onCancel={() => {
+          setIsModalOpen(false);
+        }}
+        confirmLoading={!isModalOpen}
+        destroyOnClose
+      >
+        <SelectTime />
+      </Modal>
     </div>
   );
 }
