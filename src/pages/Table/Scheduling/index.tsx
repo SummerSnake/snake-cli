@@ -3,10 +3,9 @@ import { Table, Button, Select } from 'antd';
 const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 import moment from 'moment';
-import { getRequest } from '@services/api';
 import { weekFormat, calcWeek, columnsJson } from '@utils/date';
 import styles from './index.less';
-import '../../../../mock/singleTableApi';
+import mockData from './mock';
 
 export default function Scheduling() {
   // 表头
@@ -19,21 +18,13 @@ export default function Scheduling() {
   useEffect(() => {
     const arr = columnsJson(nowDate);
     setColumns([...columns, ...arr]);
+    setDataSource([...dataSource, ...mockData]);
 
-    fetchData();
     // componentWillUnMount 时触发
     return () => {
       console.log('componentWillUnMount');
     };
   }, []);
-
-  /**
-   * 获取数据
-   */
-  async function fetchData() {
-    const data = await getRequest('/api/get_single_table', null);
-    setDataSource([...data['data']]);
-  }
 
   /**
    * 选择框事件
@@ -100,10 +91,17 @@ export default function Scheduling() {
       </div>
 
       <Table dataSource={dataSource}>
-        <Column title="工程师" dataIndex="name" key="engineer" />
+        <Column title="工程师" dataIndex="engineer" key="engineer" />
         {columns.map(item => (
           <ColumnGroup title={item._date} key={item.id}>
-            <Column title={item._day} dataIndex="nowWeek" key={item.id} />
+            <Column
+              title={item._day}
+              dataIndex={`type${item.id}`}
+              key={item.id}
+              render={text => {
+                return text === 1 ? '已排班' : '';
+              }}
+            />
           </ColumnGroup>
         ))}
       </Table>
