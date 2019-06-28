@@ -21,6 +21,9 @@ export default function SelectTime(props) {
     };
   }, []);
 
+  /**
+   * 选择标签
+   */
   function handleTagSelect(id) {
     let tagArrClone = [...tagArr];
     if (tagArrClone.includes(id)) {
@@ -30,6 +33,7 @@ export default function SelectTime(props) {
     }
     setTagArr([...tagArrClone]);
   }
+
   /**
    * 提交
    */
