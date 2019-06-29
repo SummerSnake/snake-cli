@@ -37,31 +37,50 @@ export default function SelectTime(props) {
     }
     setTagArr([...tagArrClone]);
   }
+
   /**
    * 上午标签全选 checkbox
    */
-  async function handleAmChecked() {
+  function handleAmChecked() {
     const invertVal = !amChecked;
-    await setAmChecked(invertVal);
+    setAmChecked(invertVal);
+    tagFilter(invertVal, amTimeData);
+  }
+
+  /**
+   * 下午标签全选 checkbox
+   */
+  function handlePmChecked() {
+    const invertVal = !pmChecked;
+    setPmChecked(invertVal);
+    tagFilter(invertVal, pmTimeData);
+  }
+
+  /**
+   * 标签操作方法
+   */
+  function tagFilter(timeChecked: boolean, timeData) {
     let arr = [];
     let tagArrClone = [...tagArr];
-    if (invertVal) {
+    if (timeChecked) {
       // 全选
-      arr = amTimeData.filter(item => {
+      arr = timeData.filter(item => {
         return !tagArrClone.includes(item.id);
       });
       arr.forEach(item => {
         tagArrClone.push(item.id);
       });
-      setTagArr([...tagArrClone]);
     } else {
       // 取消全选
-      arr = tagArrClone.filter(tag => {
-        return !amTimeData.map(item => item.id !== tag);
+      timeData.forEach(item => {
+        if (tagArrClone.includes(item.id)) {
+          tagArrClone.splice(tagArrClone.indexOf(item.id), 1);
+        }
       });
-      setTagArr([...arr]);
     }
+    setTagArr([...tagArrClone]);
   }
+
   /**
    * 提交
    */
@@ -111,7 +130,16 @@ export default function SelectTime(props) {
           </div>
         </div>
         <div>
-          <h3>下午</h3>
+          <h3>
+            下午
+            <Checkbox
+              checked={pmChecked}
+              style={{ marginLeft: '6px' }}
+              onChange={() => {
+                handlePmChecked();
+              }}
+            />
+          </h3>
           <div>
             {pmTimeData.map(item => (
               <Tag
