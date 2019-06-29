@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Tag } from 'antd';
+import { Modal, Tag, Checkbox } from 'antd';
 import styles from './index.less';
 import { amTime, pmTime } from '../../mock';
 
@@ -10,6 +10,10 @@ export default function SelectTime(props) {
   const [pmTimeData, setPmTimeData] = useState([]);
   // 选中 tag 数组
   const [tagArr, setTagArr] = useState([]);
+  // 上午标签全选
+  const [amChecked, setAmChecked] = useState<boolean>(false);
+  // 下午标签全选
+  const [pmChecked, setPmChecked] = useState<boolean>(false);
 
   useEffect(() => {
     setAmTimeData([...amTimeData, ...amTime]);
@@ -33,7 +37,31 @@ export default function SelectTime(props) {
     }
     setTagArr([...tagArrClone]);
   }
-
+  /**
+   * 上午标签全选 checkbox
+   */
+  async function handleAmChecked() {
+    const invertVal = !amChecked;
+    await setAmChecked(invertVal);
+    let arr = [];
+    let tagArrClone = [...tagArr];
+    if (invertVal) {
+      // 全选
+      arr = amTimeData.filter(item => {
+        return !tagArrClone.includes(item.id);
+      });
+      arr.forEach(item => {
+        tagArrClone.push(item.id);
+      });
+      setTagArr([...tagArrClone]);
+    } else {
+      // 取消全选
+      arr = tagArrClone.filter(tag => {
+        return !amTimeData.map(item => item.id !== tag);
+      });
+      setTagArr([...arr]);
+    }
+  }
   /**
    * 提交
    */
@@ -57,7 +85,16 @@ export default function SelectTime(props) {
         destroyOnClose
       >
         <div>
-          <h3>上午</h3>
+          <h3>
+            上午
+            <Checkbox
+              checked={amChecked}
+              style={{ marginLeft: '6px' }}
+              onChange={() => {
+                handleAmChecked();
+              }}
+            />
+          </h3>
           <div>
             {amTimeData.map(item => (
               <Tag
