@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Tag, Checkbox } from 'antd';
 import styles from './index.less';
-import { amTime, pmTime } from '../../mock';
 
 export default function SelectTime(props) {
   // 上午 时间段
@@ -16,8 +15,12 @@ export default function SelectTime(props) {
   const [pmChecked, setPmChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    setAmTimeData([...amTimeData, ...amTime]);
-    setPmTimeData([...pmTimeData, ...pmTime]);
+    if (Array.isArray(props.apiData['amTime'])) {
+      setAmTimeData([...amTimeData, ...props.apiData['amTime']]);
+    }
+    if (Array.isArray(props.apiData['pmTime'])) {
+      setPmTimeData([...pmTimeData, ...props.apiData['pmTime']]);
+    }
 
     // componentWillUnMount 时触发
     return () => {
@@ -87,7 +90,6 @@ export default function SelectTime(props) {
   function handleSubmit() {
     props.onModalCall();
   }
-
   return (
     <div className={styles.SelectTime}>
       <Modal
@@ -95,9 +97,11 @@ export default function SelectTime(props) {
         width={500}
         visible={props.isModalOpen}
         onOk={() => {
+          setTagArr([]);
           handleSubmit();
         }}
         onCancel={() => {
+          setTagArr([]);
           props.onModalCall();
         }}
         confirmLoading={!props.isModalOpen}
@@ -115,18 +119,20 @@ export default function SelectTime(props) {
             />
           </h3>
           <div>
-            {amTimeData.map(item => (
-              <Tag
-                color={tagArr.includes(item.id) ? '#1890ff' : ''}
-                style={{ marginBottom: '10px', cursor: 'pointer' }}
-                key={item.id}
-                onClick={() => {
-                  handleTagSelect(item.id);
-                }}
-              >
-                {item.tag}
-              </Tag>
-            ))}
+            {Array.isArray(amTimeData) &&
+              amTimeData.length > 0 &&
+              amTimeData.map(item => (
+                <Tag
+                  color={tagArr.includes(item.id) ? '#1890ff' : ''}
+                  style={{ marginBottom: '10px', cursor: 'pointer' }}
+                  key={item.id}
+                  onClick={() => {
+                    handleTagSelect(item.id);
+                  }}
+                >
+                  {item.tag}
+                </Tag>
+              ))}
           </div>
         </div>
         <div>
@@ -141,18 +147,20 @@ export default function SelectTime(props) {
             />
           </h3>
           <div>
-            {pmTimeData.map(item => (
-              <Tag
-                color={tagArr.includes(item.id) ? '#1890ff' : ''}
-                style={{ marginBottom: '10px', cursor: 'pointer' }}
-                key={item.id}
-                onClick={() => {
-                  handleTagSelect(item.id);
-                }}
-              >
-                {item.tag}
-              </Tag>
-            ))}
+            {Array.isArray(pmTimeData) &&
+              pmTimeData.length > 0 &&
+              pmTimeData.map(item => (
+                <Tag
+                  color={tagArr.includes(item.id) ? '#1890ff' : ''}
+                  style={{ marginBottom: '10px', cursor: 'pointer' }}
+                  key={item.id}
+                  onClick={() => {
+                    handleTagSelect(item.id);
+                  }}
+                >
+                  {item.tag}
+                </Tag>
+              ))}
           </div>
         </div>
       </Modal>

@@ -4,31 +4,34 @@ const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 import moment from 'moment';
 import { weekFormat, calcWeek, columnsJson } from '@utils/date';
+import { getRequest } from '@services/api';
 import SelectTime from './components/SelectTime/index';
+import '../../../../mock/schedulingApi';
 import styles from './index.less';
-import { mockData } from './mock';
 
 export default function Scheduling() {
+  // 当前日期
+  const [nowDate, setNowDate] = useState(moment());
   // 表头
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState(columnsJson(nowDate));
   // 表格数据
   const [dataSource, setDataSource] = useState([]);
   // 表格选择框
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  // 当前日期
-  const [nowDate, setNowDate] = useState(moment());
   // Modal 开关
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  // 接口数据
+  const [apiData, setApiData] = useState({});
+  /**
+   * 获取数据
+   */
+  async function fetchData() {
+    const data = await getRequest('/api/get_scheduling', null);
+    setDataSource([...dataSource, ...data['data']['tableData']]);
+    setApiData({ ...apiData, ...data['data'] });
+  }
   useEffect(() => {
-    const arr = columnsJson(nowDate);
-    setColumns([...columns, ...arr]);
-    setDataSource([...dataSource, ...mockData]);
-
-    // componentWillUnMount 时触发
-    return () => {
-      console.log('componentWillUnMount');
-    };
+    fetchData();
   }, []);
 
   /**
@@ -147,7 +150,9 @@ export default function Scheduling() {
         ))}
       </Table>
 
-      <SelectTime onModalCall={onModalCall} isModalOpen={isModalOpen} />
+      {Object.keys(apiData).length > 0 && (
+        <SelectTime apiData={apiData} onModalCall={onModalCall} isModalOpen={isModalOpen} />
+      )}
     </div>
   );
 }
