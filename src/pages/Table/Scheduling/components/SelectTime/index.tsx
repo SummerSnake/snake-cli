@@ -96,10 +96,12 @@ export default function SelectTime(props) {
         title="选择时段"
         width={500}
         visible={props.isModalOpen}
+        okText="提交"
         onOk={() => {
           setTagArr([]);
           handleSubmit();
         }}
+        cancelText="取消"
         onCancel={() => {
           setTagArr([]);
           props.onModalCall();
