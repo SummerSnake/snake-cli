@@ -31,14 +31,45 @@ export default function SelectTime(props) {
   /**
    * 选择标签
    */
-  function handleTagSelect(id) {
+  function handleTagSelect(id: number) {
     let tagArrClone = [...tagArr];
+    const amTimeDataClone = [...amTimeData];
+    const pmTimeDataClone = [...pmTimeData];
+
     if (tagArrClone.includes(id)) {
+      // 如果当前是选中状态，则取消选中
       tagArrClone.splice(tagArrClone.indexOf(id), 1);
+      // 取消全选 checkbox 状态
+      amTimeDataClone.forEach(item => {
+        item.id === id && setAmChecked(false);
+      });
+      pmTimeDataClone.forEach(item => {
+        item.id === id && setPmChecked(false);
+      });
     } else {
+      // 如果当前是非选中状态，则添加选中状态
       tagArrClone.push(id);
+      // 如果标签全部选中，添加全选 checkbox 状态
+      checkContain(amTimeDataClone, tagArrClone, 'am');
+      checkContain(pmTimeDataClone, tagArrClone, 'pm');
     }
     setTagArr([...tagArrClone]);
+  }
+
+  /**
+   * 判断标签是否全部选中，添加全选 checkbox 状态
+   */
+  function checkContain(timeData, tagArr, type: string) {
+    let amFlag = true;
+    let pmFlag = true;
+    // 判断标签数组中是否包含 当前点击标签所属数组 的所有元素
+    timeData.forEach(item => {
+      if (!tagArr.includes(item.id)) {
+        type === 'am' ? (amFlag = false) : (pmFlag = false);
+      }
+    });
+    amFlag && type === 'am' && setAmChecked(true);
+    pmFlag && type === 'pm' && setPmChecked(true);
   }
 
   /**
@@ -88,6 +119,9 @@ export default function SelectTime(props) {
    * 提交
    */
   function handleSubmit() {
+    setTagArr([]);
+    setAmChecked(false);
+    setPmChecked(false);
     props.onModalCall();
   }
   return (
@@ -98,13 +132,11 @@ export default function SelectTime(props) {
         visible={props.isModalOpen}
         okText="提交"
         onOk={() => {
-          setTagArr([]);
           handleSubmit();
         }}
         cancelText="取消"
         onCancel={() => {
-          setTagArr([]);
-          props.onModalCall();
+          handleSubmit();
         }}
         confirmLoading={!props.isModalOpen}
         destroyOnClose
