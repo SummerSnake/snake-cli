@@ -31,9 +31,6 @@ function PersonalInfo(props) {
 
   useEffect(() => {
     fetchData();
-    return () => {
-      console.log('componentWillUnMount');
-    };
   }, []);
   return (
     <div className={styles.detailWrap}>
