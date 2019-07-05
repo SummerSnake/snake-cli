@@ -5,7 +5,9 @@ import menu from '@config/menu';
 
 interface InitProp {
   history: any[];
-  location: any;
+  location: {
+    pathname?: any;
+  };
 }
 interface InitState {
   keys: string[];
@@ -32,7 +34,7 @@ class SiderMenu extends React.Component<InitProp, InitState> {
    */
   selectKey = () => {
     let keys = [];
-    keys.push(this.props.history.location.pathname);
+    keys.push(this.props.location.pathname);
     this.setState({ keys });
   };
   /**

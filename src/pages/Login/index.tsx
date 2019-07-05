@@ -3,7 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { Input, Button, Icon, notification } from 'antd';
 import styles from './index.less';
 
-function Login(props) {
+interface InitProp {
+    history: any[];
+}
+function Login(props: InitProp) {
   const [userName, setUserName] = useState<string>('admin');
   const [password, setPassword] = useState<string>('123456');
   /**
