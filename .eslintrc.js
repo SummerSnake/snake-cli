@@ -34,6 +34,7 @@ module.exports = {
         "@typescript-eslint/interface-name-prefix": 0,
         "@typescript-eslint/explicit-member-accessibility": 0,
         "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-explicit-any": 0,
         // js 相关校验规则
         "no-console": ["warn", { allow: ["warn", "error"] }], // 禁用console
         "eqeqeq": ["warn", "always"], // 要求使用 === 和 !==

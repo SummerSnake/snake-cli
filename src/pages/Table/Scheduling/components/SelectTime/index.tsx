@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Tag, Checkbox } from 'antd';
 import styles from './index.less';
 
-export default function SelectTime(props) {
+interface InitProps {
+  apiData: {
+    amTime?: string[];
+    pmTime?: string[];
+  };
+  isModalOpen: boolean;
+  onModalCall: any;
+}
+export default function SelectTime(props: InitProps) {
   // 上午 时间段
   const [amTimeData, setAmTimeData] = useState([]);
   // 下午 时间段
@@ -27,6 +35,22 @@ export default function SelectTime(props) {
       setTagArr([]);
     };
   }, []);
+
+  /**
+   * 判断标签是否全部选中，添加全选 checkbox 状态
+   */
+  function checkContain(timeData, tagArr, type: string) {
+    let amFlag = true;
+    let pmFlag = true;
+    // 判断标签数组中是否包含 当前点击标签所属数组 的所有元素
+    timeData.forEach(item => {
+      if (!tagArr.includes(item.id)) {
+        type === 'am' ? (amFlag = false) : (pmFlag = false);
+      }
+    });
+    amFlag && type === 'am' && setAmChecked(true);
+    pmFlag && type === 'pm' && setPmChecked(true);
+  }
 
   /**
    * 选择标签
@@ -57,40 +81,6 @@ export default function SelectTime(props) {
   }
 
   /**
-   * 判断标签是否全部选中，添加全选 checkbox 状态
-   */
-  function checkContain(timeData, tagArr, type: string) {
-    let amFlag = true;
-    let pmFlag = true;
-    // 判断标签数组中是否包含 当前点击标签所属数组 的所有元素
-    timeData.forEach(item => {
-      if (!tagArr.includes(item.id)) {
-        type === 'am' ? (amFlag = false) : (pmFlag = false);
-      }
-    });
-    amFlag && type === 'am' && setAmChecked(true);
-    pmFlag && type === 'pm' && setPmChecked(true);
-  }
-
-  /**
-   * 上午标签全选 checkbox
-   */
-  function handleAmChecked() {
-    const invertVal = !amChecked;
-    setAmChecked(invertVal);
-    tagFilter(invertVal, amTimeData);
-  }
-
-  /**
-   * 下午标签全选 checkbox
-   */
-  function handlePmChecked() {
-    const invertVal = !pmChecked;
-    setPmChecked(invertVal);
-    tagFilter(invertVal, pmTimeData);
-  }
-
-  /**
    * 标签操作方法
    */
   function tagFilter(timeChecked: boolean, timeData) {
@@ -113,6 +103,24 @@ export default function SelectTime(props) {
       });
     }
     setTagArr([...tagArrClone]);
+  }
+
+  /**
+   * 上午标签全选 checkbox
+   */
+  function handleAmChecked() {
+    const invertVal = !amChecked;
+    setAmChecked(invertVal);
+    tagFilter(invertVal, amTimeData);
+  }
+
+  /**
+   * 下午标签全选 checkbox
+   */
+  function handlePmChecked() {
+    const invertVal = !pmChecked;
+    setPmChecked(invertVal);
+    tagFilter(invertVal, pmTimeData);
   }
 
   /**

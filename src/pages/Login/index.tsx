@@ -4,7 +4,7 @@ import { Input, Button, Icon, notification } from 'antd';
 import styles from './index.less';
 
 interface InitProp {
-    history: any[];
+  history: any[];
 }
 function Login(props: InitProp) {
   const [userName, setUserName] = useState<string>('admin');
