@@ -4,11 +4,11 @@ import { Menu, Icon } from 'antd';
 import menu from '@config/menu';
 
 interface InitProp {
-  history: any;
+  history: any[];
   location: any;
 }
 interface InitState {
-  keys: Array<string>;
+  keys: string[];
 }
 class SiderMenu extends React.Component<InitProp, InitState> {
   constructor(props) {
@@ -22,7 +22,7 @@ class SiderMenu extends React.Component<InitProp, InitState> {
   };
 
   componentWillReceiveProps = nextProps => {
-    if (this.props.location.pathname != nextProps.location.pathname) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
       this.selectKey();
     }
   };

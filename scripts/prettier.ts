@@ -30,13 +30,13 @@ const tsxFiles = glob.sync('**/*.tsx*', {
 const cssFiles = glob.sync('**/*.less*', {
   ignore: ['**/node_modules/**', 'dist/**', '.git/**', '.idea/**'],
 });
-const tslint = glob.sync('tslint.json');
+const eslint = glob.sync('eslintrc.js');
 files = files.concat(jsFiles);
 files = files.concat(jsxFiles);
 files = files.concat(tsFiles);
 files = files.concat(tsxFiles);
 files = files.concat(cssFiles);
-files = files.concat(tslint);
+files = files.concat(eslint);
 if (!files.length) {
   return;
 }

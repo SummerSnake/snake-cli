@@ -37,7 +37,7 @@ export default function SingleTable() {
     fetchData();
     // componentWillUnMount 时触发
     return () => {
-      console.log('componentWillUnMount');
+      // console.log('componentWillUnMount');
     };
   }, []);
 

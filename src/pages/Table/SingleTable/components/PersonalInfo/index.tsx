@@ -3,7 +3,10 @@ import { Icon } from 'antd';
 import { getRequest } from '@services/api';
 import styles from './index.less';
 
-interface infoData {
+interface InitProps {
+  infoId?: string;
+}
+interface InfoData {
   name: string;
   gender?: string;
   age?: number;
@@ -12,8 +15,8 @@ interface infoData {
   hobby?: string;
   [propName: string]: any;
 }
-function PersonalInfo(props) {
-  const [infoData, setInfoData] = useState<infoData>({ name: '*' });
+function PersonalInfo(props: InitProps) {
+  const [infoData, setInfoData] = useState<InfoData>({ name: '*' });
   /**
    * 获取数据
    */

@@ -39,7 +39,7 @@ export default function Scheduling() {
    * @param val 当前所选值
    */
   function handleSelect(val: string) {
-    console.log(`selected ${val}`);
+    // console.log(`selected ${val}`);
   }
 
   /**

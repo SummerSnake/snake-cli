@@ -8,6 +8,7 @@
     "start": "webpack-dev-server --config ./config/webpack.dev.ts",
     "dev": "webpack-dev-server --config ./config/webpack.dev.ts",
     "build": "webpack  --config  ./config/webpack.prod.ts ",
+    "lint": "eslint --ext .tsx,.ts --fix ./src",
     "prettier": "node scripts/prettier.ts"
   },
   "dependencies": {
