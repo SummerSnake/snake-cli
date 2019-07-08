@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'antd';
 import { getRequest } from '@services/api';
+import InfoTable from './components/InfoTable';
 import styles from './index.less';
 
 interface InitProps {
@@ -125,6 +126,14 @@ function PersonalInfo(props: InitProps) {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className={styles.tableWrap}>
+        <div className={styles.titleDom}>
+          <span />
+          <span>个人信息表格</span>
+        </div>
+        <InfoTable infoData={infoData} />
       </div>
     </div>
   );
