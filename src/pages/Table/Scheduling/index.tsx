@@ -9,7 +9,7 @@ import SelectTime from './components/SelectTime/index';
 import '../../../../mock/schedulingApi';
 import styles from './index.less';
 
-export default function Scheduling() {
+function Scheduling() {
   // 当前日期
   const [nowDate, setNowDate] = useState(moment());
   // 表头
@@ -156,3 +156,5 @@ export default function Scheduling() {
     </div>
   );
 }
+
+export default Scheduling;

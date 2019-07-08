@@ -5,7 +5,7 @@ import PersonalInfo from './components/PersonalInfo/index';
 import styles from './index.less';
 import '../../../../mock/singleTableApi';
 
-export default function SingleTable() {
+function SingleTable() {
   /**
    * useState 是 react 自带的一个 hook 函数，它的作用就是用来声明状态变量;
    * userState 所传参数第 [0] 项是所声明状态的初始值，第 [1] 项是可以改变状态的方法函数;
@@ -117,3 +117,5 @@ export default function SingleTable() {
     </div>
   );
 }
+
+export default SingleTable;

@@ -10,7 +10,7 @@ interface InitProps {
   isModalOpen: boolean;
   onModalCall: any;
 }
-export default function SelectTime(props: InitProps) {
+function SelectTime(props: InitProps) {
   // 上午 时间段
   const [amTimeData, setAmTimeData] = useState([]);
   // 下午 时间段
@@ -209,3 +209,5 @@ export default function SelectTime(props: InitProps) {
     </div>
   );
 }
+
+export default SelectTime;
