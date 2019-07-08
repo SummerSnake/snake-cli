@@ -4,9 +4,13 @@ import { Menu, Icon } from 'antd';
 import menu from '@config/menu';
 
 interface InitProp {
-  history: any[];
+  history: {
+    location: {
+      pathname?: string;
+    };
+  };
   location: {
-    pathname?: any;
+    pathname?: string;
   };
 }
 interface InitState {
@@ -34,9 +38,10 @@ class SiderMenu extends React.Component<InitProp, InitState> {
    */
   selectKey = () => {
     let keys = [];
-    keys.push(this.props.location.pathname);
+    keys.push(this.props.history.location.pathname);
     this.setState({ keys });
   };
+
   /**
    * 处理选中路由
    */
