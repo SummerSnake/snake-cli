@@ -6,8 +6,8 @@ interface InitProp {
 }
 interface FetchData {
   front: {
-    basicDataTypes?: string;
-    complexDataTypes?: string;
+    array?: string;
+    object?: string;
     prototype?: string;
     closure?: string;
     es6?: string;
@@ -15,8 +15,6 @@ interface FetchData {
     less?: string;
     cssLoader?: string;
     styleLoader?: string;
-    entry?: string;
-    output?: string;
     module?: string;
     plugins?: string;
     resolve?: string;
@@ -31,8 +29,8 @@ function ToDoList(props: InitProp) {
 
   const [fetchData, setFetchData] = useState<FetchData>({
     front: {
-      basicDataTypes: 'string, boolean, number, null, undefined',
-      complexDataTypes: 'object',
+      array: 'array',
+      object: 'object',
       prototype: '_proto_',
       closure: 'closure',
       es6: 'es6',
@@ -40,9 +38,7 @@ function ToDoList(props: InitProp) {
       less: 'less',
       cssLoader: 'css-loader',
       styleLoader: 'style-loader',
-      entry: '入口文件',
-      output: '打包生成文件',
-      module: '模块规则（配置 loader、解析器等选项）',
+      module: '配置 loader',
       plugins: '插件',
       resolve: '解析模块请求的选项',
       optimization: 'webpack 性能优化',
@@ -86,17 +82,17 @@ function ToDoList(props: InitProp) {
           <li>
             <h3>javascript</h3>
             <div>
-              <p>
-                <span className={styles.ellipsis}>
-                  基本数据类型
-                  <span>{fetchData.front.basicDataTypes}</span>
+              <p className={styles.ellipsis}>
+                <span>
+                  数组
+                  <span>{fetchData.front.array}</span>
                 </span>
                 <span>
-                  复杂数据类型
-                  <span>{fetchData.front.complexDataTypes}</span>
+                  对象
+                  <span>{fetchData.front.object}</span>
                 </span>
               </p>
-              <p>
+              <p className={styles.ellipsis}>
                 <span>
                   原型链
                   <span>{fetchData.front.prototype}</span>
@@ -106,7 +102,7 @@ function ToDoList(props: InitProp) {
                   <span>{fetchData.front.closure}</span>
                 </span>
               </p>
-              <p>
+              <p className={styles.ellipsis}>
                 <span>
                   ESMAScript2015
                   <span>{fetchData.front.es6}</span>
@@ -118,27 +114,13 @@ function ToDoList(props: InitProp) {
           <li>
             <h3>CSS</h3>
             <div>
-              <p>
-                预编译 css 语言
-                <span>
-                  Sass
-                  <span>{fetchData.front.scss}</span>
-                </span>
-                <span>
-                  Less
-                  <span>{fetchData.front.less}</span>
-                </span>
+              <p className={styles.ellipsis}>
+                <span>Sass</span>
+                <span>Less</span>
               </p>
-              <p>
-                CSS Modules
-                <span>
-                  css-loader
-                  <span>{fetchData.front.cssLoader}</span>
-                </span>
-                <span>
-                  style-loader
-                  <span>{fetchData.front.styleLoader}</span>
-                </span>
+              <p className={styles.ellipsis}>
+                <span>CSS Modules</span>
+                <span>PostCSS</span>
               </p>
             </div>
           </li>
@@ -146,17 +128,7 @@ function ToDoList(props: InitProp) {
           <li>
             <h3>Webpack</h3>
             <div>
-              <p>
-                <span>
-                  entry
-                  <span>{fetchData.front.entry}</span>
-                </span>
-                <span>
-                  output
-                  <span>{fetchData.front.output}</span>
-                </span>
-              </p>
-              <p>
+              <p className={styles.ellipsis}>
                 <span>
                   module
                   <span>{fetchData.front.module}</span>
@@ -166,11 +138,13 @@ function ToDoList(props: InitProp) {
                   <span>{fetchData.front.plugins}</span>
                 </span>
               </p>
-              <p>
+              <p className={styles.ellipsis}>
                 <span>
                   resolve
                   <span>{fetchData.front.resolve}</span>
                 </span>
+              </p>
+              <p className={styles.ellipsis}>
                 <span>
                   optimization
                   <span>{fetchData.front.optimization}</span>
@@ -181,87 +155,47 @@ function ToDoList(props: InitProp) {
         </ul>
       </div>
 
-      {/*<div*/}
-      {/*className={animKey === '0' ? styles.disNone : styles.disBlock}*/}
-      {/*style={{ display: tabKey === '1' ? 'block' : 'none' }}*/}
-      {/*>*/}
-      {/*<ul className={styles.homeHeaderUl}>*/}
-      {/*<li>*/}
-      {/*<h3>租赁合同待审批</h3>*/}
-      {/*<div>*/}
-      {/*<p>*/}
-      {/*<span>*/}
-      {/*新增*/}
-      {/*<span>{fetchData.mapRent.xj}</span>*/}
-      {/*</span>*/}
-      {/*<span>*/}
-      {/*退租*/}
-      {/*<span>{fetchData.mapRent.tz}</span>*/}
-      {/*</span>*/}
-      {/*</p>*/}
-      {/*<p>*/}
-      {/*<span>*/}
-      {/*作废*/}
-      {/*<span>{fetchData.mapRent.zf}</span>*/}
-      {/*</span>*/}
-      {/*<span>*/}
-      {/*续租*/}
-      {/*<span>{fetchData.mapRent.xq}</span>*/}
-      {/*</span>*/}
-      {/*</p>*/}
-      {/*<p>*/}
-      {/*<span>*/}
-      {/*变更*/}
-      {/*<span>{fetchData.mapRent.bg}</span>*/}
-      {/*</span>*/}
-      {/*</p>*/}
-      {/*</div>*/}
-      {/*</li>*/}
+      <div
+        className={animKey === '1' ? styles.disBlock : styles.disNone}
+        style={{ display: tabKey === '1' ? 'block' : 'none' }}
+      >
+        <ul className={styles.cardList}>
+          <li>
+            <h3>Node.js</h3>
+            <div>
+              <p className={styles.ellipsis}>
+                <span>单线程</span>
+                <span>事件驱动，非阻塞的IO</span>
+              </p>
+              <p className={styles.ellipsis}>
+                <span>express</span>
+                <span>koa</span>
+              </p>
+              <p className={styles.ellipsis}>
+                <span>回调地狱</span>
+              </p>
+            </div>
+          </li>
 
-      {/*<li>*/}
-      {/*<h3>租金账单待审批</h3>*/}
-      {/*<div>*/}
-      {/*<p>*/}
-      {/*租金*/}
-      {/*<span>*/}
-      {/*新增*/}
-      {/*<span>{fetchData.mapRentFee.xj}</span>*/}
-      {/*</span>*/}
-      {/*<span>*/}
-      {/*作废*/}
-      {/*<span>{fetchData.mapRentFee.zf}</span>*/}
-      {/*</span>*/}
-      {/*</p>*/}
-      {/*</div>*/}
-      {/*</li>*/}
+          <li>
+            <h3>mongodb</h3>
+            <div>
+              <p className={styles.ellipsis}>
+                <span>非关系数据库</span>
+              </p>
+            </div>
+          </li>
 
-      {/*<li>*/}
-      {/*<h3>未来五日到期预警</h3>*/}
-      {/*<div>*/}
-      {/*<p>*/}
-      {/*<span>*/}
-      {/*租赁合同到期预警*/}
-      {/*<span>{fetchData.mapFive.rentFiveExpire}</span>*/}
-      {/*</span>*/}
-      {/*<span>*/}
-      {/*到期未处理*/}
-      {/*<span>{fetchData.mapFive.rentExpireUntreated}</span>*/}
-      {/*</span>*/}
-      {/*</p>*/}
-      {/*<p>*/}
-      {/*<span>*/}
-      {/*应收租金账单*/}
-      {/*<span>{fetchData.mapFive.feeFiveExpire}</span>*/}
-      {/*</span>*/}
-      {/*<span>*/}
-      {/*逾期未结清*/}
-      {/*<span>{fetchData.mapFive.feeExpireUntreated}</span>*/}
-      {/*</span>*/}
-      {/*</p>*/}
-      {/*</div>*/}
-      {/*</li>*/}
-      {/*</ul>*/}
-      {/*</div>*/}
+          <li>
+            <h3>Java</h3>
+            <div>
+              <p className={styles.ellipsis}>
+                <span>.class</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
