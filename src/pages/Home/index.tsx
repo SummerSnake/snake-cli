@@ -4,7 +4,10 @@ import ToDoList from './components/ToDoList';
 import styles from './index.less';
 
 interface InitProp {
-  history: any[];
+  history?: any[];
+}
+interface CallJson {
+  isLoading?: boolean;
 }
 function Home(props: InitProp) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,12 +21,12 @@ function Home(props: InitProp) {
   /**
    * loading 回调
    */
-  function loadingCall(json: any) {
+  function loadingCall(json: CallJson): void {
     setLoading(json['isLoading']);
   }
   return (
     <Spin spinning={loading}>
-      <div className={styles.homepageWrap}>
+      <div className={styles.homeWrap}>
         <header>
           <ToDoList loadingCall={loadingCall} />
         </header>

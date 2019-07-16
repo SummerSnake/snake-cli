@@ -5,6 +5,7 @@ import styles from './index.less';
 
 interface InitProp {
   history: any[];
+  loadingCall: any;
 }
 interface Data {
   array?: string;
@@ -33,8 +34,10 @@ function ToDoList(props: InitProp) {
    * 获取数据
    */
   async function fetchData() {
+    props.loadingCall({ isLoading: true });
     const newData = await getRequest('/api/get_toDoList', null);
     setData({ ...data, ...newData['data'] });
+    props.loadingCall({ isLoading: false });
   }
   useEffect(() => {
     fetchData();
