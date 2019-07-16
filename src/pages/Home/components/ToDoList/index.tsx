@@ -1,66 +1,57 @@
 import React, { useState, useEffect } from 'react';
+import { getRequest } from '@services/api';
+import '../../../../../mock/homeApi';
 import styles from './index.less';
 
 interface InitProp {
   history: any[];
 }
-interface FetchData {
-  front: {
-    array?: string;
-    object?: string;
-    prototype?: string;
-    closure?: string;
-    es6?: string;
-    scss?: string;
-    less?: string;
-    cssLoader?: string;
-    styleLoader?: string;
-    module?: string;
-    plugins?: string;
-    resolve?: string;
-    optimization?: string;
-    [propName: string]: any;
-  };
+interface Data {
+  array?: string;
+  object?: string;
+  prototype?: string;
+  closure?: string;
+  es6?: string;
+  scss?: string;
+  less?: string;
+  cssLoader?: string;
+  styleLoader?: string;
+  module?: string;
+  plugins?: string;
+  resolve?: string;
+  optimization?: string;
+  [propName: string]: any;
 }
 function ToDoList(props: InitProp) {
   const [tabKey, setTabKey] = useState<string>('0');
 
   const [animKey, setAnimKey] = useState<string>('0');
 
-  const [fetchData, setFetchData] = useState<FetchData>({
-    front: {
-      array: 'array',
-      object: 'object',
-      prototype: '_proto_',
-      closure: 'closure',
-      es6: 'es6',
-      scss: 'scss',
-      less: 'less',
-      cssLoader: 'css-loader',
-      styleLoader: 'style-loader',
-      module: '配置 loader',
-      plugins: '插件',
-      resolve: '解析模块请求的选项',
-      optimization: 'webpack 性能优化',
-    },
-  });
-  // useEffect(() => {
-  //   if (!localStorage.getItem('accessToken')) {
-  //     props.history.push('/login');
-  //   }
-  //   return () => {
-  //     localStorage.removeItem('accessToken');
-  //   };
-  // }, []);
+  const [data, setData] = useState<Data>({});
+
+  /**
+   * 获取数据
+   */
+  async function fetchData() {
+    const newData = await getRequest('/api/get_toDoList', null);
+    setData({ ...data, ...newData['data'] });
+  }
+  useEffect(() => {
+    fetchData();
+    return () => {
+      setAnimKey('0');
+      setTabKey('0');
+    };
+  }, []);
+
   /**
    * tabs 选择
    * @param key
    */
-  async function onTabChange(key) {
+  function onTabChange(key) {
     setAnimKey(key);
-    await setTimeout(() => {
+    setTimeout(() => {
       setTabKey(key);
-      // this.fetchApi();
     }, 300);
   }
   return (
@@ -85,27 +76,27 @@ function ToDoList(props: InitProp) {
               <p className={styles.ellipsis}>
                 <span>
                   数组
-                  <span>{fetchData.front.array}</span>
+                  <span>{data.array}</span>
                 </span>
                 <span>
                   对象
-                  <span>{fetchData.front.object}</span>
+                  <span>{data.object}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   原型链
-                  <span>{fetchData.front.prototype}</span>
+                  <span>{data.prototype}</span>
                 </span>
                 <span>
                   闭包
-                  <span>{fetchData.front.closure}</span>
+                  <span>{data.closure}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   ESMAScript2015
-                  <span>{fetchData.front.es6}</span>
+                  <span>{data.es6}</span>
                 </span>
               </p>
             </div>
@@ -131,23 +122,23 @@ function ToDoList(props: InitProp) {
               <p className={styles.ellipsis}>
                 <span>
                   module
-                  <span>{fetchData.front.module}</span>
+                  <span>{data.module}</span>
                 </span>
                 <span>
                   plugins
-                  <span>{fetchData.front.plugins}</span>
+                  <span>{data.plugins}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   resolve
-                  <span>{fetchData.front.resolve}</span>
+                  <span>{data.resolve}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   optimization
-                  <span>{fetchData.front.optimization}</span>
+                  <span>{data.optimization}</span>
                 </span>
               </p>
             </div>

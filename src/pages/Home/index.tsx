@@ -13,9 +13,6 @@ function Home(props: InitProp) {
     if (!localStorage.getItem('accessToken')) {
       props.history.push('/login');
     }
-    return () => {
-      localStorage.removeItem('accessToken');
-    };
   }, []);
 
   /**
