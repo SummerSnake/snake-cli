@@ -19,10 +19,13 @@ const Scheduling = Loadable({
 });
 export default [
   {
+    path: '/',
+    component: Home,
+  },
+  {
     path: '/home',
     component: Home,
   },
-
   {
     path: '/table/SingleTable',
     component: SingleTable,
