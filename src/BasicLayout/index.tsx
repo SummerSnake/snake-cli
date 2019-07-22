@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-const { Header, Content, Sider, Footer } = Layout;
+const { Header, Content, Sider } = Layout;
 import { Route } from 'react-router-dom';
 import routes from '@config/routes';
 import SiderMenu from './components/SiderMenu/index';
@@ -21,7 +21,6 @@ export default function BasicLayout() {
             <Route key={i.toString()} path={item.path} component={item.component} exact />
           ))}
         </Content>
-        <Footer style={{ textAlign: 'center' }}>SummerSnake</Footer>
       </Layout>
     </Layout>
   );
