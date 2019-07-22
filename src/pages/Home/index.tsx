@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
 import ToDoList from './components/ToDoList';
+import Statistics from './components/Statistics';
 import styles from './index.less';
 
 interface InitProp {
@@ -30,6 +31,9 @@ function Home(props: InitProp) {
         <header>
           <ToDoList loadingCall={loadingCall} />
         </header>
+        <main>
+          <Statistics />
+        </main>
       </div>
     </Spin>
   );

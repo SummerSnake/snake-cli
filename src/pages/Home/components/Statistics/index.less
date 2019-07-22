@@ -1,0 +1,78 @@
+@import '../../../../styles/mixin.less';
+
+.statisticsWrap {
+  width: 100%;
+  overflow: auto;
+  > ul {
+    display: flex;
+    padding: 0;
+    margin: 0 0 20px 0;
+    list-style: none;
+    > li {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 0 20px 20px;
+      margin-right: 20px;
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 1px 1px 3px 1px rgba(181, 181, 181, 0.5);
+      border-radius: 6px;
+      > h3 {
+        .sc(20px, @titleColor);
+        padding: 13px 0 16px 0;
+        margin: 0;
+      }
+      > div {
+        flex: 1;
+        padding: 12px 14px;
+        margin-bottom: 14px;
+        background-color: rgba(249, 251, 254, 1);
+        border-radius: 8px;
+        border: 1px solid rgba(242, 242, 242, 1);
+        cursor: pointer;
+        > h4 {
+          .sc(@titleSize, @titleColor);
+          margin-bottom: 20px;
+          > span {
+            .sc(20px, #64a5eb);
+          }
+        }
+        > p {
+          .sc(@txtSize, @txtColor);
+          margin-bottom: 20px;
+          > span {
+            .sc(@txtSize, #f04543);
+            float: right;
+          }
+        }
+      }
+      > div:last-child {
+        margin-bottom: 0;
+      }
+    }
+    > li:last-child {
+      margin-right: 0;
+      > div {
+        height: 70px;
+        padding: 10px 14px;
+        font-size: 14px;
+        > p:first-child {
+          margin-bottom: 10px;
+          color: rgba(51, 51, 51, 1);
+        }
+        > p:last-child {
+          position: relative;
+          margin-bottom: 0;
+          color: rgba(153, 153, 153, 1);
+          > span {
+            position: absolute;
+            top: -7px;
+            right: 24px;
+            font-size: 20px;
+            color: rgba(85, 157, 234, 1);
+          }
+        }
+      }
+    }
+  }
+}
