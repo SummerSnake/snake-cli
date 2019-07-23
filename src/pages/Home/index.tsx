@@ -32,7 +32,7 @@ function Home(props: InitProp) {
           <ToDoList loadingCall={loadingCall} />
         </header>
         <main>
-          <Statistics />
+          <Statistics loadingCall={loadingCall} />
         </main>
       </div>
     </Spin>

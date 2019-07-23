@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getRequest } from '@services/api';
-import '../../../../../mock/homeApi';
+import '../../../../../mock/todoListApi';
 import styles from './index.less';
 
 interface InitProp {
-  history: any[];
   loadingCall: any;
 }
 interface Data {
