@@ -60,14 +60,16 @@ function Statistics(props: InitProp) {
             <h4>
               基本数据类型：<span>{js.total}</span>
             </h4>
-            {Array.isArray(js.list) && js.list.length > 0 && js.list.map(item => {
-              return (
-                <p key={item.id}>
-                  {item.name}
-                  <span>{item.example}</span>
-                </p>
-              );
-            })}
+            {Array.isArray(js.list) &&
+              js.list.length > 0 &&
+              js.list.map(item => {
+                return (
+                  <p key={item.id}>
+                    {item.name}
+                    <span>{item.example}</span>
+                  </p>
+                );
+              })}
           </div>
           <div>
             <h4>复杂数据类型</h4>
@@ -83,14 +85,16 @@ function Statistics(props: InitProp) {
             <h4>
               ES5新增：<span>{array.es5Num}</span>
             </h4>
-            {Array.isArray(array.list) && array.list.length > 0 && array.list.map(item => {
-              return (
-                <p key={item.id}>
-                  {item.name}
-                  <span>{item.description}</span>
-                </p>
-              );
-            })}
+            {Array.isArray(array.list) &&
+              array.list.length > 0 &&
+              array.list.map(item => {
+                return (
+                  <p key={item.id}>
+                    {item.name}
+                    <span>{item.description}</span>
+                  </p>
+                );
+              })}
           </div>
           <div>
             <h4>
@@ -104,12 +108,14 @@ function Statistics(props: InitProp) {
 
         <li>
           <h3>js异步编程</h3>
-          {Array.isArray(async.list) && async.list.length > 0 && async.list.map(item => (
-            <div key={item.id}>
-              <p>{item.name}</p>
-              <p>{item.description}</p>
-            </div>
-          ))}
+          {Array.isArray(async.list) &&
+            async.list.length > 0 &&
+            async.list.map(item => (
+              <div key={item.id}>
+                <p>{item.name}</p>
+                <p>{item.description}</p>
+              </div>
+            ))}
         </li>
       </ul>
     </section>

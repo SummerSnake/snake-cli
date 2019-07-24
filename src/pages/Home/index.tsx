@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
 import ToDoList from './components/ToDoList';
 import Statistics from './components/Statistics';
+import Charts from './components/Charts';
 import styles from './index.less';
 
 interface InitProp {
@@ -33,6 +34,8 @@ function Home(props: InitProp) {
         </header>
         <main>
           <Statistics loadingCall={loadingCall} />
+
+          <Charts loadingCall={loadingCall} />
         </main>
       </div>
     </Spin>
