@@ -2,27 +2,43 @@ import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
 import { DatePicker } from 'antd';
 import moment from 'moment';
+import { getRequest } from '@services/api';
+import '../../../../../mock/chartsApi';
 import styles from './index.less';
 
-function Charts() {
-  const [todayArr, setTodayArr] = useState([]);
-  const [dateArr, setDateArr] = useState([]);
-  const [weekArr, setWeekArr] = useState([]);
+interface InitProp {
+  loadingCall: any;
+}
+interface ApiData {
+  todayList: number[];
+  hourList: string[];
+  dateList: string[];
+  numList: number[];
+}
+function Charts(props: InitProp) {
+  const [apiData, setApiData] = useState<ApiData>({ todayList: [],hourList: [], dateList: [], numList: [] });
   const [sortType, setSortType] = useState<string>('0');
   const [sortList, setSortList] = useState([]);
 
   /**
    * 今日图表时间改变
    */
-  async function chartOneDateChange(date, dateString) {}
+  async function chartOneDateChange(date, dateString) {
+    // const apiDataClone = apiData;
+    //   apiDataClone.todayList.sort();
+    //   setApiData(apiDataClone);
+  }
   /**
    * 近七日图表时间改变
    */
-  async function chartTwoDateChange(date, dateString) {}
+  async function chartTwoDateChange(date, dateString) {
+    // setNumArr([12, 20, 28, 40, 46, 40, 8]);
+  }
   /**
    * 排行时间改变
    */
   async function sortDateChange(type) {}
+
   /**
    * 图表初始化
    */
@@ -61,32 +77,7 @@ function Charts() {
           axisTick: {
             show: false,
           },
-          data: [
-            '00',
-            '01',
-            '02',
-            '03',
-            '04',
-            '05',
-            '06',
-            '07',
-            '08',
-            '09',
-            '10',
-            '11',
-            '12',
-            '13',
-            '14',
-            '15',
-            '16',
-            '17',
-            '18',
-            '19',
-            '20',
-            '21',
-            '22',
-            '23',
-          ],
+          data: apiData.hourList,
         },
       ],
       yAxis: [
@@ -124,7 +115,7 @@ function Charts() {
               ]),
             },
           },
-          data: todayArr,
+          data: apiData.todayList,
         },
       ],
     });
@@ -162,7 +153,7 @@ function Charts() {
           axisTick: {
             show: false,
           },
-          data: dateArr,
+          data: apiData.dateList,
         },
       ],
       yAxis: [
@@ -196,19 +187,29 @@ function Charts() {
               ]),
             },
           },
-          data: weekArr,
+          data: apiData.numList,
         },
       ],
     });
     window.onresize = myChartTwo.resize;
   }
 
-  useEffect(() => {
+  /**
+   * 挂载获取数据
+   */
+  async function fetchData() {
+    props.loadingCall({ isLoading: true });
+    const newData = await getRequest('/api/get_charts', null);
+    setApiData({ ...apiData, ...newData['data'] });
     init();
+    props.loadingCall({ isLoading: false });
+  }
+  useEffect(() => {
+    fetchData();
     return () => {
       setSortType('0');
     };
-  }, []);
+  }, [apiData]);
   return (
     <section className={styles.chartsWrap}>
       <h3>统计图表</h3>
