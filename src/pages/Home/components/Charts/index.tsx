@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
-import { DatePicker } from 'antd';
-import moment from 'moment';
 import { getRequest } from '@services/api';
 import '../../../../../mock/chartsApi';
 import styles from './index.less';
@@ -14,31 +12,21 @@ interface ApiData {
   hourList: string[];
   dateList: string[];
   numList: number[];
+  sortList: any[];
 }
 function Charts(props: InitProp) {
-  const [apiData, setApiData] = useState<ApiData>({ todayList: [],hourList: [], dateList: [], numList: [] });
-  const [sortType, setSortType] = useState<string>('0');
-  const [sortList, setSortList] = useState([]);
+  const [apiData, setApiData] = useState<ApiData>({
+    todayList: [],
+    hourList: [],
+    dateList: [],
+    numList: [],
+    sortList: [],
+  });
+  const [sortType, setSortType] = useState<number>(0);
 
-  /**
-   * 今日图表时间改变
-   */
-  async function chartOneDateChange(date, dateString) {
-    // const apiDataClone = apiData;
-    //   apiDataClone.todayList.sort();
-    //   setApiData(apiDataClone);
+  function sortDateChange(type: number) {
+    setSortType(type);
   }
-  /**
-   * 近七日图表时间改变
-   */
-  async function chartTwoDateChange(date, dateString) {
-    // setNumArr([12, 20, 28, 40, 46, 40, 8]);
-  }
-  /**
-   * 排行时间改变
-   */
-  async function sortDateChange(type) {}
-
   /**
    * 图表初始化
    */
@@ -48,7 +36,7 @@ function Charts(props: InitProp) {
     // 绘制图表1
     myChartOne.setOption({
       title: {
-        text: '今日来访分析',
+        text: '今日统计',
         textStyle: {
           fontSize: 16,
           fontWeight: 'normal',
@@ -57,7 +45,7 @@ function Charts(props: InitProp) {
       tooltip: {
         type: 'showTip',
         formatter(params) {
-          return `<span>${params.name}:00</span><br/><span>来访人数：${params.value}</span>`;
+          return `<span>${params.name}:00</span><br/><span>游客数量：${params.value}</span>`;
         },
       },
       grid: {
@@ -93,7 +81,7 @@ function Charts(props: InitProp) {
       ],
       series: [
         {
-          name: '来访人数',
+          name: '游客数量',
           type: 'line',
           smooth: true,
           itemStyle: {
@@ -124,7 +112,7 @@ function Charts(props: InitProp) {
     // 绘制图表2
     myChartTwo.setOption({
       title: {
-        text: '近七日来访统计',
+        text: '近七日统计',
         textStyle: {
           fontSize: 16,
           fontWeight: 'normal',
@@ -169,7 +157,7 @@ function Charts(props: InitProp) {
       ],
       series: [
         {
-          name: '来访人数',
+          name: '游客数量',
           type: 'bar',
           itemStyle: {
             normal: {
@@ -206,26 +194,18 @@ function Charts(props: InitProp) {
   }
   useEffect(() => {
     fetchData();
-    return () => {
-      setSortType('0');
-    };
   }, [apiData]);
+
   return (
     <section className={styles.chartsWrap}>
-      <h3>统计图表</h3>
+      <h3>游客数量统计</h3>
       <div className={styles.chartsCon}>
         <div>
-          <div className={styles.chartOne}>
-            <div>
-              <DatePicker onChange={chartOneDateChange} style={{ width: 120 }} size="small" />
-            </div>
+          <div>
             <div id="charts_01" style={{ height: 240 }} />
           </div>
 
-          <div className={styles.chartTwo}>
-            <div>
-              <DatePicker onChange={chartTwoDateChange} style={{ width: 120 }} size="small" />
-            </div>
+          <div>
             <div id="charts_02" style={{ height: 240 }} />
           </div>
         </div>
@@ -261,26 +241,20 @@ function Charts(props: InitProp) {
 
           <p className={styles.titleWrap}>
             <span>排名</span>
-            <span>公司名称</span>
-            <span>访问人数</span>
+            <span>景点名称</span>
+            <span>游客数量</span>
           </p>
-          {sortList.map((item, index) => {
-            return (
-              <p key={index.toString()}>
-                <span>{index + 1}</span>
-                <span>{item.clientName}</span>
-                <span>
-                  {item.count}&nbsp;&nbsp;&nbsp;({item.lflv})
-                </span>
-              </p>
-            );
-          })}
-          <div
-            className={styles.noData}
-            style={{ display: sortList.length === 0 ? 'block' : 'none' }}
-          >
-            暂无数据
-          </div>
+          {Array.isArray(apiData.sortList) &&
+            apiData.sortList.length > 0 &&
+            apiData.sortList.map((item, index) => {
+              return (
+                <p key={item.id}>
+                  <span>{index + 1}</span>
+                  <span>{item.name}</span>
+                  <span>{item.count}</span>
+                </p>
+              );
+            })}
         </div>
       </div>
     </section>
