@@ -3,6 +3,7 @@ import { Spin } from 'antd';
 import ToDoList from './components/ToDoList';
 import Statistics from './components/Statistics';
 import Charts from './components/Charts';
+import Tourist from './components/Tourist';
 import styles from './index.less';
 
 interface InitProp {
@@ -36,6 +37,8 @@ function Home(props: InitProp) {
           <Statistics loadingCall={loadingCall} />
 
           <Charts loadingCall={loadingCall} />
+
+          <Tourist loadingCall={loadingCall} />
         </main>
       </div>
     </Spin>
