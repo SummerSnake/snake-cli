@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
 import { getRequest } from '@services/api';
-import '../../../../../mock/chartsApi';
+import '../../../../../mock/touristApi';
 import styles from './index.less';
 
 interface InitProp {
@@ -9,20 +9,16 @@ interface InitProp {
 }
 interface ApiData {
   provinceList: any[];
-  pankings: any[];
-  repairType: any[];
-  pieChart: any[];
+  pieLegend: string[];
+  pieData: any[];
+  rankings: any[];
 }
 function Tourist(props: InitProp) {
   const [apiData, setApiData] = useState<ApiData>({
-    provinceList: [
-      { id: 1, province: '山东', touristType: 1 },
-      { id: 2, province: '江苏', touristType: 2 },
-      { id: 3, province: '河南', touristType: 3 },
-    ],
-    pankings: [],
-    repairType: ['山东', '江苏', '河南'],
-    pieChart: [3, 4, 5],
+    provinceList: [],
+    pieLegend: [],
+    pieData: [],
+    rankings: [],
   });
 
   async function init() {
@@ -56,7 +52,7 @@ function Tourist(props: InitProp) {
         itemHeight: 10,
         x: '80%',
         y: 'center',
-        data: ['山东', '江苏', '河南'],
+        data: apiData.pieLegend,
       },
       series: [
         {
@@ -72,7 +68,7 @@ function Tourist(props: InitProp) {
               show: false,
             },
           },
-          data: apiData.pieChart,
+          data: apiData.pieData,
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -85,9 +81,26 @@ function Tourist(props: InitProp) {
     });
     window.onresize = myChartOne.resize;
   }
+
+  /**
+   * 挂载获取数据
+   */
+  async function fetchData() {
+    props.loadingCall({ isLoading: true });
+    const newData = await getRequest('/api/get_tourist', null);
+    const apiDataStr = JSON.stringify(apiData);
+    const newDataStr = JSON.stringify(newData['data']);
+    if (apiDataStr !== newDataStr) {
+      setApiData({ ...newData['data'] });
+    }
+    props.loadingCall({ isLoading: false });
+  }
   useEffect(() => {
     init();
-  }, []);
+    fetchData();
+  }, [apiData]);
+
+  const { provinceList, rankings } = apiData;
   return (
     <section className={styles.RepairCountWrap}>
       <h3>游客来自省份统计</h3>
@@ -96,21 +109,23 @@ function Tourist(props: InitProp) {
           <div className={styles.chartTxt}>
             <h4>今日省份统计</h4>
             <div>
-              {apiData.provinceList.map(item => (
-                <div key={item.id}>
-                  <i />
-                  <div>
-                    <p>{item.province}</p>
-                    <p>
-                      {item.touristType === 1
-                        ? '个人旅行'
-                        : item.touristType === 2
-                        ? '家庭出游'
-                        : '其他'}
-                    </p>
+              {Array.isArray(provinceList) &&
+                provinceList.length > 0 &&
+                provinceList.map(item => (
+                  <div key={item.id}>
+                    <i />
+                    <div>
+                      <p>{item.province}</p>
+                      <p>
+                        {item.touristType === 1
+                          ? '个人旅行'
+                          : item.touristType === 2
+                          ? '家庭出游'
+                          : '其他'}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
           <div id="chartDom" style={{ height: 300 }} />
@@ -125,19 +140,19 @@ function Tourist(props: InitProp) {
             <span>好评率</span>
             <span>差评率</span>
           </p>
-          {apiData.pankings.map((item, index) => {
-            return (
-              <p key={index.toString()}>
-                <span>{index + 1}</span>
-                <span>{item.aa}</span>
-                <span>
-                  {item.aa}&nbsp;&nbsp;&nbsp;({item.aa})
-                </span>
-                <span>{item.aa}</span>
-                <span>{item.aa}</span>
-              </p>
-            );
-          })}
+          {Array.isArray(rankings) &&
+            rankings.length > 0 &&
+            rankings.map((item, index) => {
+              return (
+                <p key={item.id}>
+                  <span>{index + 1}</span>
+                  <span>{item.city}</span>
+                  <span>{item.count}</span>
+                  <span>{item.good}</span>
+                  <span>{item.bad}</span>
+                </p>
+              );
+            })}
         </section>
       </div>
     </section>
