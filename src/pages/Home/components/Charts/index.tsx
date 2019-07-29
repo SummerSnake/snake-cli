@@ -200,6 +200,8 @@ function Charts(props: InitProp) {
     fetchData();
   }, [apiData]);
 
+  const { sortList } = apiData;
+
   return (
     <section className={styles.chartsWrap}>
       <h3>游客数量统计</h3>
@@ -248,9 +250,9 @@ function Charts(props: InitProp) {
             <span>景点名称</span>
             <span>游客数量</span>
           </p>
-          {Array.isArray(apiData.sortList) &&
-            apiData.sortList.length > 0 &&
-            apiData.sortList.map((item, index) => {
+          {Array.isArray(sortList) &&
+            sortList.length > 0 &&
+            sortList.map((item, index) => {
               return (
                 <p key={item.id}>
                   <span>{index + 1}</span>

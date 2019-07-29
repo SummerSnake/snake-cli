@@ -101,6 +101,7 @@ function Tourist(props: InitProp) {
   }, [apiData]);
 
   const { provinceList, rankings } = apiData;
+
   return (
     <section className={styles.RepairCountWrap}>
       <h3>游客来自省份统计</h3>
