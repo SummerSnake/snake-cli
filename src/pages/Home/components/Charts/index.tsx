@@ -188,11 +188,15 @@ function Charts(props: InitProp) {
   async function fetchData() {
     props.loadingCall({ isLoading: true });
     const newData = await getRequest('/api/get_charts', null);
-    setApiData({ ...apiData, ...newData['data'] });
-    init();
+    const apiDataStr = JSON.stringify(apiData);
+    const newDataStr = JSON.stringify(newData['data']);
+    if (apiDataStr !== newDataStr) {
+      setApiData({ ...newData['data'] });
+    }
     props.loadingCall({ isLoading: false });
   }
   useEffect(() => {
+    init();
     fetchData();
   }, [apiData]);
 
