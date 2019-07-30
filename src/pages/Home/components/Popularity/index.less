@@ -1,0 +1,69 @@
+@import '../../../../styles/mixin.less';
+
+.popularityWrap {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 20px 20px 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px 1px rgba(181, 181, 181, 0.5);
+  > h3 {
+    .sc(20px, @titleColor);
+  }
+  > .conWrap {
+    display: flex;
+    > div {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      height: 106px;
+      margin-right: 20px;
+      background-color: #f9fbfe;
+      border-radius: 8px;
+      border: 1px solid #f2f2f2;
+      > div {
+        flex: 1;
+        padding-left: 86px;
+        > p {
+          .sc(@txtSize, @txtColor);
+          margin-bottom: 0;
+        }
+        > span {
+          .sc(20px, #559dea);
+        }
+      }
+      > div:first-child {
+        border-right: 1px solid #f2f2f2;
+        background: url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/icon_01.png')
+          no-repeat 29px center;
+      }
+      > div:last-child {
+        border: none;
+        background: url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/icon_02.png')
+          no-repeat 29px center;
+      }
+    }
+    > div:nth-of-type(2) {
+      > div:first-child {
+        background: url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/icon_03.png')
+          no-repeat 29px center;
+      }
+      > div:last-child {
+        background: url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/icon_04.png')
+          no-repeat 29px center;
+      }
+    }
+    > div:last-child {
+      margin-right: 0;
+      > div:first-child {
+        background: url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/icon_05.png')
+          no-repeat 29px center;
+      }
+      > div:last-child {
+        background: url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/icon_06.png')
+          no-repeat 29px center;
+      }
+    }
+  }
+}

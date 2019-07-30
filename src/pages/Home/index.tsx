@@ -4,6 +4,7 @@ import ToDoList from './components/ToDoList';
 import Statistics from './components/Statistics';
 import Charts from './components/Charts';
 import Tourist from './components/Tourist';
+import Popularity from './components/Popularity';
 import styles from './index.less';
 
 interface InitProp {
@@ -39,6 +40,8 @@ function Home(props: InitProp) {
           <Charts loadingCall={loadingCall} />
 
           <Tourist loadingCall={loadingCall} />
+
+          <Popularity />
         </main>
       </div>
     </Spin>
