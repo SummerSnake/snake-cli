@@ -1,0 +1,38 @@
+@import '../../../../styles/mixin.less';
+
+.feedbackWrap {
+  flex: 1;
+  padding-top: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  h3 {
+    .sc(20px, @titleColor);
+    margin-bottom: 22px;
+  }
+  .feedbackTxt {
+    background: url(https://gitee.com/summersnake/images/raw/master/snake-cli/home/footer_icon_01.png)
+      no-repeat 0 14px;
+    > p {
+      margin-left: 50px;
+      > span:first-child {
+        padding-right: 12px;
+      }
+      > span:last-child {
+        padding-left: 12px;
+        border-left: 1px solid #e2e2e2;
+      }
+    }
+    > p:first-child {
+      margin-bottom: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    > p:last-child {
+      margin-bottom: 22px;
+    }
+  }
+  .footerBtn {
+    float: right;
+    margin-top: 20px;
+  }
+}

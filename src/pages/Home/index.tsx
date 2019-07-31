@@ -5,6 +5,7 @@ import Statistics from './components/Statistics';
 import Charts from './components/Charts';
 import Tourist from './components/Tourist';
 import Popularity from './components/Popularity';
+import Feedback from './components/Feedback';
 import styles from './index.less';
 
 interface InitProp {
@@ -34,6 +35,7 @@ function Home(props: InitProp) {
         <header>
           <ToDoList loadingCall={loadingCall} />
         </header>
+
         <main>
           <Statistics loadingCall={loadingCall} />
 
@@ -43,6 +45,11 @@ function Home(props: InitProp) {
 
           <Popularity />
         </main>
+
+        <footer>
+          <Feedback />
+          <div style={{ flex: 1 }}>111</div>
+        </footer>
       </div>
     </Spin>
   );
