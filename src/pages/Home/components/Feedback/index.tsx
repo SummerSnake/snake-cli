@@ -3,7 +3,7 @@ import { Input, Button } from 'antd';
 import styles from './index.less';
 
 function Feedback() {
-  const areaVal = '';
+  let areaVal = '';
 
   /**
    * textArea 内容更新
