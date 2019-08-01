@@ -6,6 +6,7 @@ import Charts from './components/Charts';
 import Tourist from './components/Tourist';
 import Popularity from './components/Popularity';
 import Feedback from './components/Feedback';
+import Notice from './components/Notice';
 import styles from './index.less';
 
 interface InitProp {
@@ -48,7 +49,8 @@ function Home(props: InitProp) {
 
         <footer>
           <Feedback />
-          <div style={{ flex: 1 }}>111</div>
+
+          <Notice loadingCall={loadingCall} />
         </footer>
       </div>
     </Spin>

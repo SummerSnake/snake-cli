@@ -1,0 +1,41 @@
+@import '../../../../styles/mixin.less';
+
+.noticeWrap {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  height: 496px;
+  h3 {
+    .sc(20px, @titleColor);
+    margin-bottom: 22px;
+    padding-left: 40px;
+  }
+  ul {
+    height: 400px;
+    list-style: none;
+    overflow-y: auto;
+    li {
+      display: flex;
+      background: #f9fbfe
+        url('https://gitee.com/summersnake/images/raw/master/snake-cli/home/footer_icon_02.png')
+        no-repeat 16px 23px;
+      height: 64px;
+      line-height: 64px;
+      padding: 0 20px 0 56px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      > span:first-child {
+        .sc(18px, #333);
+        flex: 3;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      > span:last-child {
+        .sc(@txtSize, @txtColor);
+        float: right;
+      }
+    }
+  }
+}
