@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
 import { getRequest } from '@services/api';
+import { deepCompare } from '@utils/util';
 import '../../../../../mock/chartsApi';
 import styles from './index.less';
 
@@ -188,9 +189,7 @@ function Charts(props: InitProp) {
   async function fetchData() {
     props.loadingCall({ isLoading: true });
     const newData = await getRequest('/api/get_charts', null);
-    const apiDataStr = JSON.stringify(apiData);
-    const newDataStr = JSON.stringify(newData['data']);
-    if (apiDataStr !== newDataStr) {
+    if (!deepCompare(apiData, newData['data'])) {
       setApiData({ ...newData['data'] });
     }
     props.loadingCall({ isLoading: false });
