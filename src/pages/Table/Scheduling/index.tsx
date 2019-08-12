@@ -23,15 +23,16 @@ function Scheduling() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   // 接口数据
   const [apiData, setApiData] = useState({});
+
   /**
    * 获取数据
    */
-  async function fetchData() {
-    const data = await getRequest('/api/get_scheduling', null);
-    setDataSource([...dataSource, ...data['data']['tableData']]);
-    setApiData({ ...apiData, ...data['data'] });
-  }
   useEffect(() => {
+    async function fetchData() {
+      const data = await getRequest('/api/get_scheduling', null);
+      setDataSource([...data['data']['tableData']]);
+      setApiData({ ...data['data'] });
+    }
     fetchData();
   }, []);
 

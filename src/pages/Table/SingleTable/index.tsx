@@ -19,14 +19,6 @@ function SingleTable() {
   const [infoId, setInfoId] = useState<string>('');
 
   /**
-   * 获取数据
-   */
-  async function fetchData() {
-    const data = await getRequest('/api/get_single_table', null);
-    setDataSource([...data['data']]);
-  }
-
-  /**
    * 我们写的有状态组件，通常会产生很多的副作用（side effect），比如发起 ajax 请求获取数据，手动修改 dom 等等;
    * 我们之前都把这些副作用的函数写在生命周期函数钩子里，比如 componentDidMount，componentDidUpdate 和 componentWillUnMount;
    * 而现在的 useEffect 就相当与这些声明周期函数钩子的集合体。它以一抵三。
@@ -34,6 +26,11 @@ function SingleTable() {
    * 用第二个参数来告诉react只有当这个参数的值发生改变时，才执行我们传的副作用函数（第一个参数）。
    */
   useEffect(() => {
+    // 获取数据
+    async function fetchData() {
+      const data = await getRequest('/api/get_single_table', null);
+      setDataSource([...data['data']]);
+    }
     fetchData();
     // componentWillUnMount 时触发
     return () => {
