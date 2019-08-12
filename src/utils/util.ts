@@ -104,3 +104,36 @@ export function deepCompare(x, y) {
   }
   return true;
 }
+
+/**
+ * 验证非空
+ * @param val 要验证的值
+ */
+export function verVal(val) {
+  return val !== '' && typeof val !== 'undefined' && val !== null;
+}
+
+/**
+ * 验证是否是数组类型且数组长度大于0
+ * @param array 要验证的=数组
+ */
+export function verArr(array) {
+  return Array.isArray(array) && array.length > 0;
+}
+
+/**
+ * 验证是否是对象类型
+ * @param obj 要验证的值
+ */
+export function isObj(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
+
+/**
+ * 延迟执行
+ * @param timeout 要延迟的时间（毫秒）
+ */
+export const delayFunc = timeout =>
+  new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
