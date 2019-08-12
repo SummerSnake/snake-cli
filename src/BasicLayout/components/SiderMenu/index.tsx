@@ -2,13 +2,14 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import menu from '@config/menu';
-import {verArr} from "@utils/util";
+import { verArr } from '@utils/util';
 
 interface InitProp {
   history: {
     location: {
       pathname?: string;
     };
+    push: any;
   };
   location: {
     pathname?: string;
@@ -72,22 +73,23 @@ class SiderMenu extends React.Component<InitProp, InitState> {
           selectedKeys={this.state.keys}
           defaultOpenKeys={['/' + this.state.keys[0].split('/')[1]]}
         >
-          {verArr(menu) && menu.map(item =>
-            item && verArr(item.list)? (
-              <Menu.SubMenu key={item.path} title={this.titleNode(item)}>
-                {item.list.map(listItem => (
-                  <Menu.Item key={item.path + listItem.path}>
-                    <span>{listItem.name}</span>
-                  </Menu.Item>
-                ))}
-              </Menu.SubMenu>
-            ) : (
-              <Menu.Item key={item.path}>
-                <Icon type={item.icon} />
-                <span>{item.name}</span>
-              </Menu.Item>
-            )
-          )}
+          {verArr(menu) &&
+            menu.map(item =>
+              item && verArr(item.list) ? (
+                <Menu.SubMenu key={item.path} title={this.titleNode(item)}>
+                  {item.list.map(listItem => (
+                    <Menu.Item key={item.path + listItem.path}>
+                      <span>{listItem.name}</span>
+                    </Menu.Item>
+                  ))}
+                </Menu.SubMenu>
+              ) : (
+                <Menu.Item key={item.path}>
+                  <Icon type={item.icon} />
+                  <span>{item.name}</span>
+                </Menu.Item>
+              )
+            )}
         </Menu>
       </div>
     );

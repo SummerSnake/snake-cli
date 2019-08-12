@@ -16,7 +16,7 @@ module.exports = {
             "node_modules"
         ]
     },
-    plugins: ["@typescript-eslint", "react", "prettier"],
+    plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
     env: {
         browser: true,
         node: true,
@@ -52,5 +52,8 @@ module.exports = {
         "comma-spacing": [2, {"before": false, "after": true}],  // 控制逗号前后的空格
         "arrow-spacing":[2,{ "before": true, "after": true }], // 强制箭头函数的箭头前后使用一致的空格
         "no-var": 0,             // 要求使用 let 或 const 而不是 var
+        // React hook 相关校验规则
+        "react-hooks/rules-of-hooks": "error",
+        // "react-hooks/exhaustive-deps": "warn",
     }
 };
