@@ -5,6 +5,7 @@ const { Option } = Select;
 import moment from 'moment';
 import { weekFormat, calcWeek, columnsJson } from '@utils/date';
 import { getRequest } from '@services/api';
+import { verArr } from '@utils/util';
 import SelectTime from './components/SelectTime/index';
 import '../../../../mock/schedulingApi';
 import styles from './index.less';
@@ -132,22 +133,23 @@ function Scheduling() {
 
       <Table rowKey="id" dataSource={dataSource} rowSelection={rowSelection}>
         <Column title="工程师" dataIndex="engineer" key="engineer" />
-        {columns.map(item => (
-          <ColumnGroup title={item._date} key={item.id}>
-            <Column
-              title={item._day}
-              dataIndex={`type${item.id}`}
-              key={item.id}
-              render={text => {
-                return (
-                  <a href="javascript:;" onClick={handleModalOpen}>
-                    {text === 1 ? '已排班' : '---'}
-                  </a>
-                );
-              }}
-            />
-          </ColumnGroup>
-        ))}
+        {verArr(columns) &&
+          columns.map(item => (
+            <ColumnGroup title={item._date} key={item.id}>
+              <Column
+                title={item._day}
+                dataIndex={`type${item.id}`}
+                key={item.id}
+                render={text => {
+                  return (
+                    <a href="javascript:;" onClick={handleModalOpen}>
+                      {text === 1 ? '已排班' : '---'}
+                    </a>
+                  );
+                }}
+              />
+            </ColumnGroup>
+          ))}
       </Table>
 
       {Object.keys(apiData).length > 0 && (

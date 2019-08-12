@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
 import { getRequest } from '@services/api';
-import { deepCompare } from '@utils/util';
+import { deepCompare, verArr } from '@utils/util';
 import '../../../../../mock/touristApi';
 import styles from './index.less';
 
@@ -109,8 +109,7 @@ function Tourist(props: InitProp) {
           <div className={styles.chartTxt}>
             <h4>今日省份统计</h4>
             <div>
-              {Array.isArray(provinceList) &&
-                provinceList.length > 0 &&
+              {verArr(provinceList) &&
                 provinceList.map(item => (
                   <div key={item.id}>
                     <i />
@@ -140,8 +139,7 @@ function Tourist(props: InitProp) {
             <span>好评率</span>
             <span>差评率</span>
           </p>
-          {Array.isArray(rankings) &&
-            rankings.length > 0 &&
+          {verArr(rankings) &&
             rankings.map((item, index) => {
               return (
                 <p key={item.id}>

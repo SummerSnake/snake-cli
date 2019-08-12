@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { notification } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import { getRequest } from '@services/api';
+import { verArr } from '@utils/util';
 import '../../../../../mock/noticeApi';
 import styles from './index.less';
 
@@ -59,12 +60,13 @@ function Notice(props: InitProp) {
           hasMore={hasMore}
           useWindow={false}
         >
-          {list.map(item => (
-            <li key={item.id}>
-              <span>{item.title}</span>
-              <span>发布于 {item.sendDate}</span>
-            </li>
-          ))}
+          {verArr(list) &&
+            list.map(item => (
+              <li key={item.id}>
+                <span>{item.title}</span>
+                <span>发布于 {item.sendDate}</span>
+              </li>
+            ))}
         </InfiniteScroll>
       </ul>
     </article>

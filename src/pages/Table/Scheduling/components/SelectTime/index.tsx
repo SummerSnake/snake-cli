@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Tag, Checkbox } from 'antd';
+import { verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProps {
@@ -161,8 +162,7 @@ function SelectTime(props: InitProps) {
             />
           </h3>
           <div>
-            {Array.isArray(amTimeData) &&
-              amTimeData.length > 0 &&
+            {verArr(amTimeData) &&
               amTimeData.map(item => (
                 <Tag
                   color={tagArr.includes(item.id) ? '#1890ff' : ''}
@@ -189,8 +189,7 @@ function SelectTime(props: InitProps) {
             />
           </h3>
           <div>
-            {Array.isArray(pmTimeData) &&
-              pmTimeData.length > 0 &&
+            {verArr(pmTimeData) &&
               pmTimeData.map(item => (
                 <Tag
                   color={tagArr.includes(item.id) ? '#1890ff' : ''}

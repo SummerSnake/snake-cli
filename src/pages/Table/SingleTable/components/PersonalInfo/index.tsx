@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from 'antd';
 import { getRequest } from '@services/api';
+import { verArr } from '@utils/util';
 import InfoTable from './components/InfoTable';
 import styles from './index.less';
 
@@ -24,7 +25,7 @@ function PersonalInfo(props: InitProps) {
   async function fetchData() {
     const data = await getRequest('/api/get_single_table', null);
     const arr = data['data'];
-    if (Array.isArray(arr) && arr.length > 0) {
+    if (verArr(arr)) {
       arr.forEach(item => {
         if (props.infoId === item.key) {
           setInfoData({ ...infoData, ...item });

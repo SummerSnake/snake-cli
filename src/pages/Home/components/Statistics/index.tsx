@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getRequest } from '@services/api';
+import { verArr } from '@utils/util';
 import '../../../../../mock/statisticsApi';
 import styles from './index.less';
 
@@ -60,8 +61,8 @@ function Statistics(props: InitProp) {
             <h4>
               基本数据类型：<span>{js.total}</span>
             </h4>
-            {Array.isArray(js.list) &&
-              js.list.length > 0 &&
+            {js &&
+              verArr(js.list) &&
               js.list.map(item => {
                 return (
                   <p key={item.id}>
@@ -85,8 +86,8 @@ function Statistics(props: InitProp) {
             <h4>
               ES5新增：<span>{array.es5Num}</span>
             </h4>
-            {Array.isArray(array.list) &&
-              array.list.length > 0 &&
+            {array &&
+              verArr(array.list) &&
               array.list.map(item => {
                 return (
                   <p key={item.id}>
@@ -108,8 +109,8 @@ function Statistics(props: InitProp) {
 
         <li>
           <h3>js异步编程</h3>
-          {Array.isArray(async.list) &&
-            async.list.length > 0 &&
+          {async &&
+            verArr(async.list) &&
             async.list.map(item => (
               <div key={item.id}>
                 <p>{item.name}</p>

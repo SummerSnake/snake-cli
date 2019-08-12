@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import menu from '@config/menu';
+import {verArr} from "@utils/util";
 
 interface InitProp {
   history: {
@@ -71,8 +72,8 @@ class SiderMenu extends React.Component<InitProp, InitState> {
           selectedKeys={this.state.keys}
           defaultOpenKeys={['/' + this.state.keys[0].split('/')[1]]}
         >
-          {menu.map((item: any) =>
-            Array.isArray(item.list) && item.list.length > 0 ? (
+          {verArr(menu) && menu.map(item =>
+            item && verArr(item.list)? (
               <Menu.SubMenu key={item.path} title={this.titleNode(item)}>
                 {item.list.map(listItem => (
                   <Menu.Item key={item.path + listItem.path}>

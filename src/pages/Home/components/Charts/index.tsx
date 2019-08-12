@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
 import { getRequest } from '@services/api';
-import { deepCompare } from '@utils/util';
+import { deepCompare, verArr } from '@utils/util';
 import '../../../../../mock/chartsApi';
 import styles from './index.less';
 
@@ -249,8 +249,7 @@ function Charts(props: InitProp) {
             <span>景点名称</span>
             <span>游客数量</span>
           </p>
-          {Array.isArray(sortList) &&
-            sortList.length > 0 &&
+          {verArr(sortList) &&
             sortList.map((item, index) => {
               return (
                 <p key={item.id}>
