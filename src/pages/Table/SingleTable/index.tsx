@@ -71,7 +71,7 @@ function SingleTable() {
       dataIndex: 'tags',
       render: tags => (
         <span>
-          {tags.map(tag => {
+          {tags.map((tag: string) => {
             let color = tag.length > 5 ? 'geekblue' : 'green';
             if (tag === 'loser') {
               color = 'volcano';

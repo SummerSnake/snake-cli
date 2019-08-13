@@ -6,7 +6,7 @@ import InfoTable from './components/InfoTable';
 import styles from './index.less';
 
 interface InitProps {
-  infoId?: string;
+  readonly infoId: string;
 }
 interface InfoData {
   name: string;
@@ -15,6 +15,7 @@ interface InfoData {
   height?: number;
   weight?: number;
   hobby?: string;
+  job?: string;
   [propName: string]: any;
 }
 function PersonalInfo(props: InitProps) {

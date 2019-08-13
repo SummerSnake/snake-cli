@@ -37,7 +37,7 @@ function Feedback() {
       </div>
 
       <div className={styles.uploadDom}>
-        <UploadImg fileList={imgUrl} uploadCall={uploadCall} />
+        <UploadImg uploadCall={uploadCall} />
       </div>
 
       <div className={styles.footerBtn}>

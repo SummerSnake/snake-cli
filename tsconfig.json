@@ -21,7 +21,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "typeRoots": ["node_modules/@types", "global.d.ts"],
-    "lib": ["dom", "esNext"],
+    "lib": ["dom", "esnext"],
     // 解析非相对模块的基准目录
     "paths": {
       // alias 路径映射，如在文件中使用‘@’相当于‘src/’
