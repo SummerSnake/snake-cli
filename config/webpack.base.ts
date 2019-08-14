@@ -13,7 +13,7 @@ module.exports = {
     // 对应于entry里面生成出来的文件名，
     // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
     filename: 'js/[name].[hash:6].js',
-    chunkFilename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name]_chunk.[chunkhash:8].js',
     path: resolve(__dirname, '../dist'), // 输出目录
   },
   module: {

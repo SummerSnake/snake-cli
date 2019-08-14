@@ -2,18 +2,18 @@ import Loadable from 'react-loadable';
 import DelayLoading from '@components/DelayLoading';
 
 const Home = Loadable({
-  loader: () => import('../pages/Home/index'),
+  loader: () => import(/* webpackChunkName: "Home" */ '../pages/Home/index'),
   loading: DelayLoading,
   delay: 3000,
 });
 
 const SingleTable = Loadable({
-  loader: () => import('../pages/Table/SingleTable/index'),
+  loader: () => import(/* webpackChunkName: "SingleTable" */ '../pages/Table/SingleTable/index'),
   loading: DelayLoading,
   delay: 3000,
 });
 const Scheduling = Loadable({
-  loader: () => import('../pages/Table/Scheduling/index'),
+  loader: () => import(/* webpackChunkName: "Scheduling" */ '../pages/Table/Scheduling/index'),
   loading: DelayLoading,
   delay: 3000,
 });
