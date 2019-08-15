@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Upload, Modal, Icon } from 'antd';
 
 interface InitProp {

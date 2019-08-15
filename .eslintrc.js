@@ -6,14 +6,14 @@ module.exports = {
         "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
         "plugin:prettier/recommended", // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
         "prettier/react",
-        "prettier"
+        "prettier",
     ],
     settings: { // ESLint 支持在配置文件添加共享设置。你可以添加 settings 对象到配置文件，它将提供给每一个将被执行的规则。
         "react": {
             "version": "detect",
         },
         "import/ignore": [
-            "node_modules"
+            "node_modules",
         ]
     },
     plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
@@ -21,7 +21,7 @@ module.exports = {
         browser: true,
         node: true,
         es6: true,
-        mocha: true // 测试框架
+        mocha: true, // 测试框架
     },
     /**
      * off 或 0：表示不验证规则。
@@ -30,9 +30,10 @@ module.exports = {
      */
     rules: {
         "prettier/prettier": 1,
-        "@typescript-eslint/no-unused-vars": 0,
-        "@typescript-eslint/interface-name-prefix": 0,
-        "@typescript-eslint/explicit-member-accessibility": 0,
+        // typescript 相关校验规则
+        "@typescript-eslint/no-unused-vars": 0, // 允许有未使用的变量
+        "@typescript-eslint/interface-name-prefix": 2, // 接口名称首字母大写
+        "@typescript-eslint/explicit-member-accessibility": 0, // 允许 class 方法未使用 public static 关键字
         "@typescript-eslint/explicit-function-return-type": 0,
         "@typescript-eslint/no-explicit-any": 0,
         // js 相关校验规则
@@ -51,7 +52,7 @@ module.exports = {
         // ES6 相关校验规则
         "comma-spacing": [2, {"before": false, "after": true}],  // 控制逗号前后的空格
         "arrow-spacing":[2,{ "before": true, "after": true }], // 强制箭头函数的箭头前后使用一致的空格
-        "no-var": 0,             // 要求使用 let 或 const 而不是 var
+        "no-var": 2,             // 要求使用 let 或 const 而不是 var
         // React hook 相关校验规则
         "react-hooks/rules-of-hooks": "error",
         // "react-hooks/exhaustive-deps": "warn",
