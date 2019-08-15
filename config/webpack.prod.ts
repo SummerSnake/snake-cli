@@ -18,16 +18,8 @@ module.exports = merge(baseConfig, {
            * [ext] 表示是原文件的扩展名
            */
           {
-            test: /\.(jpg|jpeg|bmp|svg|png|webp|gif)$/,
+            test: /\.(jpe?g|png|svg|gif)$/,
             use: [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 8 * 1024,
-                  name: '[name].[hash:8].[ext]',
-                  outputPath: '/images',
-                },
-              },
               // 压缩图片
               {
                 loader: 'img-loader',
@@ -51,6 +43,7 @@ module.exports = merge(baseConfig, {
                 },
               },
             ],
+            exclude: /node_modules/,
           },
         ],
       },

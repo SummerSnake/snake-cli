@@ -5,6 +5,7 @@ const merge = require('webpack-merge');
 
 module.exports = merge(baseConfig, {
   mode: 'development', // 开发模式
+  devtool: 'cheap-module-eval-source-map',
   plugins: [
     // 模块热更新
     new webpack.HotModuleReplacementPlugin(),

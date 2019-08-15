@@ -32,7 +32,7 @@ module.exports = {
            * 加入 ts-loader 解析 TypeScript 文件
            */
           {
-            test: /\.(ts|tsx)?$/,
+            test: /\.tsx?$/,
             use: [
               {
                 loader: 'ts-loader',
@@ -97,23 +97,24 @@ module.exports = {
            * [ext] 表示是原文件的扩展名
            */
           {
-            test: /\.(jpg|jpeg|bmp|svg|png|webp|gif)$/,
+            test: /\.(jpe?g|png|bmp|svg|gif|webp)$/,
             loader: 'url-loader',
             options: {
               limit: 8 * 1024,
               name: '[name].[hash:8].[ext]',
             },
+            include: /src/,
           },
           /**
            * 将静态资源 图片、视频、字体文件等，在进行一些处理后（主要是文件名和路径），移动到打包后的目录中
            */
           {
-            exclude: /\.(css|json|js|jsx|tx|tsx)$/,
             loader: 'file-loader',
             options: {
               outputPath: 'asset/',
               name: '[name].[hash].[ext]',
             },
+            exclude: /\.(css|less|json|jsx?|tsx?)$/,
           },
         ],
       },
