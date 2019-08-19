@@ -45,8 +45,9 @@ function SingleTable() {
       key: 'name',
       render: (text, record) => (
         <a
-          href="javascript:;"
-          onClick={() => {
+          href="#"
+          onClick={e => {
+            e.preventDefault();
             setInfoId(record.key);
             setIsOpen(true);
           }}
@@ -90,9 +91,9 @@ function SingleTable() {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;">Invite {record.name}</a>
+          <span>Invite {record.name}</span>
           <Divider type="vertical" />
-          <a href="javascript:;">Delete</a>
+          <span>Delete</span>
         </span>
       ),
     },

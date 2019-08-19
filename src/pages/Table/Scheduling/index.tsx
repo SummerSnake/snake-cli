@@ -76,7 +76,8 @@ function Scheduling() {
   /**
    * 打开选择时段 Modal
    */
-  function handleModalOpen() {
+  function handleModalOpen(e) {
+    e.preventDefault();
     setIsModalOpen(true);
   }
 
@@ -145,7 +146,7 @@ function Scheduling() {
                 key={item.id}
                 render={text => {
                   return (
-                    <a href="javascript:;" onClick={handleModalOpen}>
+                    <a href="#" onClick={handleModalOpen}>
                       {text === 1 ? '已排班' : '---'}
                     </a>
                   );

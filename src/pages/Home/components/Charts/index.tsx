@@ -166,7 +166,7 @@ function Charts(props: InitProp) {
               ]),
             },
           },
-          data:props.chartsData && props.chartsData.numList,
+          data: props.chartsData && props.chartsData.numList,
         },
       ],
     });

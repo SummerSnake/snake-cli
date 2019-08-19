@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import menu from '@config/menu';
@@ -15,85 +15,66 @@ interface InitProp {
     pathname?: string;
   };
 }
-interface InitState {
-  keys: string[];
-}
-class SiderMenu extends React.Component<InitProp, InitState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      keys: [],
-    };
-  }
-  componentWillMount = () => {
-    this.selectKey();
-  };
 
-  componentWillReceiveProps = nextProps => {
-    if (this.props.location.pathname !== nextProps.location.pathname) {
-      this.selectKey();
-    }
-  };
+function SiderMenu(props: InitProp) {
+  const [keys, setKeys] = useState([]);
 
-  /**
-   * 获取路由路径字符串供 menu 使用
-   */
-  selectKey = () => {
+  useEffect(() => {
     let keys = [];
-    keys.push(this.props.history.location.pathname);
-    this.setState({ keys });
-  };
+    props.history && props.history.location && keys.push(props.history.location.pathname);
+    setKeys(keys);
+  }, []);
 
   /**
    * 处理选中路由
    */
-  handleSelect = ({ key }) => {
-    this.props.history.push(key);
-  };
+  function handleSelect({ key }) {
+    props.history.push(key);
+  }
 
   /**
    * 当前选中项名字
    */
-  titleNode = item => {
+  function titleNode(item) {
     return (
       <span>
         <Icon type={item.icon} />
         <span>{item.name}</span>
       </span>
     );
-  };
-
-  render() {
-    return (
-      <div className="SideMenu_wrap">
-        <Menu
-          mode="inline"
-          theme="dark"
-          onSelect={this.handleSelect}
-          selectedKeys={this.state.keys}
-          defaultOpenKeys={['/' + this.state.keys[0].split('/')[1]]}
-        >
-          {verArr(menu) &&
-            menu.map(item =>
-              item && verArr(item.list) ? (
-                <Menu.SubMenu key={item.path} title={this.titleNode(item)}>
-                  {item.list.map(listItem => (
-                    <Menu.Item key={item.path + listItem.path}>
-                      <span>{listItem.name}</span>
-                    </Menu.Item>
-                  ))}
-                </Menu.SubMenu>
-              ) : (
-                <Menu.Item key={item.path}>
-                  <Icon type={item.icon} />
-                  <span>{item.name}</span>
-                </Menu.Item>
-              )
-            )}
-        </Menu>
-      </div>
-    );
   }
+
+  const defaultKeys = (verArr(keys) && ['/' + keys[0].split('/')[1]]) || [];
+
+  return (
+    <div className="SideMenu_wrap">
+      <Menu
+        mode="inline"
+        theme="dark"
+        onSelect={handleSelect}
+        selectedKeys={keys}
+        defaultOpenKeys={defaultKeys}
+      >
+        {verArr(menu) &&
+          menu.map(item =>
+            item && verArr(item.list) ? (
+              <Menu.SubMenu key={item.path} title={titleNode(item)}>
+                {item.list.map(listItem => (
+                  <Menu.Item key={item.path + listItem.path}>
+                    <span>{listItem.name}</span>
+                  </Menu.Item>
+                ))}
+              </Menu.SubMenu>
+            ) : (
+              <Menu.Item key={item.path}>
+                <Icon type={item.icon} />
+                <span>{item.name}</span>
+              </Menu.Item>
+            )
+          )}
+      </Menu>
+    </div>
+  );
 }
 
 export default withRouter(SiderMenu);
