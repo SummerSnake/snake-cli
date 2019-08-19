@@ -4,24 +4,19 @@ import UploadImg from '@components/UploadImg';
 import styles from './index.less';
 
 function Feedback() {
-  let areaVal = '';
-  let imgUrl = '';
-
   /**
    * textArea 内容更新
    */
   function handleAreaChange(e) {
-    areaVal = e.target.value;
+    console.log(e.target.value);
   }
 
   /**
    * 上传图片回调
    */
   function uploadCall(url): void {
-    imgUrl = url;
+    console.log(url);
   }
-
-  console.info(areaVal, imgUrl);
 
   return (
     <section className={styles.feedbackWrap}>

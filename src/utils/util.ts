@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /**
  * 对象深比较
  */
 export function deepCompare(x, y) {
-  console.info(x, y);
-
   if (arguments.length < 1) {
     throw new Error('请传入两个对象');
   }
@@ -139,3 +139,51 @@ export const delayFunc = timeout =>
   new Promise(resolve => {
     setTimeout(resolve, timeout);
   });
+
+/**
+ * @desc 函数防抖 (触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间)
+ * @param func 函数
+ * @param delay 延迟执行毫秒数
+ * @param immediate true 表立即执行，false 表非立即执行
+ */
+export const debounce = (func, delay, immediate) => {
+  let timeout = null;
+
+  return function() {
+      const context = this;
+      const args = arguments;
+
+    if (timeout) clearTimeout(timeout);
+
+    if (immediate) {
+      const callNow = !timeout;
+      // 一定时间后清空定时器，即一定时间内定时器存在，callNow 为 false
+      timeout = setTimeout(() => {
+        timeout = null;
+      }, delay);
+      if (callNow) func.apply(context, args);
+    } else {
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, delay);
+    }
+  };
+};
+
+/**
+ * @desc 函数节流 时间戳版 (在持续触发事件的过程中，函数会立即执行，并且每 n 秒执行一次)
+ * @param func 函数
+ * @param delay 延迟执行毫秒数
+ */
+export const  throttle =(func, delay) =>{
+    let previous = 0;
+    return function() {
+        const now = Date.now();
+        const context = this;
+
+        if (now - previous > delay) {
+            func.apply(context, arguments);
+            previous = now;
+        }
+    }
+}

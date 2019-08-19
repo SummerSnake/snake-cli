@@ -28,8 +28,9 @@ function Home(props: InitProp) {
    * loading 回调
    */
   function loadingCall(json: CallJson): void {
-    setLoading(json['isLoading']);
+      setLoading(json['isLoading']);
   }
+
   return (
     <Spin spinning={loading}>
       <div className={styles.homeWrap}>
