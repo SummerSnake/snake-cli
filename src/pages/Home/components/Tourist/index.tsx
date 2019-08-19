@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Echarts from 'echarts';
-import { getRequest } from '@services/api';
-import { deepCompare, verArr } from '@utils/util';
-import '../../../../../mock/touristApi';
+import { verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
-  loadingCall: any;
+  touristData: {
+    provinceList: any[];
+    pieLegend: string[];
+    pieData: any[];
+    rankings: any[];
+  };
 }
-interface ApiData {
-  provinceList: any[];
-  pieLegend: string[];
-  pieData: any[];
-  rankings: any[];
-}
-function Tourist(props: InitProp) {
-  const [apiData, setApiData] = useState<ApiData>({
-    provinceList: [],
-    pieLegend: [],
-    pieData: [],
-    rankings: [],
-  });
 
-  async function init() {
+function Tourist(props: InitProp) {
+  /**
+   * 图表初始化
+   */
+  function init() {
     const myChartOne = Echarts.init(document.getElementById('chartDom'));
     // 绘制图表
     myChartOne.setOption({
@@ -53,7 +47,7 @@ function Tourist(props: InitProp) {
         itemHeight: 10,
         x: '80%',
         y: 'center',
-        data: apiData.pieLegend,
+        data: (props.touristData && props.touristData.pieLegend) || [],
       },
       series: [
         {
@@ -69,7 +63,7 @@ function Tourist(props: InitProp) {
               show: false,
             },
           },
-          data: apiData.pieData,
+          data: (props.touristData && props.touristData.pieData) || [],
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -83,23 +77,11 @@ function Tourist(props: InitProp) {
     window.onresize = myChartOne.resize;
   }
 
-  /**
-   * 挂载获取数据
-   */
-  async function fetchData() {
-    props.loadingCall({ isLoading: true });
-    const newData = await getRequest('/api/get_tourist', null);
-    if (!deepCompare(apiData, newData['data'])) {
-      setApiData({ ...newData['data'] });
-    }
-    props.loadingCall({ isLoading: false });
-  }
   useEffect(() => {
     init();
-    fetchData();
-  }, [apiData]);
+  }, [props.touristData]);
 
-  const { provinceList, rankings } = apiData;
+  const { provinceList, rankings } = props.touristData;
 
   return (
     <section className={styles.RepairCountWrap}>

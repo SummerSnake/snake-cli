@@ -14,6 +14,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,json,less}": [
+      "node scripts/prettier.ts",
       "eslint --ext .tsx,.ts --fix ./src"
     ]
   },

@@ -1,57 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { getRequest } from '@services/api';
+import React from 'react';
 import { verArr } from '@utils/util';
-import '../../../../../mock/statisticsApi';
 import styles from './index.less';
 
 interface InitProp {
-  loadingCall: any;
-}
-interface ApiData {
-  js: {
-    total?: number;
-    obj?: string;
-    list: any[];
-  };
-  array: {
-    es5Num?: number;
-    es6Num?: number;
-    es6Func?: string;
-    list: any[];
-  };
-  async: {
-    list: any[];
-  };
-  [propName: string]: any;
-}
-function Statistics(props: InitProp) {
-  const [apiData, setApiData] = useState<ApiData>({
+  statisticsData: {
     js: {
-      list: [],
-    },
+      total?: number;
+      obj?: string;
+      list: any[];
+    };
     array: {
-      list: [],
-    },
+      es5Num?: number;
+      es6Num?: number;
+      es6Func?: string;
+      list: any[];
+    };
     async: {
-      list: [],
-    },
-  });
+      list: any[];
+    };
+    [propName: string]: any;
+  };
+}
 
-  /**
-   * 获取数据
-   */
-  async function fetchData() {
-    props.loadingCall({ isLoading: true });
-    const newData = await getRequest('/api/get_statistics', null);
-    setApiData({ ...apiData, ...newData['data'] });
-    props.loadingCall({ isLoading: false });
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const { js, array, async } = apiData;
+function Statistics(props: InitProp) {
+  const { js, array, async } = props.statisticsData;
   return (
     <section className={styles.statisticsWrap}>
       <ul>

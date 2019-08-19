@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../../mock/touristApi';
 import styles from './index.less';
 
 function Popularity() {

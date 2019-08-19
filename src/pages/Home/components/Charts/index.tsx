@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Echarts from 'echarts';
-import { getRequest } from '@services/api';
-import { deepCompare, verArr } from '@utils/util';
-import '../../../../../mock/chartsApi';
+import { verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
-  loadingCall: any;
-}
-interface ApiData {
-  todayList: number[];
-  hourList: string[];
-  dateList: string[];
-  numList: number[];
-  sortList: any[];
+  chartsData: {
+    todayList: number[];
+    hourList: string[];
+    dateList: string[];
+    numList: number[];
+    sortList: any[];
+  };
 }
 function Charts(props: InitProp) {
-  const [apiData, setApiData] = useState<ApiData>({
-    todayList: [],
-    hourList: [],
-    dateList: [],
-    numList: [],
-    sortList: [],
-  });
   const [sortType, setSortType] = useState<number>(0);
 
   function sortDateChange(type: number) {
@@ -31,7 +21,7 @@ function Charts(props: InitProp) {
   /**
    * 图表初始化
    */
-  async function init() {
+  function init() {
     const myChartOne = Echarts.init(document.getElementById('charts_01'));
     const myChartTwo = Echarts.init(document.getElementById('charts_02'));
     // 绘制图表1
@@ -66,7 +56,7 @@ function Charts(props: InitProp) {
           axisTick: {
             show: false,
           },
-          data: apiData.hourList,
+          data: (props.chartsData && props.chartsData.hourList) || [],
         },
       ],
       yAxis: [
@@ -104,7 +94,7 @@ function Charts(props: InitProp) {
               ]),
             },
           },
-          data: apiData.todayList,
+          data: (props.chartsData && props.chartsData.todayList) || [],
         },
       ],
     });
@@ -142,7 +132,7 @@ function Charts(props: InitProp) {
           axisTick: {
             show: false,
           },
-          data: apiData.dateList,
+          data: (props.chartsData && props.chartsData.dateList) || [],
         },
       ],
       yAxis: [
@@ -176,30 +166,18 @@ function Charts(props: InitProp) {
               ]),
             },
           },
-          data: apiData.numList,
+          data:props.chartsData && props.chartsData.numList,
         },
       ],
     });
     window.onresize = myChartTwo.resize;
   }
 
-  /**
-   * 挂载获取数据
-   */
-  async function fetchData() {
-    props.loadingCall({ isLoading: true });
-    const newData = await getRequest('/api/get_charts', null);
-    if (!deepCompare(apiData, newData['data'])) {
-      setApiData({ ...newData['data'] });
-    }
-    props.loadingCall({ isLoading: false });
-  }
   useEffect(() => {
     init();
-    fetchData();
-  }, [apiData]);
+  }, [props.chartsData]);
 
-  const { sortList } = apiData;
+  const { sortList } = props.chartsData;
 
   return (
     <section className={styles.chartsWrap}>

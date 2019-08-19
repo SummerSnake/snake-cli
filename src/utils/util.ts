@@ -150,8 +150,8 @@ export const debounce = (func, delay, immediate) => {
   let timeout = null;
 
   return function() {
-      const context = this;
-      const args = arguments;
+    const context = this;
+    const args = arguments;
 
     if (timeout) clearTimeout(timeout);
 
@@ -175,15 +175,15 @@ export const debounce = (func, delay, immediate) => {
  * @param func 函数
  * @param delay 延迟执行毫秒数
  */
-export const  throttle =(func, delay) =>{
-    let previous = 0;
-    return function() {
-        const now = Date.now();
-        const context = this;
+export const throttle = (func, delay) => {
+  let previous = 0;
+  return function() {
+    const now = Date.now();
+    const context = this;
 
-        if (now - previous > delay) {
-            func.apply(context, arguments);
-            previous = now;
-        }
+    if (now - previous > delay) {
+      func.apply(context, arguments);
+      previous = now;
     }
-}
+  };
+};

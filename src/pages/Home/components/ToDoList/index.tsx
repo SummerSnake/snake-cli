@@ -1,45 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { getRequest } from '@services/api';
-import '../../../../../mock/todoListApi';
 import styles from './index.less';
 
 interface InitProp {
-  loadingCall: any;
-}
-interface Data {
-  array?: string;
-  object?: string;
-  prototype?: string;
-  closure?: string;
-  es6?: string;
-  scss?: string;
-  less?: string;
-  cssLoader?: string;
-  styleLoader?: string;
-  module?: string;
-  plugins?: string;
-  resolve?: string;
-  optimization?: string;
-  [propName: string]: any;
+  todoListData: {
+    array?: string;
+    object?: string;
+    prototype?: string;
+    closure?: string;
+    es6?: string;
+    scss?: string;
+    less?: string;
+    cssLoader?: string;
+    styleLoader?: string;
+    module?: string;
+    plugins?: string;
+    resolve?: string;
+    optimization?: string;
+    [propName: string]: any;
+  };
 }
 function ToDoList(props: InitProp) {
   const [tabKey, setTabKey] = useState<string>('0');
 
   const [animKey, setAnimKey] = useState<string>('0');
 
-  const [data, setData] = useState<Data>({});
-
-  /**
-   * 获取数据
-   */
-  async function fetchData() {
-    props.loadingCall({ isLoading: true });
-    const newData = await getRequest('/api/get_toDoList', null);
-    setData({ ...data, ...newData['data'] });
-    props.loadingCall({ isLoading: false });
-  }
   useEffect(() => {
-    fetchData();
     return () => {
       setAnimKey('0');
       setTabKey('0');
@@ -56,6 +41,9 @@ function ToDoList(props: InitProp) {
       setTabKey(key);
     }, 300);
   }
+
+  const { todoListData } = props;
+
   return (
     <div className={styles.todoListWrap}>
       <p>
@@ -78,27 +66,27 @@ function ToDoList(props: InitProp) {
               <p className={styles.ellipsis}>
                 <span>
                   数组
-                  <span>{data.array}</span>
+                  <span>{todoListData.array}</span>
                 </span>
                 <span>
                   对象
-                  <span>{data.object}</span>
+                  <span>{todoListData.object}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   原型链
-                  <span>{data.prototype}</span>
+                  <span>{todoListData.prototype}</span>
                 </span>
                 <span>
                   闭包
-                  <span>{data.closure}</span>
+                  <span>{todoListData.closure}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   ESMAScript2015
-                  <span>{data.es6}</span>
+                  <span>{todoListData.es6}</span>
                 </span>
               </p>
             </div>
@@ -124,23 +112,23 @@ function ToDoList(props: InitProp) {
               <p className={styles.ellipsis}>
                 <span>
                   module
-                  <span>{data.module}</span>
+                  <span>{todoListData.module}</span>
                 </span>
                 <span>
                   plugins
-                  <span>{data.plugins}</span>
+                  <span>{todoListData.plugins}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   resolve
-                  <span>{data.resolve}</span>
+                  <span>{todoListData.resolve}</span>
                 </span>
               </p>
               <p className={styles.ellipsis}>
                 <span>
                   optimization
-                  <span>{data.optimization}</span>
+                  <span>{todoListData.optimization}</span>
                 </span>
               </p>
             </div>
