@@ -21,6 +21,8 @@ function Feedback() {
     imgUrl = url;
   }
 
+  console.info(areaVal, imgUrl);
+
   return (
     <section className={styles.feedbackWrap}>
       <h3>意见反馈</h3>

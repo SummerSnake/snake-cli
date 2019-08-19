@@ -41,7 +41,7 @@ function Scheduling() {
    * @param val 当前所选值
    */
   function handleSelect(val: string) {
-    // console.log(`selected ${val}`);
+    console.log(`selected ${val}`);
   }
 
   /**
@@ -92,6 +92,8 @@ function Scheduling() {
    */
   const rowSelection = {
     onChange: (selectRowKeys, selectRows) => {
+      console.log(selectRows);
+
       const arr = selectRowKeys.filter(item => {
         return !selectedRowKeys.includes(item.id);
       });

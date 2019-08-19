@@ -2,6 +2,8 @@
  * 对象深比较
  */
 export function deepCompare(x, y) {
+  console.info(x, y);
+
   if (arguments.length < 1) {
     throw new Error('请传入两个对象');
   }

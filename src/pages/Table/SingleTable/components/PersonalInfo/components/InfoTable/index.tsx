@@ -18,7 +18,7 @@ function InfoTable(props: InitProps) {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (text, record) => <a href="javascript:;">{text}</a>,
+      render: text => <a href="javascript:;">{text}</a>,
     },
     {
       title: 'Age',

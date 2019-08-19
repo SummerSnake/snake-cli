@@ -31,13 +31,13 @@ module.exports = {
     rules: {
         "prettier/prettier": 1,
         // typescript 相关校验规则
-        "@typescript-eslint/no-unused-vars": 0, // 允许有未使用的变量
+        "@typescript-eslint/no-unused-vars": 2, // 不允许有未使用的变量
         "@typescript-eslint/interface-name-prefix": 2, // 接口名称首字母大写
         "@typescript-eslint/explicit-member-accessibility": 0, // 允许 class 方法未使用 public static 关键字
         "@typescript-eslint/explicit-function-return-type": 0,
         "@typescript-eslint/no-explicit-any": 0,
         // js 相关校验规则
-        "no-console": ["warn", { allow: ["warn", "error"] }], // 禁用console
+        "no-console": 0, // 允许使用 console
         "eqeqeq": ["warn", "always"], // 要求使用 === 和 !==
         "no-debugger": 2,        // 禁用debugger
         "semi": 2,               // 强制使用分号
