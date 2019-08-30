@@ -9,8 +9,9 @@ interface InitProp {
 function Login(props: InitProp) {
   const [userName, setUserName] = useState<string>('admin');
   const [password, setPassword] = useState<string>('123456');
+
   /**
-   * 提交登陆
+   * @desc提交登陆
    */
   function handleSubmit() {
     if (userName === 'admin' && password === '123456') {

@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 /**
- * 对象深比较
+ * @desc 对象深比较
+ * @param x { any }
+ * @param y { any }
+ * @return { boolean }
  */
 export function deepCompare(x, y) {
   if (arguments.length < 1) {
@@ -108,32 +110,35 @@ export function deepCompare(x, y) {
 }
 
 /**
- * 验证非空
- * @param val 要验证的值
+ * @desc 验证非空
+ * @param { any } val 要验证的值
+ * @return { boolean }
  */
 export function verVal(val) {
   return val !== '' && typeof val !== 'undefined' && val !== null;
 }
 
 /**
- * 验证是否是数组类型且数组长度大于0
- * @param array 要验证的=数组
+ * @desc 验证是否是数组类型且数组长度大于0
+ * @param { array } array 要验证的数组
+ * @return { boolean }
  */
 export function verArr(array) {
   return Array.isArray(array) && array.length > 0;
 }
 
 /**
- * 验证是否是对象类型
- * @param obj 要验证的值
+ * @desc 验证是否是对象类型
+ * @param { any } obj 要验证的值
+ * @return { boolean }
  */
 export function isObj(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
 /**
- * 延迟执行
- * @param timeout 要延迟的时间（毫秒）
+ * @desc 延迟执行
+ * @param { number } timeout 要延迟的时间（毫秒）
  */
 export const delayFunc = timeout =>
   new Promise(resolve => {
@@ -142,9 +147,9 @@ export const delayFunc = timeout =>
 
 /**
  * @desc 函数防抖 (触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间)
- * @param func 函数
- * @param delay 延迟执行毫秒数
- * @param immediate true 表立即执行，false 表非立即执行
+ * @param { function } func 函数
+ * @param { number } delay 延迟执行毫秒数
+ * @param { boolean } immediate true 表立即执行，false 表非立即执行
  */
 export const debounce = (func, delay, immediate) => {
   let timeout = null;
@@ -172,8 +177,8 @@ export const debounce = (func, delay, immediate) => {
 
 /**
  * @desc 函数节流 时间戳版 (在持续触发事件的过程中，函数会立即执行，并且每 n 秒执行一次)
- * @param func 函数
- * @param delay 延迟执行毫秒数
+ * @param { function } func 函数
+ * @param { number } delay 延迟执行毫秒数
  */
 export const throttle = (func, delay) => {
   let previous = 0;

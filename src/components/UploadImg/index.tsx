@@ -12,7 +12,8 @@ function UploadImg(props: InitProp) {
   const [fileList, setFileList] = useState([]);
 
   /**
-   * 预览图片
+   * @desc 预览图片
+   * @param { object } file 图片路径
    */
   function handlePreview(file) {
     const imgUrl = file.url || file.thumbUrl;
@@ -21,14 +22,15 @@ function UploadImg(props: InitProp) {
   }
 
   /**
-   * 取消预览图片
+   * @desc 取消预览图片
    */
   function handleCancel() {
     setPreviewVisible(false);
   }
 
   /**
-   * 上传图片
+   * @desc 上传图片
+   * @param { array } fileList 上传图片列表
    */
   function handleChange({ fileList }) {
     let imgUrl = '';

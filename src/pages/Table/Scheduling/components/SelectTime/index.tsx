@@ -38,7 +38,10 @@ function SelectTime(props: InitProps) {
   }, []);
 
   /**
-   * 判断标签是否全部选中，添加全选 checkbox 状态
+   * @desc 判断标签是否全部选中，添加全选 checkbox 状态
+   * @param { array } timeData 时间标签
+   * @param { array } tagArr 选中的标签数组
+   * @param { string } type 上午、下午 标识符
    */
   function checkContain(timeData, tagArr, type: string) {
     let amFlag = true;
@@ -54,7 +57,8 @@ function SelectTime(props: InitProps) {
   }
 
   /**
-   * 选择标签
+   * @desc 选择标签
+   * @param { number } id 当前选择的标签id
    */
   function handleTagSelect(id: number) {
     let tagArrClone = [...tagArr];
@@ -82,7 +86,9 @@ function SelectTime(props: InitProps) {
   }
 
   /**
-   * 标签操作方法
+   * @desc 标签操作方法
+   * @param { boolean } timeChecked 标签全选状态
+   * @param { array } timeData 当前选择的时间数据所属数组 上午、下午
    */
   function tagFilter(timeChecked: boolean, timeData) {
     let arr = [];
@@ -107,7 +113,7 @@ function SelectTime(props: InitProps) {
   }
 
   /**
-   * 上午标签全选 checkbox
+   * @desc 上午标签全选 checkbox
    */
   function handleAmChecked() {
     const invertVal = !amChecked;
@@ -116,7 +122,7 @@ function SelectTime(props: InitProps) {
   }
 
   /**
-   * 下午标签全选 checkbox
+   * @desc 下午标签全选 checkbox
    */
   function handlePmChecked() {
     const invertVal = !pmChecked;
@@ -125,7 +131,7 @@ function SelectTime(props: InitProps) {
   }
 
   /**
-   * 提交
+   * @desc 提交
    */
   function handleSubmit() {
     setTagArr([]);

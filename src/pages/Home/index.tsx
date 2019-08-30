@@ -103,7 +103,7 @@ function Home(props: InitProp) {
   }, []);
 
   /**
-   * 挂载获取数据
+   * @desc 挂载获取数据
    */
   async function fetchData() {
     setLoading(true);
@@ -116,7 +116,8 @@ function Home(props: InitProp) {
   }, []);
 
   /**
-   * loading 回调
+   * @desc loading 回调
+   * @param { object } json loading状态对象
    */
   function loadingCall(json: CallJson): void {
     setLoading(json['isLoading']);

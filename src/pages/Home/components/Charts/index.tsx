@@ -19,7 +19,7 @@ function Charts(props: InitProp) {
     setSortType(type);
   }
   /**
-   * 图表初始化
+   * @desc 图表初始化
    */
   function init() {
     const myChartOne = Echarts.init(document.getElementById('charts_01'));

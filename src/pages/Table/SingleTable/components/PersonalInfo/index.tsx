@@ -21,7 +21,7 @@ interface InfoData {
 function PersonalInfo(props: InitProps) {
   const [infoData, setInfoData] = useState<InfoData>({ name: '*' });
   /**
-   * 获取数据
+   * @desc 获取数据
    */
   async function fetchData() {
     const data = await getRequest('/api/get_single_table', null);

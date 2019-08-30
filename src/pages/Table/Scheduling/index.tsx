@@ -25,7 +25,7 @@ function Scheduling() {
   const [apiData, setApiData] = useState({});
 
   /**
-   * 获取数据
+   * @desc 获取数据
    */
   useEffect(() => {
     async function fetchData() {
@@ -37,7 +37,7 @@ function Scheduling() {
   }, []);
 
   /**
-   * 选择框事件
+   * @desc 选择框事件
    * @param val 当前所选值
    */
   function handleSelect(val: string) {
@@ -45,7 +45,7 @@ function Scheduling() {
   }
 
   /**
-   * 上一周按钮点击
+   * @desc 上一周按钮点击
    */
   function handleLastWeek() {
     const json = calcWeek(nowDate);
@@ -55,7 +55,7 @@ function Scheduling() {
   }
 
   /**
-   * 当前周按钮点击
+   * @desc 当前周按钮点击
    */
   function handleNowWeek() {
     const arr = columnsJson(moment());
@@ -64,7 +64,7 @@ function Scheduling() {
   }
 
   /**
-   * 上一周按钮点击
+   * @desc 上一周按钮点击
    */
   function handleNextWeek() {
     const json = calcWeek(nowDate);
@@ -74,7 +74,7 @@ function Scheduling() {
   }
 
   /**
-   * 打开选择时段 Modal
+   * @desc 打开选择时段 Modal
    */
   function handleModalOpen(e) {
     e.preventDefault();
@@ -82,14 +82,14 @@ function Scheduling() {
   }
 
   /**
-   * 打开选择时段 Modal 回调
+   * @desc 打开选择时段 Modal 回调
    */
   function onModalCall() {
     setIsModalOpen(false);
   }
 
   /**
-   * 表格行选择
+   * @desc 表格行选择
    */
   const rowSelection = {
     onChange: (selectRowKeys, selectRows) => {

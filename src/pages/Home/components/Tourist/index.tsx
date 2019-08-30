@@ -14,7 +14,7 @@ interface InitProp {
 
 function Tourist(props: InitProp) {
   /**
-   * 图表初始化
+   * @desc 图表初始化
    */
   function init() {
     const myChartOne = Echarts.init(document.getElementById('chartDom'));

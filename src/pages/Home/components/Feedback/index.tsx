@@ -5,14 +5,14 @@ import styles from './index.less';
 
 function Feedback() {
   /**
-   * textArea 内容更新
+   * @desc textArea 内容更新
    */
   function handleAreaChange(e) {
     console.log(e.target.value);
   }
 
   /**
-   * 上传图片回调
+   * @desc 上传图片回调
    */
   function uploadCall(url): void {
     console.log(url);

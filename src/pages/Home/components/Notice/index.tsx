@@ -20,7 +20,7 @@ function Notice(props: InitProp) {
   const [list, setList] = useState([]);
 
   /**
-   * 无限滚动
+   * @desc 无限滚动
    */
   function handleInfiniteOnLoad() {
     if (list.length >= listTotal) {
@@ -34,7 +34,7 @@ function Notice(props: InitProp) {
   }
 
   /**
-   * 获取数据
+   * @desc 获取数据
    */
   async function fetchSysNoticeList() {
     props.loadingCall({ isLoading: true });
