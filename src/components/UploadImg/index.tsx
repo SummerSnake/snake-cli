@@ -69,4 +69,5 @@ function UploadImg(props: InitProp) {
     </div>
   );
 }
+
 export default UploadImg;
