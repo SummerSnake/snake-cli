@@ -29,7 +29,8 @@
     "react-dom": "^16.8.6",
     "react-infinite-scroller": "^1.2.4",
     "react-redux": "^7.1.1",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": "^5.0.0",
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
     "@types/react": "^16.8.18",
@@ -70,7 +71,6 @@
     "style-loader": "^0.23.1",
     "ts-import-plugin": "^1.5.5",
     "ts-loader": "^6.0.1",
-    "typescript": "^3.4.5",
     "url-loader": "^1.1.2",
     "webpack": "^4.31.0",
     "webpack-bundle-analyzer": "^3.3.2",

@@ -14,6 +14,8 @@ import styles from './index.less';
 
 interface InitProp {
   history?: any[];
+  common?: any;
+  loading?: any;
 }
 interface ApiData {
   chartsData: {
