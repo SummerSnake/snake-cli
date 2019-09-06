@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Tag, Icon } from 'antd';
-import { verArr, verVal } from '@utils/util';
+import { verArr, verVal, setObjVal } from '@utils/util';
 
 interface InitProp {
   tableRigger: {
@@ -15,12 +15,13 @@ class FilterTag extends React.Component<InitProp> {
    * @desc 生成筛选项标签
    */
   tagRigger = () => {
-    const {
-      tableRigger: { queryShow = {}, query = {} },
+    let {
+      tableRigger: { queryShow, query = {} },
       dispatch,
     } = this.props;
     const arr = [];
-    for (const key in queryShow) {
+
+    for (const key in (queryShow = {})) {
       const json = queryShow[key];
       if (verVal(json) && json['queryValue'].length > 0)
         arr.push(
@@ -28,8 +29,8 @@ class FilterTag extends React.Component<InitProp> {
             key={key}
             closable
             onClose={() => {
-              delete queryShow[key];
-              delete query[key];
+              queryShow = setObjVal(queryShow, key, '');
+              query = setObjVal(query, key, '');
               dispatch({
                 type: 'tableRigger/fetch',
                 payload: { queryShow, query },

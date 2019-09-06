@@ -1,8 +1,10 @@
+@import '../../../styles/mixin.less';
+
 .statisticsWrap {
   display: flex;
   width: 100%;
   padding: 12px 0;
-  background: rgba(255, 255, 255, 1);
+  background: #fff;
   box-shadow: 0 2px 4px 0 rgba(224, 224, 224, 0.5);
   > div {
     position: relative;
@@ -10,14 +12,12 @@
     max-width: 140px;
     text-align: center;
     > p {
+      .sc(@txtSize, #686a6c);
       margin-bottom: 4px;
-      font-size: 14px;
       font-weight: 600;
-      color: rgba(104, 106, 108, 1);
     }
     > span {
-      font-size: 32px;
-      color: rgba(51, 51, 51, 1);
+      .sc(32px, @titleColor);
     }
     .lineDom {
       position: absolute;

@@ -192,3 +192,17 @@ export const throttle = (func, delay) => {
     }
   };
 };
+
+/**
+ * @desc 对象赋值方法
+ * @param {object} initObj 原始对象
+ * @param {string} name 要赋的值--名字
+ * @param {string} value 要赋的值
+ * @return {object} 操作后的值
+ */
+export const setObjVal = (initObj, name, value) => {
+  return {
+    ...initObj,
+    [name]: value,
+  };
+};

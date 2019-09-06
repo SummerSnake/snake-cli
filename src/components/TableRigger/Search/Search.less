@@ -1,0 +1,40 @@
+@import '../../../styles/mixin.less';
+
+.searchWrap {
+  .generalSearch {
+    margin-right: 6px;
+  }
+  .advancedSearchBtn {
+    .sc(@txtSize, @primaryColor);
+    height: 32px;
+    line-height: 32px;
+    padding-left: 17px;
+    cursor: pointer;
+  }
+  .advancedSearchWrap {
+    width: 100%;
+    > div {
+      float: left;
+      margin-top: 10px;
+      min-width: 30%;
+      > span {
+        display: inline-block;
+        width: 100px;
+        text-align: right;
+      }
+      .inputDom {
+        width: 266px;
+        margin: 0 10px;
+      }
+    }
+    > div:last-child {
+      margin-bottom: 10px;
+    }
+  }
+  .advancedSearchWrap:after {
+    .clearfix;
+  }
+  .btnGroup {
+    float: right;
+  }
+}
