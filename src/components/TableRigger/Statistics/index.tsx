@@ -6,11 +6,10 @@ import { deepCompare, verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
-  screen: {
+  tableRigger: {
     query?: any;
     queryShow?: any;
   };
-  tableRigger?: any;
   dispatch?: any;
   topJson?: any;
   sourceUrl?: string;
