@@ -61,7 +61,7 @@ function UploadImg(props: InitProp) {
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 5 ? null : uploadButton}
+        {fileList.length >= props.limitNum ? null : uploadButton}
       </Upload>
       <Modal maskClosable={false} visible={previewVisible} footer={null} onCancel={handleCancel}>
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
