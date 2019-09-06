@@ -10,6 +10,7 @@ interface InitProp {
     query?: any;
     queryShow?: any;
   };
+  tableRigger?: any;
   dispatch?: any;
   topJson?: any;
   sourceUrl?: string;
@@ -53,7 +54,7 @@ class Statistics extends React.Component<InitProp, InitState> {
    */
   handleClick = async json => {
     const {
-      screen: { query, queryShow },
+      tableRigger: { query = {}, queryShow = {} },
       dispatch,
     } = this.props;
     if (json.queryField && json.queryTitle && json.queryValue) {
@@ -70,8 +71,8 @@ class Statistics extends React.Component<InitProp, InitState> {
   };
 
   render() {
-    const { topJson } = this.props;
-    const { dataSource, isLoading } = this.state;
+    const { topJson = {} } = this.props;
+    const { dataSource = {}, isLoading } = this.state;
     return (
       <Spin spinning={isLoading}>
         <div className={styles.statisticsWrap}>

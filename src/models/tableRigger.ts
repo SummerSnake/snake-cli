@@ -42,7 +42,7 @@ export default {
       const code = Math.round(Math.random() * 999999999);
 
       if (payload) {
-        payloadClone = JSON.parse(payload);
+        const payloadClone = JSON.parse(payload);
         payload = {
           ...payloadClone,
           code,
