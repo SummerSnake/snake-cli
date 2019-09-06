@@ -11,10 +11,6 @@ interface InitProp {
   dispatch?: any;
 }
 class FilterTag extends React.Component<InitProp> {
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * @desc 生成筛选项标签
    */
@@ -24,7 +20,7 @@ class FilterTag extends React.Component<InitProp> {
       dispatch,
     } = this.props;
     const arr = [];
-    for (const key in (queryShow = {})) {
+    for (const key in queryShow) {
       const json = queryShow[key];
       if (verVal(json) && json['queryValue'].length > 0)
         arr.push(
@@ -86,4 +82,4 @@ class FilterTag extends React.Component<InitProp> {
   }
 }
 
-export default connect(({ tableRigger }) => ({ ...tableRigger }))(FilterTag);
+export default connect(({ tableRigger }: any) => ({ ...tableRigger }))(FilterTag);

@@ -15,37 +15,36 @@ interface InitProp {
   sourceUrl?: string;
 }
 interface InitState {
-  dataSource: any;
-  isLoading: boolean;
+  _dataSource: any;
+  _isLoading: boolean;
 }
 class Statistics extends React.Component<InitProp, InitState> {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: {},
-      isLoading: false,
+      _dataSource: {},
+      _isLoading: false,
     };
   }
-
-  tableRigger = null;
+  _tableRigger = null;
 
   componentWillReceiveProps = nextProps => {
-    if (deepCompare(nextProps.tableRigger, this.tableRigger)) {
+    if (deepCompare(nextProps.tableRigger, this._tableRigger)) {
       this.fetchData();
     }
-    this.tableRigger = JSON.parse(JSON.stringify(nextProps.tableRigger));
+    this._tableRigger = JSON.parse(JSON.stringify(nextProps.tableRigger));
   };
 
   /**
    * @desc 获取数据
    */
   fetchData = async () => {
-    this.setState({ isLoading: true });
+    this.setState({ _isLoading: true });
     const data = await getRequest(this.props.sourceUrl, null);
     if (data['status'] === 200) {
-      this.setState({ dataSource: data['data'] });
+      this.setState({ _dataSource: data['data'] });
     }
-    this.setState({ isLoading: false });
+    this.setState({ _isLoading: false });
   };
 
   /**
@@ -71,9 +70,9 @@ class Statistics extends React.Component<InitProp, InitState> {
 
   render() {
     const { topJson = {} } = this.props;
-    const { dataSource = {}, isLoading } = this.state;
+    const { _dataSource = {}, _isLoading } = this.state;
     return (
-      <Spin spinning={isLoading}>
+      <Spin spinning={_isLoading}>
         <div className={styles.statisticsWrap}>
           {verArr(topJson) &&
             topJson.map((item, i) => (
@@ -91,7 +90,7 @@ class Statistics extends React.Component<InitProp, InitState> {
                         : 'default',
                   }}
                 >
-                  {dataSource[item.displayField] || 0}
+                  {_dataSource[item.displayField] || 0}
                 </span>
                 <Divider type="vertical" className={styles.lineDom} />
               </div>
@@ -102,4 +101,4 @@ class Statistics extends React.Component<InitProp, InitState> {
   }
 }
 
-export default connect(({ tableRigger }) => ({ ...tableRigger }))(Statistics);
+export default connect(({ tableRigger }: any) => ({ ...tableRigger }))(Statistics);
