@@ -219,8 +219,7 @@ export const jsonString = (json = {}) => {
       if (verArr(json[key])) {
         json[key].forEach(item => {
           switch (item) {
-            case typeof item === 'string' &&
-              (item.indexOf('Date') > -1 || item.indexOf('Time') > -1):
+            case moment(item, 'YYYY-MM-DD').isValid():
               let arr = [];
               arr.push(moment(item).format('YYYY-MM-DD HH:mm'));
               json[key] = arr;
