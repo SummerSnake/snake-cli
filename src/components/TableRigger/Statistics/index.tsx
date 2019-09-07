@@ -75,26 +75,24 @@ class Statistics extends React.Component<InitProp, InitState> {
       <Spin spinning={_isLoading}>
         <div className={styles.statisticsWrap}>
           {verArr(topJson) &&
-            topJson.map((item, i) => (
-              <div key={i.toString()} onClick={this.handleClick.bind(this, item)}>
-                <p>{item['displayTitle']}</p>
-                <span
-                  style={{
-                    color:
-                      item['queryField'] && item['queryTitle'] && item['queryValue']
-                        ? '#40a9ff'
-                        : '#999',
-                    cursor:
-                      item['queryField'] && item['queryTitle'] && item['queryValue']
-                        ? 'pointer'
-                        : 'default',
-                  }}
-                >
-                  {_dataSource[item.displayField] || 0}
-                </span>
-                <Divider type="vertical" className={styles.lineDom} />
-              </div>
-            ))}
+            topJson.map((item, i) => {
+              const isQuery = item['queryField'] && item['queryTitle'] && item['queryValue'];
+
+              return (
+                <div key={i.toString()} onClick={this.handleClick.bind(this, item)}>
+                  <p>{item['displayTitle']}</p>
+                  <span
+                    style={{
+                      color: isQuery ? '#40a9ff' : '#999',
+                      cursor: isQuery ? 'pointer' : 'default',
+                    }}
+                  >
+                    {_dataSource[item.displayField] || 0}
+                  </span>
+                  <Divider type="vertical" className={styles.lineDom} />
+                </div>
+              );
+            })}
         </div>
       </Spin>
     );

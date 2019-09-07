@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Input, DatePicker, Select } from 'antd';
 import moment from 'moment';
 import { isObj, verVal, setObjVal, verArr } from '@utils/util';
-import styles from './Search.less';
+import styles from './index.less';
 
 interface InitProp {
   tableRigger: {
@@ -152,7 +152,7 @@ class Search extends React.Component<InitProp, InitState> {
 
       _dataShow[json['queryField']] = {
         queryTitle: json['queryTitle'],
-        queryValue: maybeVal || val,
+        queryValue: verVal(maybeVal) ? maybeVal : val,
       };
     } else {
       _dataSource = setObjVal(_dataSource, [json['queryField']], '');
@@ -256,8 +256,8 @@ class Search extends React.Component<InitProp, InitState> {
                           verArr(item.componentData) &&
                           item.componentData.map((json, j) => {
                             return (
-                              <Select.Option key={j.toString()} value={json.value}>
-                                {json.title}
+                              <Select.Option key={j.toString()} value={json['value']}>
+                                {json['title']}
                               </Select.Option>
                             );
                           })}
