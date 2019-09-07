@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import moment from 'moment';
+
 /**
  * @desc 对象深比较
  * @param x { any }
@@ -205,4 +207,38 @@ export const setObjVal = (initObj, name, value) => {
     ...initObj,
     [name]: value,
   };
+};
+
+/**
+ * @desc 参数处理方法
+ * @param { object } json 要处理的参数
+ */
+export const jsonString = (json = {}) => {
+  if (isObj(json)) {
+    for (const key in json) {
+      if (verArr(json[key])) {
+        json[key].forEach(item => {
+          switch (item) {
+            case typeof item === 'string' &&
+              (item.indexOf('Date') > -1 || item.indexOf('Time') > -1):
+              let arr = [];
+              arr.push(moment(item).format('YYYY-MM-DD HH:mm'));
+              json[key] = arr;
+              break;
+            case typeof item === 'object':
+              jsonString(item);
+              break;
+            case typeof item !== 'undefined':
+              json[key] = json[key].toString();
+              break;
+            default:
+          }
+        });
+      } else {
+        if (verVal(json[key]) && (key.indexOf('Date') > -1 || key.indexOf('Time') > -1)) {
+          json[key] = moment(json[key]).format('YYYY-MM-DD HH:mm');
+        }
+      }
+    }
+  }
 };
