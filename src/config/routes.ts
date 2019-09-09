@@ -12,11 +12,20 @@ const SingleTable = Loadable({
   loading: DelayLoading,
   delay: 3000,
 });
+
 const Scheduling = Loadable({
   loader: () => import(/* webpackChunkName: "Scheduling" */ '../pages/Table/Scheduling/index'),
   loading: DelayLoading,
   delay: 3000,
 });
+
+const TableRiggerExample = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "TableRiggerExample" */ '../pages/Table/TableRiggerExample/index'),
+  loading: DelayLoading,
+  delay: 3000,
+});
+
 export default [
   {
     path: '/',
@@ -33,5 +42,9 @@ export default [
   {
     path: '/table/Scheduling',
     component: Scheduling,
+  },
+  {
+    path: '/table/TableRiggerExample',
+    component: TableRiggerExample,
   },
 ];

@@ -6,7 +6,7 @@ import { isObj, verVal, setObjVal, verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
-  tableRigger: {
+  tableRigger?: {
     query?: any;
     queryShow?: any;
   };
@@ -308,4 +308,4 @@ class Search extends React.Component<InitProp, InitState> {
   }
 }
 
-export default connect(({ tableRigger }: any) => ({ ...tableRigger }))(Search);
+export default connect(({ tableRigger }: any) => ({ tableRigger }))(Search);

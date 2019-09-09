@@ -23,4 +23,55 @@
       padding: 0;
     }
   }
+  /* table里滚动条样式 */
+  //.ant-table-fixed-header .ant-table-scroll .ant-table-header {
+  //  overflow-y: auto !important;
+  //}
+  .ant-table-fixed-left,
+  .ant-table-fixed-right {
+    .ant-table-header {
+      margin-bottom: -2.5px;
+      padding-bottom: 0;
+    }
+  }
+  .ant-table-body::-webkit-scrollbar,
+  .ant-table-header::-webkit-scrollbar,
+  .ant-table-body-inner::-webkit-scrollbar {
+    width: 0; /* 滚动条宽度 */
+  }
+
+  .ant-table-body::-webkit-scrollbar:horizontal,
+  .ant-table-header::-webkit-scrollbar:horizontal,
+  .ant-table-body-inner::-webkit-scrollbar:horizontal {
+    width: 10px; /* 滚动条宽度 */
+  }
+
+  .ant-table-body::-webkit-scrollbar:vertical,
+  .ant-table-header::-webkit-scrollbar:vertical,
+  .ant-table-body-inner::-webkit-scrollbar:vertical {
+    width: 14px; /* 滚动条宽度 */
+  }
+
+  .ant-table-body::-webkit-scrollbar-thumb:vertical,
+  .ant-table-header::-webkit-scrollbar-thumb:vertical,
+  .ant-table-body-inner::-webkit-scrollbar-thumb:vertical {
+    background-color: #ededed; /* 滑道 */
+  }
+
+  .ant-table-body::-webkit-scrollbar-thumb:horizontal,
+  .ant-table-header::-webkit-scrollbar-thumb:horizontal,
+  .ant-table-body-inner::-webkit-scrollbar-thumb:horizontal {
+    background-color: #ededed; /* 滑道 */
+  }
+
+  .ant-table-body::-webkit-scrollbar-track,
+  .ant-table-body-inner::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  .ant-table-header::-webkit-scrollbar-track {
+    background-color: #fafafa;
+  }
+  .ant-table-pagination.ant-pagination {
+    margin: 16px;
+  }
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Table, Button, notification } from 'antd';
-import { postRequest } from '@services/api';
-import { jsonString, verArr, verVal, setObjVal, deepCompare } from '@utils/util';
+import { getRequest } from '@services/api';
+import { jsonString, verArr, verVal, setObjVal, deepCompare, isObj } from '@utils/util';
 import styles from './index.less';
+import '../../../../mock/tableRiggerApi';
 
 interface InitProp {
-  tableRigger: {
+  tableRigger?: {
     query?: any;
     queryShow?: any;
     orders?: any;
@@ -63,6 +64,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
 
   componentDidMount = () => {
     this.columnsUp(this.props);
+    this.fetchData(this.props);
   };
 
   _tableRigger = null;
@@ -80,7 +82,11 @@ class CommonTable extends React.Component<InitProp, InitState> {
   };
 
   componentWillUnmount = async () => {
-    await localStorage.setItem(this.state._url, JSON.stringify(this.props.tableRigger));
+    const { tableRigger } = this.props;
+    const { _url = '' } = this.state;
+    if (isObj(tableRigger)) {
+      await localStorage.setItem(_url, JSON.stringify(tableRigger));
+    }
   };
 
   /**
@@ -191,7 +197,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
     jsonString(json.query);
 
     this.setState({ _isLoading: true });
-    const data = await postRequest(props['listUrl'], json);
+    const data = await getRequest(props['listUrl'], json);
     if (data['status'] === 200 && verVal(data['data'])) {
       const _pagination = {
         ...this.state._pagination,
@@ -211,6 +217,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
   render() {
     const { operationBlock } = this.props;
     const { _columns, _dataSource, _pagination, _isLoading, _idArr, _objArr } = this.state;
+
     return (
       <div>
         {operationBlock && (
@@ -238,7 +245,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
         <Table
           scroll={{
             x: 1200,
-            y: 'calc(100vh - 252px)',
+            y: operationBlock ? 'calc(100vh - 290px)' : 'calc(100vh - 248px)',
           }}
           {...this.props}
           rowKey="id"
@@ -250,7 +257,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
           rowSelection={
             operationBlock
               ? {
-                  columnWidth: '2%',
+                  // columnWidth: '2%',
                   onChange: (idArr, objArr) => {
                     this.setState({
                       _idArr: idArr,
@@ -266,4 +273,4 @@ class CommonTable extends React.Component<InitProp, InitState> {
   }
 }
 
-export default connect(({ tableRigger }: any) => ({ ...tableRigger }))(CommonTable);
+export default connect(({ tableRigger }: any) => ({ tableRigger }))(CommonTable);

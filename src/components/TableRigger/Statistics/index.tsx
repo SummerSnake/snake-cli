@@ -6,7 +6,7 @@ import { deepCompare, verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
-  tableRigger: {
+  tableRigger?: {
     query?: any;
     queryShow?: any;
   };
@@ -98,4 +98,4 @@ class Statistics extends React.Component<InitProp, InitState> {
   }
 }
 
-export default connect(({ tableRigger }: any) => ({ ...tableRigger }))(Statistics);
+export default connect(({ tableRigger }: any) => ({ tableRigger }))(Statistics);

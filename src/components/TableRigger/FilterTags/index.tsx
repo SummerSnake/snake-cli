@@ -4,7 +4,7 @@ import { Tag, Icon } from 'antd';
 import { verArr, verVal, setObjVal } from '@utils/util';
 
 interface InitProp {
-  tableRigger: {
+  tableRigger?: {
     query?: any;
     queryShow?: any;
   };
@@ -81,4 +81,4 @@ class FilterTags extends React.Component<InitProp> {
   }
 }
 
-export default connect(({ tableRigger }: any) => ({ ...tableRigger }))(FilterTags);
+export default connect(({ tableRigger }: any) => ({ tableRigger }))(FilterTags);

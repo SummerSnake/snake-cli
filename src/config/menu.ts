@@ -17,6 +17,10 @@ export default [
         name: '排班表格',
         path: '/Scheduling',
       },
+      {
+        name: '表格封装',
+        path: '/TableRiggerExample',
+      },
     ],
   },
 ];

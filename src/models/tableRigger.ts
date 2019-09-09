@@ -41,7 +41,7 @@ export default {
       let payload = localStorage.getItem(url);
       const code = Math.round(Math.random() * 999999999);
 
-      if (payload) {
+      if (payload !== null && typeof payload !== 'undefined') {
         const payloadClone = JSON.parse(payload);
         payload = {
           ...payloadClone,

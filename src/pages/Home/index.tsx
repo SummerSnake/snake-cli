@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
-import { connect } from 'react-redux';
 import { getRequest } from '@services/api';
 import ToDoList from './components/ToDoList';
 import Statistics from './components/Statistics';
@@ -155,4 +154,4 @@ function Home(props: InitProp) {
   );
 }
 
-export default connect(({ common, loading }) => ({ ...common, ...loading }))(Home);
+export default Home;
