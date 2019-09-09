@@ -15,10 +15,8 @@ class FilterTags extends React.Component<InitProp> {
    * @desc 生成筛选项标签
    */
   tagRigger = () => {
-    let {
-      tableRigger: { queryShow, query = {} },
-      dispatch,
-    } = this.props;
+    const { tableRigger = {}, dispatch } = this.props;
+    let { queryShow, query = {} } = tableRigger;
     const arr = [];
 
     for (const key in (queryShow = {})) {
@@ -46,9 +44,8 @@ class FilterTags extends React.Component<InitProp> {
   };
 
   isShow = () => {
-    const {
-      tableRigger: { queryShow = {} },
-    } = this.props;
+    const { tableRigger = {} } = this.props;
+    const { queryShow = {} } = tableRigger;
 
     return Object.keys(queryShow).length > 0;
   };

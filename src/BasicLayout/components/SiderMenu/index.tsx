@@ -18,12 +18,13 @@ interface InitProp {
 
 function SiderMenu(props: InitProp) {
   const [keys, setKeys] = useState([]);
+  const { pathname } = props.history && props.history.location;
 
   useEffect(() => {
     let keys = [];
-    props.history && props.history.location && keys.push(props.history.location.pathname);
+    keys.push(pathname);
     setKeys(keys);
-  }, []);
+  }, [pathname]);
 
   /**
    * 处理选中路由
@@ -57,9 +58,9 @@ function SiderMenu(props: InitProp) {
       >
         {verArr(menu) &&
           menu.map(item =>
-            item && verArr(item.list) ? (
+            item && verArr(item['list']) ? (
               <Menu.SubMenu key={item.path} title={titleNode(item)}>
-                {item.list.map(listItem => (
+                {item['list'].map(listItem => (
                   <Menu.Item key={item.path + listItem.path}>
                     <span>{listItem.name}</span>
                   </Menu.Item>

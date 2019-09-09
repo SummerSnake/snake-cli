@@ -61,7 +61,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
     };
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.columnsUp(this.props);
   };
 
@@ -90,10 +90,8 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @param { object } sorter 排序参数
    */
   handleTableChange = (pager = {}, filters, sorter = {}) => {
-    let {
-      tableRigger: { query = {}, queryShow = {}, pagination = {}, orders = {} },
-      dispatch,
-    } = this.props;
+    const { tableRigger = {}, dispatch } = this.props;
+    let { query = {}, queryShow = {}, pagination = {}, orders = {} } = tableRigger;
     const { _columns } = this.state;
     // 分页
     pagination = {
@@ -151,9 +149,8 @@ class CommonTable extends React.Component<InitProp, InitState> {
    */
   columnsUp = props => {
     const { _pagination = {} } = this.state;
-    const {
-      tableRigger: { query = {}, orders = {} },
-    } = this.props;
+    const { tableRigger = {} } = this.props;
+    const { query = {}, orders = {} } = tableRigger;
     if (verArr(props['columns'])) {
       const arr = props['columns'];
 
@@ -196,7 +193,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
     this.setState({ _isLoading: true });
     const data = await postRequest(props['listUrl'], json);
     if (data['status'] === 200 && verVal(data['data'])) {
-     const _pagination = {
+      const _pagination = {
         ...this.state._pagination,
         total: data['data']['total'],
         current: data['data']['pageNum'],

@@ -51,10 +51,9 @@ class Statistics extends React.Component<InitProp, InitState> {
    * @desc 点击事件
    */
   handleClick = async json => {
-    const {
-      tableRigger: { query = {}, queryShow = {} },
-      dispatch,
-    } = this.props;
+    const { tableRigger = {}, dispatch } = this.props;
+    let { queryShow = {}, query = {} } = tableRigger;
+
     if (json.queryField && json.queryTitle && json.queryValue) {
       queryShow[json.queryField] = {
         queryTitle: json.queryTitle,

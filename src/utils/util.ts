@@ -141,6 +141,7 @@ export function isObj(obj) {
 /**
  * @desc 延迟执行
  * @param { number } timeout 要延迟的时间（毫秒）
+ * @return { Promise }
  */
 export const delayFunc = timeout =>
   new Promise(resolve => {
@@ -197,10 +198,10 @@ export const throttle = (func, delay) => {
 
 /**
  * @desc 对象赋值方法
- * @param {object} initObj 原始对象
- * @param {string} name 要赋的值--名字
- * @param {string} value 要赋的值
- * @return {object} 操作后的值
+ * @param { object } initObj 原始对象
+ * @param { string } name 要赋的值--名字
+ * @param { string } value 要赋的值
+ * @return { object } 操作后的值
  */
 export const setObjVal = (initObj, name, value) => {
   return {
@@ -227,7 +228,7 @@ export const jsonString = (json = {}) => {
             case typeof item === 'object':
               jsonString(item);
               break;
-            case typeof item !== 'undefined':
+            case verVal(item):
               json[key] = json[key].toString();
               break;
             default:

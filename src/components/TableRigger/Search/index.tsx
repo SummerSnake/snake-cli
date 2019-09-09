@@ -54,11 +54,9 @@ class Search extends React.Component<InitProp, InitState> {
    * @desc 点击普通搜素
    */
   handleGeneralSearch = () => {
+    const { tableRigger = {}, dispatch } = this.props;
+    const { queryShow = {}, query = {} } = tableRigger;
     const { _dataSource = {}, _dataShow = {} } = this.state;
-    const {
-      tableRigger: { queryShow = {}, query = {} },
-      dispatch,
-    } = this.props;
 
     Object.assign(query, _dataSource);
     Object.assign(queryShow, _dataShow);
@@ -93,9 +91,8 @@ class Search extends React.Component<InitProp, InitState> {
    * @param { object } object
    */
   handleSelectChange = (item, value, object) => {
-    const {
-      props: { children },
-    } = object;
+    const { props = {} } = object;
+    const { children } = props;
     this.setStateData(item, value, children);
   };
 
@@ -108,9 +105,8 @@ class Search extends React.Component<InitProp, InitState> {
   handleMultiPleSelectChange = (item, value, objectArr) => {
     const arr = [];
     objectArr.forEach(object => {
-      const {
-        props: { children },
-      } = object;
+      const { props = {} } = object;
+      const { children } = props;
       arr.push(children);
     });
 
