@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getRequest } from '@services/api';
 import { deepCompare, verArr } from '@utils/util';
 import styles from './index.less';
+import '../../../../mock/topJsonApi';
 
 interface InitProp {
   tableRigger?: {
@@ -26,6 +27,10 @@ class Statistics extends React.Component<InitProp, InitState> {
   }
   _tableRigger = null;
 
+  componentDidMount = () => {
+    this.fetchData();
+  };
+
   componentWillReceiveProps = nextProps => {
     if (this._tableRigger !== null && !deepCompare(nextProps.tableRigger, this._tableRigger)) {
       this.fetchData();
@@ -39,7 +44,7 @@ class Statistics extends React.Component<InitProp, InitState> {
   fetchData = async () => {
     const data = await getRequest(this.props.sourceUrl, null);
     if (data['status'] === 200) {
-      this.setState({ _dataSource: data['data'] });
+      this.setState({ _dataSource: data['data']['data'] });
     }
   };
 
@@ -66,6 +71,7 @@ class Statistics extends React.Component<InitProp, InitState> {
   render() {
     const { topJson = {} } = this.props;
     const { _dataSource = {} } = this.state;
+
     return (
       <div className={styles.statisticsWrap}>
         {verArr(topJson) &&

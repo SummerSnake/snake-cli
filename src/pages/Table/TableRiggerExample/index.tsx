@@ -1,23 +1,26 @@
 import React from 'react';
-import { Tag, Divider } from 'antd';
 import { CommonTable, Statistics, Search, FilterTags } from '@components/TableRigger';
 import styles from './index.less';
 
 const _statistics = {
   topJson: [
     {
-      displayTitle: '已发送',
-      displayField: 'alreadySent',
-      queryTitle: '消息状态',
-      queryField: 'informationState',
+      displayTitle: '账号汇总',
+      displayField: 'totalAccount',
+    },
+    {
+      displayTitle: '未冻结',
+      displayField: 'unfrozen',
+      queryTitle: '冻结状态',
+      queryField: 'freezeState',
       queryValue: ['0'],
     },
     {
-      displayTitle: '已撤回',
-      displayField: 'noSend',
-      queryTitle: '消息状态',
-      queryField: 'informationState',
-      queryValue: ['2'],
+      displayTitle: '已冻结',
+      displayField: 'frozen',
+      queryTitle: '冻结状态',
+      queryField: 'freezeState',
+      queryValue: ['1'],
     },
   ],
 };
@@ -78,75 +81,65 @@ class TableRiggerExample extends React.Component<null, InitState> {
       _columns: [
         {
           title: '序号',
-          width: '5%',
+          width: '6%',
           dataIndex: 'id',
           isIncrement: true,
         },
         {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          render: text => (
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-              }}
-            >
-              {text}
-            </a>
-          ),
+          title: '手机号',
+          width: '14%',
+          dataIndex: 'phone',
         },
         {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
+          title: '创建日期',
+          width: '16%',
+          dataIndex: 'createDate',
+        },
+        {
+          title: '邮箱',
+          width: '16%',
+          dataIndex: 'email',
+        },
+        {
+          title: '冻结状态',
+          width: '14%',
+          dataIndex: 'freezeState',
           filters: [
             {
-              text: '儿童',
+              text: '未冻结',
               value: '0',
             },
             {
-              text: '少年',
+              text: '已冻结',
               value: '1',
             },
           ],
+          render(text) {
+            return text === '0' ? '未冻结' : '已冻结';
+          },
         },
         {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
+          title: '修改日期',
+          width: '16%',
+          dataIndex: 'updateDate',
         },
         {
-          title: 'Tags',
-          key: 'tags',
-          dataIndex: 'tags',
-          render: tags => (
-            <span>
-              {tags.map((tag: string) => {
-                let color = tag.length > 5 ? 'geekblue' : 'green';
-                if (tag === 'loser') {
-                  color = 'volcano';
-                }
-                return (
-                  <Tag color={color} key={tag}>
-                    {tag.toUpperCase()}
-                  </Tag>
-                );
-              })}
-            </span>
-          ),
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-            <span>
-              <span>Invite {record.name}</span>
-              <Divider type="vertical" />
-              <span>Delete</span>
-            </span>
-          ),
+          title: '用户类别',
+          width: '12%',
+          dataIndex: 'userType',
+          filters: [
+            {
+              text: 'A类别',
+              value: '0',
+            },
+            {
+              text: 'B类别',
+              value: '1',
+            },
+          ],
+          render(text) {
+            return text === '0' ? 'A类别' : 'B类别';
+          },
         },
       ],
     });
@@ -157,7 +150,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
 
     return (
       <div className={styles.baseTableWrap}>
-        <Statistics sourceUrl={''} topJson={_statistics.topJson} />
+        <Statistics sourceUrl={'/api/get_top_json'} topJson={_statistics.topJson} />
         <div className={styles.screenTag}>
           <Search general={search.general} advanced={search.advanced} />
           <FilterTags />

@@ -40,7 +40,6 @@ export default {
       const url = location.pathname;
       let payload = localStorage.getItem(url);
       const code = Math.round(Math.random() * 999999999);
-
       if (payload !== null && typeof payload !== 'undefined') {
         const payloadClone = JSON.parse(payload);
         payload = {

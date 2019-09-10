@@ -82,6 +82,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
   };
 
   componentWillUnmount = async () => {
+    // 将筛选项放入 localStorage
     const { tableRigger } = this.props;
     const { _url = '' } = this.state;
     if (isObj(tableRigger)) {
@@ -95,7 +96,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @param { object } filters 筛选参数
    * @param { object } sorter 排序参数
    */
-  handleTableChange = (pager = {}, filters, sorter = {}) => {
+  handleTableChange = (pager = {}, filters = {}, sorter = {}) => {
     const { tableRigger = {}, dispatch } = this.props;
     let { query = {}, queryShow = {}, pagination = {}, orders = {} } = tableRigger;
     const { _columns } = this.state;
@@ -106,7 +107,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
       pageSize: pager['pageSize'],
     };
     // 筛选
-    for (const key in (filters = {})) {
+    for (const key in filters) {
       if (filters[key]) {
         _columns.forEach((json = {}) => {
           if (key === json['dataIndex'] || key === json['key']) {
@@ -155,11 +156,10 @@ class CommonTable extends React.Component<InitProp, InitState> {
    */
   columnsUp = props => {
     const { _pagination = {} } = this.state;
-    const { tableRigger = {} } = this.props;
+    const { tableRigger = {} } = props;
     const { query = {}, orders = {} } = tableRigger;
     if (verArr(props['columns'])) {
       const arr = props['columns'];
-
       arr.forEach((json = {}) => {
         if (json['filters']) {
           // 判断筛选状态
@@ -199,6 +199,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @param { object } props
    */
   fetchData = async props => {
+    const { tableRigger } = props;
     const json = JSON.parse(JSON.stringify(props['tableRigger']));
     jsonString(json.query);
     this.setState({ _isLoading: true });
@@ -217,6 +218,11 @@ class CommonTable extends React.Component<InitProp, InitState> {
       notification.error({ message: data['msg'], description: data['subMsg'] });
     }
     this.setState({ _isLoading: false });
+    // 将筛选项放入 localStorage
+    const { _url = '' } = this.state;
+    if (isObj(tableRigger)) {
+      await localStorage.setItem(_url, JSON.stringify(tableRigger));
+    }
   };
 
   render() {
