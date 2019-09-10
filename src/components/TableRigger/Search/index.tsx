@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Input, DatePicker, Select } from 'antd';
 import moment from 'moment';
-import { isObj, verVal, setObjVal, verArr } from '@utils/util';
+import { isObj, verVal, verArr } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
@@ -142,7 +142,6 @@ class Search extends React.Component<InitProp, InitState> {
   setStateData = (json, value, maybeVal) => {
     const val = value;
     let { _dataSource, _dataShow } = this.state;
-
     if (verVal(val)) {
       _dataSource[json['queryField']] = val;
 
@@ -151,8 +150,8 @@ class Search extends React.Component<InitProp, InitState> {
         queryValue: verVal(maybeVal) ? maybeVal : val,
       };
     } else {
-      _dataSource = setObjVal(_dataSource, [json['queryField']], '');
-      _dataShow = setObjVal(_dataShow, [json['queryField']], '');
+      Reflect.deleteProperty(_dataSource, _dataSource[json['queryField']]);
+      Reflect.deleteProperty(_dataShow, _dataShow[json['queryField']]);
     }
     this.setState({
       _dataSource,
@@ -180,7 +179,7 @@ class Search extends React.Component<InitProp, InitState> {
           </span>
         )}
         {/*高级搜索*/}
-        {isObj(advanced) && (
+        {verArr(advanced) && (
           <span
             className={styles.advancedSearchBtn}
             style={{ color: _isVisible ? '#f56c6c' : '#40a9ff' }}
@@ -192,8 +191,11 @@ class Search extends React.Component<InitProp, InitState> {
         {/*操作按钮*/}
         {operationBlock && <div className={styles.btnGroup}>{operationBlock.map(obj => obj)}</div>}
         {/*高级搜索内容区域*/}
-        {advanced && (
-          <div className={styles.advancedSearchWrap}>
+        {verArr(advanced) && (
+          <div
+            className={styles.advancedSearchWrap}
+            style={{ display: _isVisible ? 'block' : 'none' }}
+          >
             {advanced.map((item, index) => {
               const { component } = item;
               switch (component) {
@@ -203,7 +205,7 @@ class Search extends React.Component<InitProp, InitState> {
                       <span>{item['queryTitle']}:</span>
                       <Input
                         className={styles.inputDom}
-                        placeholder="请输入"
+                        placeholder={`请输入${item['queryTitle']}`}
                         value={_dataSource[item['queryField']]}
                         onChange={this.handleAdvancedInputChange.bind(this, item)}
                       />
@@ -216,21 +218,19 @@ class Search extends React.Component<InitProp, InitState> {
                       <span>{item['queryTitle']}:</span>
                       <Select
                         className={styles.inputDom}
-                        placeholder="请选择"
+                        placeholder={`请选择${item['queryTitle']}`}
                         value={
-                          _dataSource[item['queryField']] ? _dataSource[item['queryField']] : null
+                          _dataSource[item['queryField']] ? _dataSource[item['queryField']] : ''
                         }
                         onChange={this.handleSelectChange.bind(this, item)}
                       >
                         {isObj(item) &&
                           verArr(item.componentData) &&
-                          item.componentData.map((json, j) => {
-                            return (
-                              <Select.Option key={j.toString()} value={json['value']}>
-                                {json['title']}
-                              </Select.Option>
-                            );
-                          })}
+                          item.componentData.map((json, j) => (
+                            <Select.Option key={j.toString()} value={json['value']}>
+                              {json['title']}
+                            </Select.Option>
+                          ))}
                       </Select>
                     </div>
                   );
@@ -241,7 +241,7 @@ class Search extends React.Component<InitProp, InitState> {
                       <span>{item['queryTitle']}:</span>
                       <Select
                         className={styles.inputDom}
-                        placeholder="请选择"
+                        placeholder={`请选择${item['queryTitle']}`}
                         mode="multiple"
                         value={
                           _dataSource[item['queryField']] ? _dataSource[item['queryField']] : []
@@ -250,13 +250,11 @@ class Search extends React.Component<InitProp, InitState> {
                       >
                         {isObj(item) &&
                           verArr(item.componentData) &&
-                          item.componentData.map((json, j) => {
-                            return (
-                              <Select.Option key={j.toString()} value={json['value']}>
-                                {json['title']}
-                              </Select.Option>
-                            );
-                          })}
+                          item.componentData.map((json, j) => (
+                            <Select.Option key={j.toString()} value={json['value']}>
+                              {json['title']}
+                            </Select.Option>
+                          ))}
                       </Select>
                     </div>
                   );
@@ -267,7 +265,7 @@ class Search extends React.Component<InitProp, InitState> {
                       <span>{item['queryTitle']}:</span>
                       <DatePicker
                         className={styles.inputDom}
-                        placeholder="请选择"
+                        placeholder={`请选择${item['queryTitle']}`}
                         value={
                           _dataSource[item['queryField']]
                             ? moment(_dataSource[item['queryField']])
@@ -285,7 +283,7 @@ class Search extends React.Component<InitProp, InitState> {
                       <DatePicker.RangePicker
                         className={styles.inputDom}
                         value={
-                          _dataSource[item['queryTitle']]
+                          _dataSource[item['queryField']]
                             ? [
                                 moment(_dataSource[item['queryField']][0]),
                                 moment(_dataSource[item['queryField']][1]),

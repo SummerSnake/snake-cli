@@ -77,6 +77,12 @@ class TableRiggerExample extends React.Component<null, InitState> {
     this.setState({
       _columns: [
         {
+          title: '序号',
+          width: '5%',
+          dataIndex: 'id',
+          isIncrement: true,
+        },
+        {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
@@ -95,6 +101,16 @@ class TableRiggerExample extends React.Component<null, InitState> {
           title: 'Age',
           dataIndex: 'age',
           key: 'age',
+          filters: [
+            {
+              text: '儿童',
+              value: '0',
+            },
+            {
+              text: '少年',
+              value: '1',
+            },
+          ],
         },
         {
           title: 'Address',

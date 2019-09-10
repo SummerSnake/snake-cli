@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Tag, Icon } from 'antd';
-import { verArr, verVal, setObjVal } from '@utils/util';
+import { verArr, verVal } from '@utils/util';
 
 interface InitProp {
   tableRigger?: {
@@ -13,29 +13,29 @@ interface InitProp {
 class FilterTags extends React.Component<InitProp> {
   /**
    * @desc 生成筛选项标签
+   * @return { array } 生成的筛选标签数组
    */
   tagRigger = () => {
     const { tableRigger = {}, dispatch } = this.props;
-    let { queryShow, query = {} } = tableRigger;
+    let { queryShow = {}, query = {} } = tableRigger;
     const arr = [];
-
-    for (const key in (queryShow = {})) {
+    for (const key in queryShow) {
       const json = queryShow[key];
-      if (verVal(json) && json['queryValue'].length > 0)
+      verVal(json['queryValue']) &&
         arr.push(
           <Tag
             key={key}
             closable
             onClose={() => {
-              queryShow = setObjVal(queryShow, key, '');
-              query = setObjVal(query, key, '');
+              Reflect.deleteProperty(queryShow, key);
+              Reflect.deleteProperty(query, key);
               dispatch({
                 type: 'tableRigger/fetch',
                 payload: { queryShow, query },
               });
             }}
           >
-            {`${json.queryTitle}: ' '`}
+            {`${json.queryTitle}: `}
             {verArr(json['queryValue']) ? json['queryValue'].toString() : json['queryValue']}
           </Tag>
         );
@@ -43,6 +43,10 @@ class FilterTags extends React.Component<InitProp> {
     return arr;
   };
 
+  /**
+   * @desc 标签展示与否
+   * @return { boolean }
+   */
   isShow = () => {
     const { tableRigger = {} } = this.props;
     const { queryShow = {} } = tableRigger;

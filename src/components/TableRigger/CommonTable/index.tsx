@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Table, Button, notification } from 'antd';
 import { getRequest } from '@services/api';
-import { jsonString, verArr, verVal, setObjVal, deepCompare, isObj } from '@utils/util';
+import { jsonString, verArr, verVal, deepCompare, isObj } from '@utils/util';
 import styles from './index.less';
 import '../../../../mock/tableRiggerApi';
 
@@ -75,7 +75,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
     this.setState({
       _pagination: Object.assign(_pagination, nextProps['tableRigger']['pagination']),
     });
-    if (deepCompare(nextProps['tableRigger'], this._tableRigger)) {
+    if (this._tableRigger !== null && !deepCompare(nextProps['tableRigger'], this._tableRigger)) {
       this.fetchData(nextProps);
     }
     this._tableRigger = JSON.parse(JSON.stringify(nextProps['tableRigger']));
@@ -127,8 +127,8 @@ class CommonTable extends React.Component<InitProp, InitState> {
                 queryValue: arr,
               };
             } else {
-              queryShow = setObjVal(queryShow, key, '');
-              query = setObjVal(query, key, '');
+              Reflect.deleteProperty(queryShow, key);
+              Reflect.deleteProperty(query, key);
             }
           }
         });
@@ -140,8 +140,8 @@ class CommonTable extends React.Component<InitProp, InitState> {
       type = type.substring(0, type['length'] - 3);
       Object.assign(orders, { name: sorter['field'], type });
     } else {
-      orders = setObjVal(orders, orders['name'], '');
-      orders = setObjVal(orders, orders['type'], '');
+      Reflect.deleteProperty(orders, orders['name']);
+      Reflect.deleteProperty(orders, orders['type']);
     }
 
     dispatch({
@@ -162,16 +162,21 @@ class CommonTable extends React.Component<InitProp, InitState> {
 
       arr.forEach((json = {}) => {
         if (json['filters']) {
+          // 判断筛选状态
           json['filteredValue'] = query[json.dataIndex] ? query[json.dataIndex] : null;
         }
         if (json['column']) {
+          // 如果表格数据有 column
           if (!json['render']) {
+            // 如果没有 render 方法, 则渲染 column, 否则antd默认渲染 dataIndex
             json['render'] = (text, record) => record[json['column']];
           }
         } else {
+          // 如果表格数据没有 column, 则将 dataIndex 赋值给 column
           json['column'] = json['dataIndex'];
         }
         if (json['isIncrement']) {
+          // 设置序号
           json.render = (text, record, index) => {
             let page = (_pagination['current'] - 1) * _pagination['pageSize'];
             if (isNaN(page)) {
@@ -181,6 +186,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
           };
         }
         if (json['sorter']) {
+          // 排序, 根据接口需求编写逻辑
           json['sortOrder'] = json['dataIndex'] === orders['name'] && `${orders['type']}end`;
         }
       });
@@ -195,7 +201,6 @@ class CommonTable extends React.Component<InitProp, InitState> {
   fetchData = async props => {
     const json = JSON.parse(JSON.stringify(props['tableRigger']));
     jsonString(json.query);
-
     this.setState({ _isLoading: true });
     const data = await getRequest(props['listUrl'], json);
     if (data['status'] === 200 && verVal(data['data'])) {

@@ -5,7 +5,7 @@ import moment from 'moment';
  * @desc 对象深比较
  * @param x { any }
  * @param y { any }
- * @return { boolean }
+ * @return { boolean } true 相等，false 不等
  */
 export function deepCompare(x, y) {
   if (arguments.length < 1) {
