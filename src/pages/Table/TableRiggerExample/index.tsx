@@ -1,5 +1,6 @@
 import React from 'react';
-import { CommonTable, Statistics, Search, FilterTags } from '@components/TableRigger';
+import { CommonTable, Statistics, Search, FilterTags, Add } from '@components/TableRigger';
+import AddUser from './component/AddUser';
 import styles from './index.less';
 
 const _statistics = {
@@ -153,7 +154,11 @@ class TableRiggerExample extends React.Component<null, InitState> {
       <div className={styles.baseTableWrap}>
         <Statistics sourceUrl={'/api/get_top_json'} topJson={_statistics.topJson} />
         <div className={styles.screenTag}>
-          <Search general={search.general} advanced={search.advanced} />
+          <Search
+            general={search.general}
+            advanced={search.advanced}
+            operationBlock={[<Add key="1" title="添加用户" component={AddUser} />]}
+          />
           <FilterTags />
         </div>
         <div className={styles.tableWrap}>

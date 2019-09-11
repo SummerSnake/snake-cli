@@ -1,0 +1,48 @@
+@import '../../../../../styles/mixin.less';
+
+.formWrap {
+  width: 100%;
+  padding: 0 20px;
+  overflow: hidden;
+  .titleDom {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #f8f8f8;
+    > span:first-child {
+      display: inline-block;
+      width: 3px;
+      height: 14px;
+      background-color: @primaryColor;
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+    > span:last-child {
+      .sc(@txtSize, @titleColor);
+      padding-left: 9px;
+      vertical-align: middle;
+    }
+  }
+  .rowDom {
+    width: 100%;
+    display: flex;
+    .colDom {
+      flex: 1;
+    }
+  }
+  .btnGroup {
+    margin: 94px 0 30px;
+    text-align: center;
+    .submitBtn {
+      .wh(116px, 36px);
+      margin-left: 10px;
+      border-radius: 2px;
+    }
+    .cancelBtn {
+      .wh(116px, 36px);
+      color: #ccc;
+      background-color: @txtColor;
+      border-radius: 2px;
+    }
+  }
+}

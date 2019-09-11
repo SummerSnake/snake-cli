@@ -263,10 +263,11 @@ class CommonTable extends React.Component<InitProp, InitState> {
             operationBlock
               ? {
                   // columnWidth: '2%',
-                  onChange: (idArr, objArr) => this.setState({
+                  onChange: (idArr, objArr) =>
+                    this.setState({
                       _idArr: idArr,
                       _objArr: objArr,
-                  })
+                    }),
                 }
               : null
           }
