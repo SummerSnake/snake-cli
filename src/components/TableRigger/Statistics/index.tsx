@@ -79,7 +79,7 @@ class Statistics extends React.Component<InitProp, InitState> {
             const isQuery = item['queryField'] && item['queryTitle'] && item['queryValue'];
 
             return (
-              <div key={i.toString()} onClick={this.handleClick.bind(this, item)}>
+              <div key={i.toString()} onClick={() => this.handleClick(item)}>
                 <p>{item['displayTitle']}</p>
                 <span
                   style={{

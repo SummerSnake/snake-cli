@@ -96,7 +96,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @param { object } filters 筛选参数
    * @param { object } sorter 排序参数
    */
-  handleTableChange = (pager = {}, filters = {}, sorter) => {
+  handleTableChange = (pager = {}, filters = {}, sorter = {}) => {
     const { tableRigger = {}, dispatch } = this.props;
     let { query = {}, queryShow = {}, pagination = {}, orders = {} } = tableRigger;
     const { _columns } = this.state;
@@ -239,9 +239,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
                   className={styles.optBtn}
                   type="primary"
                   key={index.toString()}
-                  onClick={() => {
-                    item.onClick(_idArr, _objArr);
-                  }}
+                  onClick={() => item.onClick(_idArr, _objArr)}
                 >
                   {item.title}
                 </Button>
@@ -265,12 +263,10 @@ class CommonTable extends React.Component<InitProp, InitState> {
             operationBlock
               ? {
                   // columnWidth: '2%',
-                  onChange: (idArr, objArr) => {
-                    this.setState({
+                  onChange: (idArr, objArr) => this.setState({
                       _idArr: idArr,
                       _objArr: objArr,
-                    });
-                  },
+                  })
                 }
               : null
           }

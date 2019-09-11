@@ -1,0 +1,16 @@
+@import '../../../styles/mixin.less';
+
+.addWrap {
+  display: inline-block;
+  margin-left: 36px;
+  .addBtn {
+    .sc(@titleSize, @primaryColor);
+    vertical-align: middle;
+    cursor: pointer;
+    .iconDom {
+      .sc(@txtSize, @primaryColor);
+      display: inline-block;
+      margin-right: 6px;
+    }
+  }
+}
