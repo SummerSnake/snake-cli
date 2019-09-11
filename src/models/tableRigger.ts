@@ -22,7 +22,7 @@ export default {
     query: {},
     queryShow: {},
     orders: {
-      name: 'a.id',
+      name: '',
       type: 'desc',
     },
     code: 0,

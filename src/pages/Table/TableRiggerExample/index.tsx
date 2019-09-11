@@ -94,6 +94,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
           title: '创建日期',
           width: '16%',
           dataIndex: 'createDate',
+          sorter: true,
         },
         {
           title: '邮箱',

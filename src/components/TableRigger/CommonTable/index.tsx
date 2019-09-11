@@ -63,14 +63,14 @@ class CommonTable extends React.Component<InitProp, InitState> {
   }
 
   componentDidMount = () => {
-    this.columnsUp(this.props);
+    this.columnsUpdate(this.props);
     this.fetchData(this.props);
   };
 
   _tableRigger = null;
 
   componentWillReceiveProps = nextProps => {
-    this.columnsUp(nextProps);
+    this.columnsUpdate(nextProps);
     const { _pagination } = this.state;
     this.setState({
       _pagination: Object.assign(_pagination, nextProps['tableRigger']['pagination']),
@@ -96,7 +96,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @param { object } filters 筛选参数
    * @param { object } sorter 排序参数
    */
-  handleTableChange = (pager = {}, filters = {}, sorter = {}) => {
+  handleTableChange = (pager = {}, filters = {}, sorter) => {
     const { tableRigger = {}, dispatch } = this.props;
     let { query = {}, queryShow = {}, pagination = {}, orders = {} } = tableRigger;
     const { _columns } = this.state;
@@ -144,20 +144,20 @@ class CommonTable extends React.Component<InitProp, InitState> {
       Reflect.deleteProperty(orders, orders['name']);
       Reflect.deleteProperty(orders, orders['type']);
     }
-
     dispatch({
       type: 'tableRigger/fetch',
       payload: { query, queryShow, pagination, orders },
     });
   };
+
   /**
-   * @desc 表头初始化
+   * @desc 更新表头
    * @param { object } props
    */
-  columnsUp = props => {
+  columnsUpdate = props => {
     const { _pagination = {} } = this.state;
     const { tableRigger = {} } = props;
-    const { query = {}, orders = {} } = tableRigger;
+    const { query = {} } = tableRigger;
     if (verArr(props['columns'])) {
       const arr = props['columns'];
       arr.forEach((json = {}) => {
@@ -184,10 +184,6 @@ class CommonTable extends React.Component<InitProp, InitState> {
             }
             return <span>{page + index + 1}</span>;
           };
-        }
-        if (json['sorter']) {
-          // 排序, 根据接口需求编写逻辑
-          json['sortOrder'] = json['dataIndex'] === orders['name'] && `${orders['type']}end`;
         }
       });
       this.setState({ _columns: arr });
