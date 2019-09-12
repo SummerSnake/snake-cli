@@ -43,7 +43,7 @@ class Add extends React.Component<InitProp, InitState> {
   };
 
   render() {
-    const { title } = this.props;
+    const { component: Component, title } = this.props;
     const { _isVisible } = this.state;
 
     return (
@@ -61,8 +61,9 @@ class Add extends React.Component<InitProp, InitState> {
           destroyOnClose
           {...this.props}
         >
-          {this.props.component && (
-            <this.props.component tableCallback={this.tableCallback} {...this.props} />
+          {/* 走 createClass */}
+          {Component && (
+            <Component tableCallback={this.tableCallback} {...this.props} />
           )}
         </Modal>
       </div>
