@@ -37,8 +37,8 @@ export default {
     },
     *init(_, { put, select }) {
       const initState = yield select(state => state.tableRigger);
-      const url = location.pathname;
-      let payload = localStorage.getItem(url);
+      const url = location.hash;
+      let payload = sessionStorage.getItem(url);
       const code = Math.round(Math.random() * 999999999);
       if (payload !== null && typeof payload !== 'undefined') {
         const payloadClone = JSON.parse(payload);

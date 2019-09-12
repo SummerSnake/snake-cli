@@ -38,7 +38,7 @@ interface InitState {
 class CommonTable extends React.Component<InitProp, InitState> {
   constructor(props) {
     super(props);
-    const url = location.pathname;
+    const url = location.hash;
     const { dispatch } = props;
     dispatch({
       type: 'tableRigger/init',
@@ -82,11 +82,11 @@ class CommonTable extends React.Component<InitProp, InitState> {
   };
 
   componentWillUnmount = async () => {
-    // 将筛选项放入 localStorage
+    // 将筛选项放入 sessionStorage
     const { tableRigger } = this.props;
     const { _url = '' } = this.state;
     if (isObj(tableRigger)) {
-      await localStorage.setItem(_url, JSON.stringify(tableRigger));
+      await sessionStorage.setItem(_url, JSON.stringify(tableRigger));
     }
   };
 
@@ -214,10 +214,10 @@ class CommonTable extends React.Component<InitProp, InitState> {
       notification.error({ message: data['msg'], description: data['subMsg'] });
     }
     this.setState({ _isLoading: false });
-    // 将筛选项放入 localStorage
+    // 将筛选项放入 sessionStorage
     const { _url = '' } = this.state;
     if (isObj(tableRigger)) {
-      await localStorage.setItem(_url, JSON.stringify(tableRigger));
+      await sessionStorage.setItem(_url, JSON.stringify(tableRigger));
     }
   };
 
