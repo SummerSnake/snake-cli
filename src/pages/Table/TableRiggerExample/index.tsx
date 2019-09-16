@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommonTable, Statistics, Search, FilterTags, Add } from '@components/TableRigger';
+import { CommonTable, Statistics, Search, FilterTags, FormModal } from '@components/TableRigger';
 import AddUser from './component/AddUser';
 import styles from './index.less';
 
@@ -157,7 +157,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
           <Search
             general={search.general}
             advanced={search.advanced}
-            operationBlock={[<Add key="1" title="添加用户" component={AddUser} />]}
+            operationBlock={[<FormModal key="1" title="添加用户" component={AddUser} />]}
           />
           <FilterTags />
         </div>

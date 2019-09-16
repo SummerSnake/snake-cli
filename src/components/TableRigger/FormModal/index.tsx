@@ -1,18 +1,25 @@
 import React from 'react';
 import { Modal, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { verVal } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
-  tableRigger?: {};
+  tableRigger?: {
+    query?: any;
+    queryShow?: any;
+    pagination?: any;
+    orders?: any;
+  };
   dispatch?: any;
+  id?: any;
   title?: string;
   component?: any;
 }
 interface InitState {
   _isVisible: any;
 }
-class Add extends React.Component<InitProp, InitState> {
+class FormModal extends React.Component<InitProp, InitState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,10 +34,20 @@ class Add extends React.Component<InitProp, InitState> {
   tableCallback = isRefresh => {
     this.setState({ _isVisible: false });
     if (isRefresh) {
-      const { dispatch } = this.props;
-      dispatch({
-        type: 'tableRigger/init',
-      });
+      const { dispatch, id } = this.props;
+      if (verVal(id)) {
+        const code = Math.round(Math.random() * 999999999);
+        const { tableRigger = {} } = this.props;
+        const { query, queryShow, pagination, orders } = tableRigger;
+        dispatch({
+          type: 'tableRigger/fetch',
+          payload: { query, queryShow, pagination, orders, code },
+        });
+      } else {
+        dispatch({
+          type: 'tableRigger/init',
+        });
+      }
     }
   };
 
@@ -62,13 +79,11 @@ class Add extends React.Component<InitProp, InitState> {
           {...this.props}
         >
           {/* 走 createClass */}
-          {Component && (
-            <Component tableCallback={this.tableCallback} {...this.props} />
-          )}
+          {Component && <Component tableCallback={this.tableCallback} {...this.props} />}
         </Modal>
       </div>
     );
   }
 }
 
-export default connect(({ tableRigger }: any) => ({ tableRigger }))(Add);
+export default connect(({ tableRigger }: any) => ({ tableRigger }))(FormModal);
