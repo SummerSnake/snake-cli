@@ -93,18 +93,18 @@ class TableRiggerExample extends React.Component<null, InitState> {
         },
         {
           title: '创建日期',
-          width: '16%',
+          width: '14%',
           dataIndex: 'createDate',
           sorter: true,
         },
         {
           title: '邮箱',
-          width: '16%',
+          width: '14%',
           dataIndex: 'email',
         },
         {
           title: '冻结状态',
-          width: '14%',
+          width: '12%',
           dataIndex: 'freezeState',
           filters: [
             {
@@ -122,7 +122,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
         },
         {
           title: '修改日期',
-          width: '16%',
+          width: '14%',
           dataIndex: 'updateDate',
         },
         {
@@ -141,6 +141,18 @@ class TableRiggerExample extends React.Component<null, InitState> {
           ],
           render(text) {
             return text === '0' ? 'A类别' : 'B类别';
+          },
+        },
+        {
+          title: '操作',
+          width: '12%',
+          dataIndex: 'operate',
+          render(text, record) {
+            return (
+              <div>
+                <FormModal id={record.id} title="编辑" component={AddUser} />
+              </div>
+            );
           },
         },
       ],

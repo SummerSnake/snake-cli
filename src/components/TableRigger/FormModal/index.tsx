@@ -60,15 +60,26 @@ class FormModal extends React.Component<InitProp, InitState> {
   };
 
   render() {
-    const { component: Component, title } = this.props;
+    const { component: Component, title, id } = this.props;
     const { _isVisible } = this.state;
 
     return (
-      <div className={styles.addWrap}>
-        <span className={styles.addBtn} key="1" onClick={() => this.handleBtnClick(true)}>
-          <Icon className={styles.iconDom} type="plus-circle" key="Icon" />
-          {title}
-        </span>
+      <div className={styles.addWrap} style={{ marginLeft: !verVal(id) && '36px' }}>
+        {verVal(id) ? (
+          <a
+            onClick={e => {
+              e.preventDefault();
+              this.handleBtnClick(true);
+            }}
+          >
+            {title}
+          </a>
+        ) : (
+          <span className={styles.addBtn} key="1" onClick={() => this.handleBtnClick(true)}>
+            <Icon className={styles.iconDom} type="plus-circle" key="Icon" />
+            {title}
+          </span>
+        )}
         <Modal
           title={title}
           width={800}

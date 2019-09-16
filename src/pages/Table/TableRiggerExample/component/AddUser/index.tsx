@@ -5,6 +5,7 @@ import styles from './index.less';
 interface InitProp {
   form?: any;
   tableCallback?: any;
+  id?: any;
 }
 interface InitState {
   _btnLoading: boolean;
@@ -19,6 +20,30 @@ class AddUser extends React.Component<InitProp, InitState> {
     };
   }
 
+  componentDidMount() {
+    this.initialization();
+  }
+
+  /**
+   * @desc 编辑初始化数据
+   */
+  initialization = async () => {
+    if (this.props.id > 0) {
+      this.setState({ _isLoading: true });
+      this.props.form.setFieldsValue({
+        loginName: 'SummerSnake',
+        phone: 13577886699,
+        jobNum: 9521,
+        email: '33661226lll@163.com',
+        remarks: 'user.remarks',
+      });
+      this.setState({ _isLoading: false });
+    }
+  };
+
+  /**
+   * @desc 提交表单
+   */
   handleSubmit = async () => {
     let adopt = false;
     this.props.form.validateFields(err => {
@@ -40,6 +65,9 @@ class AddUser extends React.Component<InitProp, InitState> {
     }
   };
 
+  /**
+   * @desc 关闭 Modal
+   */
   handleCancel = () => {
     this.props.tableCallback(false);
   };
