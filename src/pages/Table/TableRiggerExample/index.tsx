@@ -1,5 +1,13 @@
 import React from 'react';
-import { CommonTable, Statistics, Search, FilterTags, FormModal } from '@components/TableRigger';
+import { Menu, Dropdown, Divider, Icon } from 'antd';
+import {
+  CommonTable,
+  Statistics,
+  Search,
+  FilterTags,
+  FormModal,
+  OperationBtn,
+} from '@components/TableRigger';
 import AddUser from './component/AddUser';
 import styles from './index.less';
 
@@ -77,7 +85,20 @@ class TableRiggerExample extends React.Component<null, InitState> {
     this.columnsUp();
   };
 
+  /**
+   * @desc 操作栏按钮点击事件
+   * @param { any } id
+   */
+  handleBtnClick = id => {
+    console.log(id);
+  };
+
+  /**
+   * @desc 设置表头
+   */
   columnsUp = () => {
+    const that = this;
+
     this.setState({
       _columns: [
         {
@@ -148,9 +169,39 @@ class TableRiggerExample extends React.Component<null, InitState> {
           width: '12%',
           dataIndex: 'operate',
           render(text, record) {
+            const MenuWrap = (
+              <Menu>
+                <Menu.Item>
+                  <OperationBtn
+                    title="重置密码"
+                    mode={0}
+                    onClick={() => {
+                      that.handleBtnClick(record.id);
+                    }}
+                  />
+                </Menu.Item>
+                <Menu.Item>
+                  <OperationBtn
+                    title="删除"
+                    mode={0}
+                    reminder="此操作将会将用户删除，确认操作吗？"
+                    onClick={() => {
+                      that.handleBtnClick(record.id);
+                    }}
+                  />
+                </Menu.Item>
+              </Menu>
+            );
             return (
               <div>
                 <FormModal id={record.id} title="编辑" component={AddUser} />
+                <Divider type="vertical" />
+                <Dropdown overlay={MenuWrap} placement="bottomLeft">
+                  <Icon
+                    type="ellipsis"
+                    style={{ paddingTop: '10px', fontSize: 14, color: '#40a9ff' }}
+                  />
+                </Dropdown>
               </div>
             );
           },
