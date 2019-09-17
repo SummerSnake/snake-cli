@@ -3,9 +3,9 @@ import { Spin, Form, Button, Input, notification } from 'antd';
 import styles from './index.less';
 
 interface InitProp {
-  form?: any;
-  tableCallback?: any;
   id?: any;
+  form?: any;
+  tableCallback?: (isRefresh: boolean) => void;
 }
 interface InitState {
   _btnLoading: boolean;

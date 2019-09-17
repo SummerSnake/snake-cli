@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Upload, Modal, Icon } from 'antd';
 
 interface InitProp {
-  uploadCall: any;
+  limitNum: number;
+  uploadCall: (imgUrl: string) => void;
 }
 function UploadImg(props: InitProp) {
   const [previewVisible, setPreviewVisible] = useState<boolean>(false);

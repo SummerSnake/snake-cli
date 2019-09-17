@@ -12,7 +12,7 @@ interface InitProp {
   };
   dispatch?: any;
   general?: any;
-  advanced?: any;
+  advanced?: any[];
   operationBlock?: any;
 }
 interface InitState {
