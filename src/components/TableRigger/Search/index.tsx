@@ -116,8 +116,8 @@ class Search extends React.Component<InitProp, InitState> {
   /**
    * @desc 高级搜素 DatePicker onChange 事件
    * @param { obj } item
-   * @param { moment } date
-   * @param { string } dateString
+   * @param { moment } date [moment, moment]
+   * @param { string } dateString [string, string]
    */
   handleDatePickerChange = (item, date, dateString) => {
     this.setStateData(item, dateString, null);

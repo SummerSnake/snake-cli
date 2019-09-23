@@ -21,7 +21,6 @@ interface InitProp {
   onClick?: () => void;
 }
 function OperationBtn(props: InitProp = {}) {
-
   const handleClick = async () => {
     const { onClick, tableRigger = {}, dispatch, mode } = props;
     const { query, queryShow, pagination, orders } = tableRigger;

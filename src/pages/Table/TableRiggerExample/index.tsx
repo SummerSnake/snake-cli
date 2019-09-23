@@ -150,16 +150,6 @@ class TableRiggerExample extends React.Component<null, InitState> {
           title: '用户类别',
           width: '12%',
           dataIndex: 'userType',
-          filters: [
-            {
-              text: 'A类别',
-              value: '0',
-            },
-            {
-              text: 'B类别',
-              value: '1',
-            },
-          ],
           render(text) {
             return text === '0' ? 'A类别' : 'B类别';
           },
