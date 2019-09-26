@@ -1,6 +1,6 @@
 import mockJs from 'mockjs';
 
-const getTopJsonData = {
+const getTopListData = {
   status: 200,
   msg: 'success',
   data: {
@@ -10,4 +10,4 @@ const getTopJsonData = {
   },
 };
 
-export default mockJs.mock('/api/get_top_json', 'get', getTopJsonData);
+export default mockJs.mock('/api/get_top_list', 'get', getTopListData);

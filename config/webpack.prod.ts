@@ -1,5 +1,3 @@
-const os = require('os');
-const webpack = require('webpack');
 const baseConfig = require('./webpack.base.ts');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,7 +13,6 @@ module.exports = merge(baseConfig, {
         oneOf: [
           /**
            * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
-           * [ext] 表示是原文件的扩展名
            */
           {
             test: /\.(jpe?g|png|svg|gif)$/,

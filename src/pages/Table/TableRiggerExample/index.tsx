@@ -14,7 +14,7 @@ import AddUser from './component/AddUser';
 import styles from './index.less';
 
 const _statistics = {
-  topJson: [
+  topList: [
     {
       displayTitle: '账号汇总',
       displayField: 'totalAccount',
@@ -210,7 +210,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
 
     return (
       <div className={styles.baseTableWrap}>
-        <Statistics sourceUrl={'/api/get_top_json'} topJson={_statistics.topJson} />
+        <Statistics sourceUrl={'/api/get_top_list'} topList={_statistics.topList} />
         <div className={styles.screenTag}>
           <Search
             general={search.general}

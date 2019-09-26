@@ -21,13 +21,16 @@ interface InitProp {
   onClick?: () => void;
 }
 function OperationBtn(props: InitProp = {}) {
+  /**
+   * @desc 按钮点击事件
+   */
   const handleClick = async () => {
     const { onClick, tableRigger = {}, dispatch, mode } = props;
     const { query, queryShow, pagination, orders } = tableRigger;
 
     if (verVal(onClick)) {
       await onClick();
-      // mode 是否携带筛选条件刷新
+      // mode === 0 携带筛选条件刷新
       if (mode === 0) {
         const code = Math.round(Math.random() * 999999999);
         dispatch({

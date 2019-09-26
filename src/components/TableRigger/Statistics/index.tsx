@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getRequest } from '@services/api';
 import { deepCompare, verArr } from '@utils/util';
 import styles from './index.less';
-import '../../../../mock/topJsonApi';
+import '../../../../mock/topListApi';
 
 interface InitProp {
   tableRigger?: {
@@ -12,7 +12,7 @@ interface InitProp {
     queryShow?: any;
   };
   dispatch?: any;
-  topJson?: any;
+  topList?: any[];
   sourceUrl?: string;
 }
 interface InitState {
@@ -69,13 +69,13 @@ class Statistics extends React.Component<InitProp, InitState> {
   };
 
   render() {
-    const { topJson = {} } = this.props;
+    const { topList = [] } = this.props;
     const { _dataSource = {} } = this.state;
 
     return (
       <div className={styles.statisticsWrap}>
-        {verArr(topJson) &&
-          topJson.map((item, i) => {
+        {verArr(topList) &&
+          topList.map((item, i) => {
             const isQuery = item['queryField'] && item['queryTitle'] && item['queryValue'];
 
             return (

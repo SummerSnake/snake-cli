@@ -11,7 +11,10 @@ interface InitProp {
     queryShow?: any;
   };
   dispatch?: any;
-  general?: any;
+  general?: {
+    queryTitle?: string;
+    queryField?: string;
+  };
   advanced?: any[];
   operationBlock?: any;
 }

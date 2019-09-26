@@ -1,5 +1,4 @@
 const { resolve } = require('path');
-const webpack = require('webpack');
 const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -7,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: {
     app: ['./src/index.tsx'], // 入口文件
-    vendors: ['react', 'react-dom', 'react-router-dom'], // 所引入的公共库
+    vendors: ['react', 'react-dom', 'react-router-dom', 'echarts'], // 所引入的公共库
   },
   output: {
     // 对应于entry里面生成出来的文件名，

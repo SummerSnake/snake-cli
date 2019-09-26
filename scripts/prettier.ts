@@ -31,41 +31,41 @@ const cssFiles = glob.sync('**/*.less*', {
   ignore: ['**/node_modules/**', 'dist/**', '.git/**', '.idea/**'],
 });
 const eslint = glob.sync('eslintrc.js');
+
 files = files.concat(jsFiles);
 files = files.concat(jsxFiles);
 files = files.concat(tsFiles);
 files = files.concat(tsxFiles);
 files = files.concat(cssFiles);
 files = files.concat(eslint);
-if (!files.length) {
-  return;
-}
 
-files.forEach(file => {
-  const options = prettier.resolveConfig.sync(file, {
-    config: prettierConfigPath,
-  });
-  const fileInfo = prettier.getFileInfo.sync(file);
-  if (fileInfo.ignored) {
-    return;
-  }
-  try {
-    const input = fs.readFileSync(file, 'utf8');
-    const withParserOptions = {
-      ...options,
-      parser: fileInfo.inferredParser,
-    };
-    const output = prettier.format(input, withParserOptions);
-    if (output !== input) {
-      fs.writeFileSync(file, output, 'utf8');
-      console.log(`\x1b[34m ${file} is prettier`);
+if (files.length) {
+  files.forEach(file => {
+    const options = prettier.resolveConfig.sync(file, {
+      config: prettierConfigPath,
+    });
+    const fileInfo = prettier.getFileInfo.sync(file);
+    if (fileInfo.ignored) {
+      return;
     }
-  } catch (e) {
-    didError = true;
-  }
-});
+    try {
+      const input = fs.readFileSync(file, 'utf8');
+      const withParserOptions = {
+        ...options,
+        parser: fileInfo.inferredParser,
+      };
+      const output = prettier.format(input, withParserOptions);
+      if (output !== input) {
+        fs.writeFileSync(file, output, 'utf8');
+        console.log(`\x1b[34m ${file} is prettier`);
+      }
+    } catch (e) {
+      didError = true;
+    }
+  });
 
-if (didError) {
-  process.exit(1);
+  if (didError) {
+    process.exit(1);
+  }
+  console.log('\x1b[32m prettier success!');
 }
-console.log('\x1b[32m prettier success!');

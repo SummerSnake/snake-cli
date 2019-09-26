@@ -27,14 +27,16 @@ function SiderMenu(props: InitProp) {
   }, [pathname]);
 
   /**
-   * 处理选中路由
+   * @desc 处理选中路由
+   * @param { string } key 当前所选菜单项
    */
   function handleSelect({ key }) {
     props.history.push(key);
   }
 
   /**
-   * 当前选中项名字
+   * @desc 当前选中项名字
+   * @param { object } item 当前所选菜单项
    */
   function titleNode(item) {
     return (
