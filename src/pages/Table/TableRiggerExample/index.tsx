@@ -13,6 +13,15 @@ import PersonalInfo from '../SingleTable/components/PersonalInfo';
 import AddUser from './component/AddUser';
 import styles from './index.less';
 
+/**
+ * @desc 头部汇总数据
+ * @param { array } topList 头部数据数组
+ * @param { string } displayTitle 展示标题
+ * @param { string } displayField 接口对应字段
+ * @param { string } queryTitle 表格对应筛选项标题
+ * @param { string } queryField 表格对应筛选项接口字段
+ * @param { string } queryValue 表格对应筛选项值
+ */
 const _statistics = {
   topList: [
     {
@@ -36,6 +45,17 @@ const _statistics = {
   ],
 };
 
+/**
+ * @desc 搜索数据
+ * @param { object } general 普通搜索
+ * @param { object } advanced 高级搜索
+ * @param { string } queryTitle 展示标题
+ * @param { string } queryField 接口对应字段
+ * @param { string } component 相对应的组件
+ * @param { string } componentData Select组件下拉筛选项
+ * @param { string } value 对应筛选项值
+ * @param { string } title 对应筛选项文本
+ */
 const search = {
   general: {
     queryTitle: '手机号',

@@ -1,7 +1,9 @@
 import moment from 'moment';
 
 /**
- * 格式化星期
+ * @desc 格式化星期
+ * @param { string } day
+ * @return { string }
  */
 export const weekFormat = function(day: string) {
   switch (day) {
@@ -24,7 +26,9 @@ export const weekFormat = function(day: string) {
 };
 
 /**
- * 计算前一周、后一周
+ * @desc 计算前一周、后一周
+ * @param nowDate
+ * @return { object }
  */
 export const calcWeek = function(nowDate) {
   return {
@@ -36,7 +40,9 @@ export const calcWeek = function(nowDate) {
 };
 
 /**
- * 表头数据
+ * @desc 表头数据
+ * @param date
+ * @return { array }
  */
 export const columnsJson = function(date) {
   return [
