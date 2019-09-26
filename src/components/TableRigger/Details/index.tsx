@@ -2,7 +2,8 @@ import React from 'react';
 import { Drawer } from 'antd';
 
 interface InitProp {
-  info: any;
+  readonly infoId: any;
+  component: any;
   title: string;
 }
 interface InitState {
@@ -19,12 +20,30 @@ class Details extends React.Component<InitProp, InitState> {
   }
 
   render() {
+    const { component: Component } = this.props;
     const { title, isShow } = this.state;
 
     return (
       <React.Fragment>
-        <Drawer title={title} placement="right" width="1000px" visible={isShow} destroyOnClose>
-          {this.props.info && this.props.info}
+        <a
+          onClick={e => {
+            e.preventDefault();
+            this.setState({ isShow: true });
+          }}
+        >
+          详情
+        </a>
+        <Drawer
+          title={title}
+          placement="right"
+          width="1000px"
+          visible={isShow}
+          onClose={() => {
+            this.setState({ isShow: false });
+          }}
+          destroyOnClose
+        >
+          {Component && <Component infoId={this.props.infoId} />}
         </Drawer>
       </React.Fragment>
     );

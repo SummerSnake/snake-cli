@@ -7,7 +7,9 @@ import {
   FilterTags,
   FormModal,
   OperationBtn,
+  Details,
 } from '@components/TableRigger';
+import PersonalInfo from '../SingleTable/components/PersonalInfo';
 import AddUser from './component/AddUser';
 import styles from './index.less';
 
@@ -162,6 +164,9 @@ class TableRiggerExample extends React.Component<null, InitState> {
             const MenuWrap = (
               <Menu>
                 <Menu.Item>
+                  <FormModal id={record.id} title="编辑" component={AddUser} />
+                </Menu.Item>
+                <Menu.Item>
                   <OperationBtn
                     title="重置密码"
                     mode={0}
@@ -184,7 +189,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
             );
             return (
               <div>
-                <FormModal id={record.id} title="编辑" component={AddUser} />
+                <Details infoId={record.id} component={PersonalInfo} title="个人信息" />
                 <Divider type="vertical" />
                 <Dropdown overlay={MenuWrap} placement="bottomLeft">
                   <Icon
