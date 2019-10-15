@@ -58,7 +58,7 @@ module.exports = {
           /**
            * 加入 less-loader 解析 less 文件;
            * 加入css-loader 解析 css 文件 modules 为 true less引入方式为 import styles from './styles', 为 false，则为 import './styles';
-           * 当 modules 为 true 时, 将启用 css modules, 即为类名前添加额外标识-localIdentName,[local] 为class名称, [name] 为文件名称;
+           * modules 选项启用 css modules, 即为类名前添加额外标识-localIdentName,[local] 为class名称, [name] 为文件名称;
            * 加入 style-loader 生成一个内容为最终解析完的css代码的style标签，放到head标签里。
            */
           {
@@ -74,8 +74,9 @@ module.exports = {
               {
                 loader: 'css-loader',
                 options: {
-                  modules: true,
-                  localIdentName: '[local]_[hash:base64:6]',
+                  modules: {
+                    localIdentName: '[name]_[local]_[hash:base64:6]',
+                  },
                 },
               },
               { loader: 'postcss-loader' },
