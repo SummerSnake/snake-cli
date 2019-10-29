@@ -13,6 +13,7 @@ module.exports = {
             "version": "detect",
         },
         "import/ignore": [
+            "dist",
             "node_modules",
         ]
     },
@@ -21,7 +22,6 @@ module.exports = {
         browser: true,
         node: true,
         es6: true,
-        mocha: true, // 测试框架
     },
     /**
      * off 或 0：表示不验证规则。
