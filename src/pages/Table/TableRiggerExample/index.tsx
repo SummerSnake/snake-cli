@@ -76,7 +76,10 @@ const search = {
       queryTitle: '冻结状态',
       queryField: 'freezeState',
       component: 'Select-Multiple',
-      componentData: [{ value: '0', title: '未冻结' }, { value: '1', title: '已冻结' }],
+      componentData: [
+        { value: '0', title: '未冻结' },
+        { value: '1', title: '已冻结' },
+      ],
     },
     {
       queryTitle: '修改日期',
@@ -87,7 +90,10 @@ const search = {
       queryTitle: '用户类别',
       queryField: 'userType',
       component: 'Select',
-      componentData: [{ value: '0', title: 'A类别' }, { value: '1', title: 'B类别' }],
+      componentData: [
+        { value: '0', title: 'A类别' },
+        { value: '1', title: 'B类别' },
+      ],
     },
   ],
 };
