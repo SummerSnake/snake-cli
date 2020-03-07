@@ -103,7 +103,7 @@ interface InitState {
   _columns: any[];
 }
 class TableRiggerExample extends React.Component<null, InitState> {
-  constructor(props) {
+  constructor(props: null) {
     super(props);
     this.state = {
       _columns: [],
@@ -118,7 +118,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
    * @desc 操作栏按钮点击事件
    * @param { any } id
    */
-  handleBtnClick = id => {
+  handleBtnClick = (id: any) => {
     console.log(id);
   };
 
@@ -166,7 +166,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
               value: '1',
             },
           ],
-          render(text) {
+          render(text: string) {
             return text === '0' ? '未冻结' : '已冻结';
           },
         },
@@ -179,7 +179,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
           title: '用户类别',
           width: '12%',
           dataIndex: 'userType',
-          render(text) {
+          render(text: string) {
             return text === '0' ? 'A类别' : 'B类别';
           },
         },
@@ -187,7 +187,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
           title: '操作',
           width: '12%',
           dataIndex: 'operate',
-          render(text, record) {
+          render(text: any, record: { id: any }) {
             const MenuWrap = (
               <Menu>
                 <Menu.Item>
@@ -251,7 +251,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
               operationBlock={[
                 {
                   title: '批量操作',
-                  onClick: (idArr, objArr) => {
+                  onClick: (idArr: any[], objArr: any[]) => {
                     console.log(idArr, objArr);
                   },
                 },
