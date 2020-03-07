@@ -7,45 +7,45 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = merge(baseConfig, {
   mode: 'production', // 生产模式
-  module: {
-    rules: [
-      {
-        oneOf: [
-          /**
-           * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
-           */
-          {
-            test: /\.(jpe?g|png|svg|gif)$/,
-            use: [
-              // 压缩图片
-              {
-                loader: 'img-loader',
-                options: {
-                  plugins: [
-                    require('imagemin-gifsicle')({
-                      interlaced: false,
-                    }),
-                    require('imagemin-mozjpeg')({
-                      progressive: true,
-                      arithmetic: false,
-                    }),
-                    require('imagemin-pngquant')({
-                      floyd: 0.5,
-                      speed: 2,
-                    }),
-                    require('imagemin-svgo')({
-                      plugins: [{ removeTitle: true }, { convertPathData: false }],
-                    }),
-                  ],
-                },
-              },
-            ],
-            exclude: /node_modules/,
-          },
-        ],
-      },
-    ],
-  },
+  // module: {
+  //   rules: [
+  //     {
+  //       oneOf: [
+  //         /**
+  //          * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
+  //          */
+  //         {
+  //           test: /\.(jpe?g|png|svg|gif)$/,
+  //           use: [
+  //             // 压缩图片
+  //             {
+  //               loader: 'img-loader',
+  //               options: {
+  //                 plugins: [
+  //                   require('imagemin-gifsicle')({
+  //                     interlaced: false,
+  //                   }),
+  //                   require('imagemin-mozjpeg')({
+  //                     progressive: true,
+  //                     arithmetic: false,
+  //                   }),
+  //                   require('imagemin-pngquant')({
+  //                     floyd: 0.5,
+  //                     speed: 2,
+  //                   }),
+  //                   require('imagemin-svgo')({
+  //                     plugins: [{ removeTitle: true }, { convertPathData: false }],
+  //                   }),
+  //                 ],
+  //               },
+  //             },
+  //           ],
+  //           exclude: /node_modules/,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
   plugins: [
     new HtmlWebpackPlugin({
       // 指定生成的文件所依赖哪一个html文件模板，模板类型可以是html、jade、ejs等
