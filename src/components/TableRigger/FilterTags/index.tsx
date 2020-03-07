@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Tag, Icon } from 'antd';
+import { DeleteFilled } from '@ant-design/icons';
+import { Tag } from 'antd';
 import { verArr, verVal } from '@utils/util';
 
 interface InitProp {
@@ -72,12 +73,7 @@ class FilterTags extends React.Component<InitProp> {
               });
             }}
           >
-            <Icon
-              type="delete"
-              theme="filled"
-              key="Icon"
-              style={{ color: '#999', verticalAlign: 'middle' }}
-            />
+            <DeleteFilled key="Icon" style={{ color: '#999', verticalAlign: 'middle' }} />
           </a>
         )}
       </div>

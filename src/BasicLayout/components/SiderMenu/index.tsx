@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Menu, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Menu } from 'antd';
 import menu from '@config/menu';
 import { verArr } from '@utils/util';
 
@@ -41,7 +42,7 @@ function SiderMenu(props: InitProp) {
   function titleNode(item) {
     return (
       <span>
-        <Icon type={item.icon} />
+        <LegacyIcon type={item.icon} />
         <span>{item.name}</span>
       </span>
     );
@@ -70,7 +71,7 @@ function SiderMenu(props: InitProp) {
               </Menu.SubMenu>
             ) : (
               <Menu.Item key={item.path}>
-                <Icon type={item.icon} />
+                <LegacyIcon type={item.icon} />
                 <span>{item.name}</span>
               </Menu.Item>
             )

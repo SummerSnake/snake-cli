@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Upload, Modal, Icon } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Upload, Modal } from 'antd';
 
 interface InitProp {
   limitNum: number;
@@ -48,7 +49,7 @@ function UploadImg(props: InitProp) {
 
   const uploadButton = (
     <div>
-      <Icon type="plus" />
+      <PlusOutlined />
       <div className="ant-upload-text">Upload</div>
     </div>
   );

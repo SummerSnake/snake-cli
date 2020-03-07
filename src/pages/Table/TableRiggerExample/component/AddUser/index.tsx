@@ -1,5 +1,7 @@
 import React from 'react';
-import { Spin, Form, Button, Input, notification } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Spin, Button, Input, notification } from 'antd';
 import styles from './index.less';
 
 interface InitProp {

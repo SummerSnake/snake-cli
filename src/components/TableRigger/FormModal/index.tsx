@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, Icon } from 'antd';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
 import { connect } from 'react-redux';
 import { verVal } from '@utils/util';
 import styles from './index.less';
@@ -76,7 +77,7 @@ class FormModal extends React.Component<InitProp, InitState> {
           </a>
         ) : (
           <span className={styles.addBtn} key="1" onClick={() => this.handleBtnClick(true)}>
-            <Icon className={styles.iconDom} type="plus-circle" key="Icon" />
+            <PlusCircleOutlined className={styles.iconDom} key="Icon" />
             {title}
           </span>
         )}

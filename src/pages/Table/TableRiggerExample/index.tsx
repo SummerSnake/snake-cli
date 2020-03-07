@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, Dropdown, Divider, Icon } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Divider } from 'antd';
 import {
   CommonTable,
   Statistics,
@@ -218,8 +219,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
                 <Details infoId={record.id} component={PersonalInfo} title="个人信息" />
                 <Divider type="vertical" />
                 <Dropdown overlay={MenuWrap} placement="bottomLeft">
-                  <Icon
-                    type="ellipsis"
+                  <EllipsisOutlined
                     style={{ paddingTop: '10px', fontSize: 14, color: '#40a9ff' }}
                   />
                 </Dropdown>

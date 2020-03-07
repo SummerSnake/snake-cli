@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Input, Button, Icon, notification } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Input, Button, notification } from 'antd';
 import styles from './index.less';
 
 interface InitProp {
@@ -11,7 +12,7 @@ function Login(props: InitProp) {
   const [password, setPassword] = useState<string>('123456');
 
   /**
-   * @desc提交登陆
+   * @desc 提交登陆
    */
   function handleSubmit() {
     if (userName === 'admin' && password === '123456') {
@@ -22,6 +23,7 @@ function Login(props: InitProp) {
       notification.error({ message: '用户名：admin, 密码：123456' });
     }
   }
+
   return (
     <div
       className={styles.loginWrap}
@@ -44,7 +46,7 @@ function Login(props: InitProp) {
             <h3>登陆</h3>
             <Input
               defaultValue={userName}
-              prefix={<Icon type="user" className={styles.iconDom} />}
+              prefix={<UserOutlined className={styles.iconDom} />}
               className={styles.inputDom}
               onChange={e => {
                 setUserName(e.target.value);
@@ -53,7 +55,7 @@ function Login(props: InitProp) {
             />
             <Input
               defaultValue={password}
-              prefix={<Icon type="lock" className={styles.iconDom} />}
+              prefix={<LockOutlined className={styles.iconDom} />}
               className={styles.inputDom}
               onChange={e => {
                 setPassword(e.target.value);

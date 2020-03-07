@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Icon } from 'antd';
+
+import {
+  FireOutlined,
+  HeartOutlined,
+  KeyOutlined,
+  SlackOutlined,
+  SmileOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
+
 import { getRequest } from '@services/api';
 import { verArr } from '@utils/util';
 import InfoTable from './components/InfoTable';
@@ -48,14 +57,14 @@ function PersonalInfo(props: InitProps) {
         <div className={styles.cardWrap}>
           <div className={styles.cardDom}>
             <p className={styles.cardTitle}>
-              <Icon type="heart" className={styles.iconDom} />
+              <HeartOutlined className={styles.iconDom} />
               性别
             </p>
             <p className={styles.cardContent}>{infoData.gender}</p>
           </div>
           <div className={styles.cardDom}>
             <p className={styles.cardTitle}>
-              <Icon type="key" className={styles.iconDom} />
+              <KeyOutlined className={styles.iconDom} />
               年龄
             </p>
             <p className={styles.cardContent}>{infoData.age}</p>
@@ -63,7 +72,7 @@ function PersonalInfo(props: InitProps) {
 
           <div className={styles.cardDom}>
             <p className={styles.cardTitle}>
-              <Icon type="team" className={styles.iconDom} />
+              <TeamOutlined className={styles.iconDom} />
               身高
             </p>
             <p className={styles.cardContent}>{infoData.height}</p>
@@ -71,7 +80,7 @@ function PersonalInfo(props: InitProps) {
 
           <div className={styles.cardDom}>
             <p className={styles.cardTitle}>
-              <Icon type="fire" className={styles.iconDom} />
+              <FireOutlined className={styles.iconDom} />
               体重
             </p>
             <p className={styles.cardContent}>{infoData.weight}</p>
@@ -79,7 +88,7 @@ function PersonalInfo(props: InitProps) {
 
           <div className={styles.cardDom}>
             <p className={styles.cardTitle}>
-              <Icon type="smile" className={styles.iconDom} />
+              <SmileOutlined className={styles.iconDom} />
               爱好
             </p>
             <p className={styles.cardContent}>{infoData.hobby}</p>
@@ -87,7 +96,7 @@ function PersonalInfo(props: InitProps) {
 
           <div className={styles.cardDom}>
             <p className={styles.cardTitle}>
-              <Icon type="slack" className={styles.iconDom} />
+              <SlackOutlined className={styles.iconDom} />
               职业
             </p>
             <p className={styles.cardContent}>{infoData.job}</p>
