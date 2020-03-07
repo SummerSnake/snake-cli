@@ -12,7 +12,9 @@
     "prettier": "node scripts/prettier.ts"
   },
   "dependencies": {
-    "antd": "^3.26.6",
+    "@ant-design/compatible": "^1.0.1",
+    "@ant-design/icons": "^4.0.2",
+    "antd": "^4.0.1",
     "axios": "^0.19.2",
     "dva-core": "^2.0.2",
     "dva-loading": "^3.0.20",
