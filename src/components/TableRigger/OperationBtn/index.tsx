@@ -24,12 +24,12 @@ function OperationBtn(props: InitProp = {}) {
   /**
    * @desc 按钮点击事件
    */
-  const handleClick = async () => {
+  const handleClick = () => {
     const { onClick, tableRigger = {}, dispatch, mode } = props;
     const { query, queryShow, pagination, orders } = tableRigger;
 
     if (verVal(onClick)) {
-      await onClick();
+      onClick();
       // mode === 0 携带筛选条件刷新
       if (mode === 0) {
         const code = Math.round(Math.random() * 999999999);
@@ -46,6 +46,7 @@ function OperationBtn(props: InitProp = {}) {
   };
 
   const { isBtn, btnType, btnLoading, title, reminder } = props;
+
   return (
     <span>
       {isBtn ? (

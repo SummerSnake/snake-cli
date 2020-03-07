@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Input, Button, notification } from 'antd';
+import { Input, Button } from 'antd';
+import { openNotificationWithIcon } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
@@ -14,15 +15,15 @@ function Login(props: InitProp) {
   /**
    * @desc 提交登陆
    */
-  function handleSubmit() {
+  const handleSubmit = () => {
     if (userName === 'admin' && password === '123456') {
       const { history } = props;
       history.push('/home');
       localStorage.setItem('accessToken', 'login');
     } else {
-      notification.error({ message: '用户名：admin, 密码：123456' });
+      openNotificationWithIcon('error', '账号或密码错误', '用户名：admin, 密码：123456');
     }
-  }
+  };
 
   return (
     <div

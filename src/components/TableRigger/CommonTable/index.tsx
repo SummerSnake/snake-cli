@@ -1,8 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Button, notification } from 'antd';
+import { Table, Button } from 'antd';
 import { getRequest } from '@services/api';
-import { jsonString, verArr, verVal, deepCompare, isObj } from '@utils/util';
+import {
+  jsonString,
+  verArr,
+  verVal,
+  deepCompare,
+  isObj,
+  openNotificationWithIcon,
+} from '@utils/util';
 import styles from './index.less';
 import '../../../../mock/tableRiggerApi';
 
@@ -36,10 +43,11 @@ interface InitState {
   _objArr: any[];
 }
 class CommonTable extends React.Component<InitProp, InitState> {
-  constructor(props) {
+  constructor(props: Readonly<InitProp>) {
     super(props);
     const url = location.hash;
     const { dispatch } = props;
+
     dispatch({
       type: 'tableRigger/init',
     });
@@ -69,9 +77,10 @@ class CommonTable extends React.Component<InitProp, InitState> {
 
   _tableRigger = null;
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps: { [x: string]: any }) => {
     this.columnsUpdate(nextProps);
     const { _pagination } = this.state;
+
     this.setState({
       _pagination: Object.assign(_pagination, nextProps['tableRigger']['pagination']),
     });
@@ -85,6 +94,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
     // 将筛选项放入 sessionStorage
     const { tableRigger } = this.props;
     const { _url = '' } = this.state;
+
     if (isObj(tableRigger)) {
       await sessionStorage.setItem(_url, JSON.stringify(tableRigger));
     }
@@ -114,7 +124,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
             const arr = [];
             verArr(json['filters']) &&
               json['filters'].forEach((filtersJson = {}) => {
-                filters[key].forEach(value => {
+                filters[key].forEach((value: any) => {
                   if (filtersJson['value'] === value) {
                     arr.push(filtersJson['text']);
                   }
@@ -154,10 +164,11 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @desc 更新表头
    * @param { object } props
    */
-  columnsUpdate = props => {
+  columnsUpdate = (props: { [x: string]: any; tableRigger?: any }) => {
     const { _pagination = {} } = this.state;
     const { tableRigger = {} } = props;
     const { query = {} } = tableRigger;
+
     if (verArr(props['columns'])) {
       const arr = props['columns'];
       arr.forEach((json = {}) => {
@@ -169,7 +180,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
           // 如果表格数据有 column
           if (!json['render']) {
             // 如果没有 render 方法, 则渲染 column, 否则antd默认渲染 dataIndex
-            json['render'] = (text, record) => record[json['column']];
+            json['render'] = (text: any, record: { [x: string]: any }) => record[json['column']];
           }
         } else {
           // 如果表格数据没有 column, 则将 dataIndex 赋值给 column
@@ -177,7 +188,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
         }
         if (json['isIncrement']) {
           // 设置序号
-          json.render = (text, record, index) => {
+          json.render = (text: any, record: any, index: number) => {
             let page = (_pagination['current'] - 1) * _pagination['pageSize'];
             if (isNaN(page)) {
               page = 0;
@@ -194,10 +205,11 @@ class CommonTable extends React.Component<InitProp, InitState> {
    * @desc 获取数据
    * @param { object } props
    */
-  fetchData = async props => {
+  fetchData = async (props: { [x: string]: any; tableRigger?: any }) => {
     const { tableRigger } = props;
     const json = JSON.parse(JSON.stringify(props['tableRigger']));
     jsonString(json.query);
+
     this.setState({ _isLoading: true });
     const data = await getRequest(props['listUrl'], json);
     if (data['status'] === 200 && verVal(data['data'])) {
@@ -211,7 +223,7 @@ class CommonTable extends React.Component<InitProp, InitState> {
         _pagination,
       });
     } else {
-      notification.error({ message: data['msg'], description: data['subMsg'] });
+      openNotificationWithIcon('error', data['msg'], data['subMsg']);
     }
     this.setState({ _isLoading: false });
     // 将筛选项放入 sessionStorage

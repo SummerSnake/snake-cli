@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { notification } from 'antd';
 import moment from 'moment';
 
 /**
@@ -241,4 +242,17 @@ export const jsonString = (json = {}) => {
       }
     }
   }
+};
+
+/**
+ * @desc notification
+ * @param { string } type 图标类型
+ * @param { string } message 标题
+ * @param { string } description 内容
+ */
+export const openNotificationWithIcon = (type: string, message: string, description: string) => {
+  notification[type]({
+    message,
+    description,
+  });
 };

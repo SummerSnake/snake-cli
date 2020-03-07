@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Spin, Form, Button, Input, notification } from 'antd';
+import { Spin, Form, Button, Input } from 'antd';
+import { openNotificationWithIcon } from '@utils/util';
 import styles from './index.less';
 
 interface InitProp {
@@ -15,19 +16,6 @@ function AddUser(props: InitProp) {
   useEffect(() => {
     initialization();
   }, []);
-
-  /**
-   * @desc notification
-   * @param { string } type 图标类型
-   * @param { string } message 标题
-   * @param { string } description 内容
-   */
-  const openNotificationWithIcon = (type: string, message: string, description: string) => {
-    notification[type]({
-      message,
-      description,
-    });
-  };
 
   /**
    * @desc 编辑初始化数据
@@ -149,7 +137,7 @@ function AddUser(props: InitProp) {
           <div className={styles.rowDom} style={{ width: '50%' }}>
             <div className={styles.colDom}>
               <Form.Item name="remarks" label="备注">
-                <Input.TextArea autoSize={{ minRows: 6, maxRows: Infinity }} />
+                <Input.TextArea autoSize={{ minRows: 6, maxRows: 10 }} />
               </Form.Item>
             </div>
           </div>
