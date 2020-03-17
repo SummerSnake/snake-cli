@@ -26,6 +26,12 @@ const TableRiggerExample = Loadable({
   delay: 3000,
 });
 
+const MenuManage = Loadable({
+  loader: () => import(/* webpackChunkName: "MenuManage" */ '../pages/System/MenuManage/index'),
+  loading: DelayLoading,
+  delay: 3000,
+});
+
 export default [
   {
     path: '/',
@@ -46,5 +52,9 @@ export default [
   {
     path: '/table/TableRiggerExample',
     component: TableRiggerExample,
+  },
+  {
+    path: '/system/MenuManage',
+    component: MenuManage,
   },
 ];

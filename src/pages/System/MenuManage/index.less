@@ -1,0 +1,43 @@
+@import '../../../styles/mixin.less';
+
+.menuManageWrap {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #fff;
+  .menuCon {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow-x: auto;
+    .menuLeft {
+      flex: 1;
+      min-width: 200px;
+      word-wrap: break-word;
+    }
+    .menuRight {
+      flex: 4;
+      min-width: 800px;
+    }
+  }
+  .treeNode {
+    width: 120%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border: 1px solid #c5b4b4;
+  }
+  .treeNodeActive {
+    width: 120%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    background-color: @primaryColor;
+  }
+  :global {
+    .ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
+      background-color: transparent;
+    }
+  }
+}

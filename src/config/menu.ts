@@ -23,4 +23,15 @@ export default [
       },
     ],
   },
+  {
+    name: '系统设置',
+    path: '/system',
+    icon: 'setting',
+    list: [
+      {
+        name: '菜单管理',
+        path: '/MenuManage',
+      },
+    ],
+  },
 ];
