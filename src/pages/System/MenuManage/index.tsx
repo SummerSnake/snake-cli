@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { FolderOutlined } from '@ant-design/icons';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { WindowsOutlined, TableOutlined, SettingOutlined, FolderOutlined } from '@ant-design/icons';
 import { Spin, Tree, Tag } from 'antd';
 import { getRequest } from '@services/api';
 import styles from './index.less';
 import '../../../../mock/menuManageApi';
+
+const Icons = {
+  windows: <WindowsOutlined />,
+  table: <TableOutlined />,
+  setting: <SettingOutlined />,
+};
 
 function MenuManage() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,18 +27,7 @@ function MenuManage() {
                 className={isTagSelect === item.id ? styles.treeNodeActive : styles.treeNode}
                 onClick={() => setIsTagSelect(item.id)}
               >
-                <LegacyIcon
-                  type={
-                    item.menuImg
-                      ? item.menuImg
-                      : item.menuType === 0
-                      ? 'appstore'
-                      : item.menuType === 1
-                      ? 'pic-right'
-                      : 'poweroff'
-                  }
-                />
-                &nbsp;&nbsp;{item.menuName}
+                {Icons[item.menuImg]} &nbsp;&nbsp;{item.menuName}
               </Tag>
             }
             key={item.id}
@@ -67,7 +61,10 @@ function MenuManage() {
             <Tree showLine defaultExpandAll>
               <Tree.TreeNode
                 title={
-                  <Tag className={isTagSelect === 0 ? styles.treeNodeActive : styles.treeNode}>
+                  <Tag
+                    className={isTagSelect === 0 ? styles.treeNodeActive : styles.treeNode}
+                    onClick={() => setIsTagSelect(0)}
+                  >
                     <FolderOutlined />
                     &nbsp;&nbsp;菜单结构
                   </Tag>

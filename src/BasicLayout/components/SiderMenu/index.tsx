@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { HomeOutlined, TableOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import menu from '@config/menu';
 import { verArr } from '@utils/util';
 
+const Icons = {
+  home: <HomeOutlined />,
+  table: <TableOutlined />,
+  setting: <SettingOutlined />,
+};
+
+type titleNode = {
+  name: string;
+  path: string;
+  icon: string;
+  list?: any[];
+};
 interface InitProp {
   history: {
     location: {
@@ -22,31 +34,27 @@ function SiderMenu(props: InitProp) {
   const { pathname } = props.history && props.history.location;
 
   useEffect(() => {
-    let keys = [];
-    keys.push(pathname);
-    setKeys(keys);
+    setKeys([pathname]);
   }, [pathname]);
 
   /**
    * @desc 处理选中路由
    * @param { string } key 当前所选菜单项
    */
-  function handleSelect({ key }) {
-    props.history.push(key);
-  }
+  const handleSelect = ({ key }) => props.history.push(key);
 
   /**
    * @desc 当前选中项名字
    * @param { object } item 当前所选菜单项
    */
-  function titleNode(item) {
+  const titleNode = (item: titleNode) => {
     return (
       <span>
-        <LegacyIcon type={item.icon} />
+        {Icons[item.icon]}
         <span>{item.name}</span>
       </span>
     );
-  }
+  };
 
   const defaultKeys = (verArr(keys) && ['/' + keys[0].split('/')[1]]) || [];
 
@@ -71,7 +79,7 @@ function SiderMenu(props: InitProp) {
               </Menu.SubMenu>
             ) : (
               <Menu.Item key={item.path}>
-                <LegacyIcon type={item.icon} />
+                {Icons[item.icon]}
                 <span>{item.name}</span>
               </Menu.Item>
             )
