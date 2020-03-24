@@ -35,12 +35,13 @@ function ToDoList(props: InitProp) {
    * @desc tabs 选择
    * @param { string } key 当前选择的 tab
    */
-  function onTabChange(key) {
+  const onTabChange = key => {
     setAnimKey(key);
+
     setTimeout(() => {
       setTabKey(key);
     }, 300);
-  }
+  };
 
   const { todoListData } = props;
 
@@ -76,7 +77,7 @@ function ToDoList(props: InitProp) {
               <p className={styles.ellipsis}>
                 <span>
                   原型链
-                  <span>{todoListData.prototype}</span>
+                  <span>{todoListData.proto}</span>
                 </span>
                 <span>
                   闭包

@@ -17,6 +17,12 @@ function MenuManage() {
   const [menuList, setMenuList] = useState<any[]>([]);
   const [menuItemInfo, setMenuItemInfo] = useState<any>({});
 
+  /**
+   * @desc 递归树节点
+   * @param { any[] } menuList 菜单树
+   * @param { index } index 菜单项的层级
+   * @return { any[] } 递归完成的树
+   */
   const recursion = (menuList = [], index: number) => {
     const arr = [];
     menuList.forEach(item => {
@@ -44,6 +50,9 @@ function MenuManage() {
     return arr;
   };
 
+  /**
+   * @desc 获取数据
+   */
   const fetchData = async () => {
     setLoading(true);
     const data = await getRequest('/api/get_menu_manage_tree', null);

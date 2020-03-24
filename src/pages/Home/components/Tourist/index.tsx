@@ -16,7 +16,7 @@ function Tourist(props: InitProp) {
   /**
    * @desc 图表初始化
    */
-  function init() {
+  const init = () => {
     const myChartOne = Echarts.init(document.getElementById('chartDom'));
     // 绘制图表
     myChartOne.setOption({
@@ -75,7 +75,7 @@ function Tourist(props: InitProp) {
       ],
     });
     window.onresize = myChartOne.resize;
-  }
+  };
 
   useEffect(() => {
     init();

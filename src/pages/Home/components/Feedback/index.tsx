@@ -6,17 +6,19 @@ import styles from './index.less';
 function Feedback() {
   /**
    * @desc textArea 内容更新
+   * @param { object } e event
    */
-  function handleAreaChange(e) {
+  const handleAreaChange = e => {
     console.log(e.target.value);
-  }
+  };
 
   /**
    * @desc 上传图片回调
+   * @param { string } url 图片url
    */
-  function uploadCall(url): void {
+  const uploadCall = (url): void => {
     console.log(url);
-  }
+  };
 
   return (
     <section className={styles.feedbackWrap}>

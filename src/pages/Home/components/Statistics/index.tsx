@@ -22,8 +22,9 @@ interface InitProp {
   };
 }
 
-function Statistics(props: InitProp) {
+const Statistics = (props: InitProp) => {
   const { js, array, async } = props.statisticsData;
+
   return (
     <section className={styles.statisticsWrap}>
       <ul>
@@ -93,6 +94,6 @@ function Statistics(props: InitProp) {
       </ul>
     </section>
   );
-}
+};
 
 export default Statistics;

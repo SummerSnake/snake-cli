@@ -107,12 +107,13 @@ function Home(props: InitProp) {
   /**
    * @desc 挂载获取数据
    */
-  async function fetchData() {
+  const fetchData = async () => {
     setLoading(true);
     const newData = await getRequest('/api/get_homeData', null);
     setApiData({ ...newData['data'] });
     setLoading(false);
-  }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);

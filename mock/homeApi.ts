@@ -82,7 +82,7 @@ const getHomeData = {
   todoListData: {
     array: 'array',
     object: 'object',
-    prototype: '_proto_',
+    proto: '_proto_',
     closure: 'closure',
     es6: 'es6',
     scss: 'scss',

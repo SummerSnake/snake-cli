@@ -13,15 +13,18 @@ interface InitProp {
   };
 }
 function Charts(props: InitProp) {
-  const [sortType, setSortType] = useState<number>(0);
+  const [sortType, setSortType] = useState<number>(1);
 
-  function sortDateChange(type: number) {
-    setSortType(type);
-  }
+  /**
+   * @desc 日期 tab 切换
+   * @param { number } type tabIndex
+   */
+  const sortDateChange = (type: number) => setSortType(type);
+
   /**
    * @desc 图表初始化
    */
-  function init() {
+  const init = () => {
     const myChartOne = Echarts.init(document.getElementById('charts_01'));
     const myChartTwo = Echarts.init(document.getElementById('charts_02'));
     // 绘制图表1
@@ -171,7 +174,7 @@ function Charts(props: InitProp) {
       ],
     });
     window.onresize = myChartTwo.resize;
-  }
+  };
 
   useEffect(() => {
     init();
@@ -197,25 +200,19 @@ function Charts(props: InitProp) {
           <h5>排行榜</h5>
           <div className={styles.btnGroup}>
             <span
-              onClick={() => {
-                sortDateChange(1);
-              }}
+              onClick={() => sortDateChange(1)}
               className={sortType === 1 ? styles.btnActive : null}
             >
               本日
             </span>
             <span
-              onClick={() => {
-                sortDateChange(2);
-              }}
+              onClick={() => sortDateChange(2)}
               className={sortType === 2 ? styles.btnActive : null}
             >
               本周
             </span>
             <span
-              onClick={() => {
-                sortDateChange(3);
-              }}
+              onClick={() => sortDateChange(3)}
               className={sortType === 3 ? styles.btnActive : null}
             >
               本月
