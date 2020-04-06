@@ -26,14 +26,7 @@ function Login(props: InitProp) {
   };
 
   return (
-    <div
-      className={styles.loginWrap}
-      onKeyDown={async (e) => {
-        if (e.keyCode === 13) {
-          handleSubmit();
-        }
-      }}
-    >
+    <div className={styles.loginWrap} onKeyDown={(e) => e.keyCode === 13 && handleSubmit()}>
       <div className={styles.formDom}>
         <div className={styles.formLeft}>
           <i />

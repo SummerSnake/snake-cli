@@ -197,9 +197,8 @@ class TableRiggerExample extends React.Component<null, InitState> {
                   <OperationBtn
                     title="重置密码"
                     mode={0}
-                    onClick={() => {
-                      that.handleBtnClick(record.id);
-                    }}
+                    reminder="确认重置密码吗？"
+                    onClick={() => that.handleBtnClick(record.id)}
                   />
                 </Menu.Item>
                 <Menu.Item>
@@ -207,9 +206,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
                     title="删除"
                     mode={0}
                     reminder="此操作将会将用户删除，确认操作吗？"
-                    onClick={() => {
-                      that.handleBtnClick(record.id);
-                    }}
+                    onClick={() => that.handleBtnClick(record.id)}
                   />
                 </Menu.Item>
               </Menu>
@@ -250,7 +247,7 @@ class TableRiggerExample extends React.Component<null, InitState> {
             <CommonTable
               operationBlock={[
                 {
-                  title: '批量操作',
+                  title: '按钮',
                   onClick: (idArr: any[], objArr: any[]) => {
                     console.log(idArr, objArr);
                   },
