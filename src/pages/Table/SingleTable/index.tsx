@@ -46,7 +46,7 @@ function SingleTable() {
       render: (text, record) => (
         <a
           href="#"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setInfoId(record.key);
             setIsOpen(true);
@@ -70,7 +70,7 @@ function SingleTable() {
       title: 'Tags',
       key: 'tags',
       dataIndex: 'tags',
-      render: tags => (
+      render: (tags) => (
         <span>
           {tags.map((tag: string) => {
             let color = tag.length > 5 ? 'geekblue' : 'green';

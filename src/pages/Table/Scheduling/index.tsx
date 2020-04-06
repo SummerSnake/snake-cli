@@ -96,7 +96,7 @@ function Scheduling() {
     onChange: (selectRowKeys, selectRows) => {
       console.log(selectRows);
 
-      const arr = selectRowKeys.filter(item => {
+      const arr = selectRowKeys.filter((item) => {
         return !selectedRowKeys.includes(item.id);
       });
       setSelectedRowKeys([...arr]);
@@ -139,13 +139,13 @@ function Scheduling() {
       <Table rowKey="id" dataSource={dataSource} rowSelection={rowSelection}>
         <Column title="工程师" dataIndex="engineer" key="engineer" />
         {verArr(columns) &&
-          columns.map(item => (
+          columns.map((item) => (
             <ColumnGroup title={item._date} key={item.id}>
               <Column
                 title={item._day}
                 dataIndex={`type${item.id}`}
                 key={item.id}
-                render={text => {
+                render={(text) => {
                   return (
                     <a href="#" onClick={handleModalOpen}>
                       {text === 1 ? '已排班' : '---'}

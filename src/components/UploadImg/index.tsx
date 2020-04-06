@@ -36,7 +36,7 @@ function UploadImg(props: InitProp) {
    */
   function handleChange({ fileList }) {
     let imgUrl = '';
-    fileList.forEach(file => {
+    fileList.forEach((file) => {
       if (typeof file.response !== 'undefined') {
         imgUrl = `${imgUrl + file.response.data}#`;
       } else {

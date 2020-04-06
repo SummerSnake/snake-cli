@@ -36,7 +36,7 @@ export default {
       });
     },
     *init(_, { put, select }) {
-      const initState = yield select(state => state.tableRigger);
+      const initState = yield select((state) => state.tableRigger);
       const url = location.hash;
       let payload = sessionStorage.getItem(url);
       const code = Math.round(Math.random() * 999999999);

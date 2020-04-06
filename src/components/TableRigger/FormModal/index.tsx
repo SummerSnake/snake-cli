@@ -32,7 +32,7 @@ class FormModal extends React.Component<InitProp, InitState> {
    * @desc table 回调函数
    * @param { boolean } isRefresh 是否刷新表格数据
    */
-  tableCallback = isRefresh => {
+  tableCallback = (isRefresh) => {
     this.setState({ _isVisible: false });
     if (isRefresh) {
       const { dispatch, id } = this.props;
@@ -56,7 +56,7 @@ class FormModal extends React.Component<InitProp, InitState> {
    * @desc 是否打开 Modal
    * @param { boolean } isVisible
    */
-  handleBtnClick = isVisible => {
+  handleBtnClick = (isVisible) => {
     this.setState({ _isVisible: isVisible });
   };
 
@@ -68,7 +68,7 @@ class FormModal extends React.Component<InitProp, InitState> {
       <div className={styles.addWrap} style={{ marginLeft: !verVal(id) && '36px' }}>
         {verVal(id) ? (
           <a
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               this.handleBtnClick(true);
             }}

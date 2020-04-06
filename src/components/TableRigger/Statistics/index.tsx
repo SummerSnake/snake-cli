@@ -31,7 +31,7 @@ class Statistics extends React.Component<InitProp, InitState> {
     this.fetchData();
   };
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     if (this._tableRigger !== null && !deepCompare(nextProps.tableRigger, this._tableRigger)) {
       this.fetchData();
     }
@@ -51,7 +51,7 @@ class Statistics extends React.Component<InitProp, InitState> {
   /**
    * @desc 点击事件
    */
-  handleClick = async json => {
+  handleClick = async (json) => {
     const { tableRigger = {}, dispatch } = this.props;
     let { queryShow = {}, query = {} } = tableRigger;
 

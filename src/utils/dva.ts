@@ -9,7 +9,7 @@ function createApp(opt) {
   app = create(opt);
   app.use(createLoading({}));
 
-  opt.models.forEach(model => app.model(model));
+  opt.models.forEach((model) => app.model(model));
   app.start();
 
   store = app._store;

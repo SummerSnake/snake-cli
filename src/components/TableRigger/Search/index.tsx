@@ -34,7 +34,7 @@ class Search extends React.Component<InitProp, InitState> {
     };
   }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     const { tableRigger = {} } = nextProps;
     this.setState({
       _dataSource: tableRigger.query,
@@ -46,7 +46,7 @@ class Search extends React.Component<InitProp, InitState> {
    * @desc 普通搜索 input 框 onChange 事件
    * @param { event } e
    */
-  handleGeneralInputChange = e => {
+  handleGeneralInputChange = (e) => {
     const { value } = e.target;
     const { general = {} } = this.props;
 
@@ -107,7 +107,7 @@ class Search extends React.Component<InitProp, InitState> {
    */
   handleMultiPleSelectChange = (item, value, objectArr) => {
     const arr = [];
-    objectArr.forEach(object => {
+    objectArr.forEach((object) => {
       const { props = {} } = object;
       const { children } = props;
       arr.push(children);
@@ -192,7 +192,9 @@ class Search extends React.Component<InitProp, InitState> {
           </span>
         )}
         {/*操作按钮*/}
-        {operationBlock && <div className={styles.btnGroup}>{operationBlock.map(obj => obj)}</div>}
+        {operationBlock && (
+          <div className={styles.btnGroup}>{operationBlock.map((obj) => obj)}</div>
+        )}
         {/*高级搜索内容区域*/}
         {verArr(advanced) && (
           <div

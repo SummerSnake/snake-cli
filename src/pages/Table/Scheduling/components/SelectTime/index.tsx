@@ -47,7 +47,7 @@ function SelectTime(props: InitProps) {
     let amFlag = true;
     let pmFlag = true;
     // 判断标签数组中是否包含 当前点击标签所属数组 的所有元素
-    timeData.forEach(item => {
+    timeData.forEach((item) => {
       if (!tagArr.includes(item.id)) {
         type === 'am' ? (amFlag = false) : (pmFlag = false);
       }
@@ -69,10 +69,10 @@ function SelectTime(props: InitProps) {
       // 如果当前是选中状态，则取消选中
       tagArrClone.splice(tagArrClone.indexOf(id), 1);
       // 取消全选 checkbox 状态
-      amTimeDataClone.forEach(item => {
+      amTimeDataClone.forEach((item) => {
         item.id === id && setAmChecked(false);
       });
-      pmTimeDataClone.forEach(item => {
+      pmTimeDataClone.forEach((item) => {
         item.id === id && setPmChecked(false);
       });
     } else {
@@ -95,15 +95,15 @@ function SelectTime(props: InitProps) {
     let tagArrClone = [...tagArr];
     if (timeChecked) {
       // 全选
-      arr = timeData.filter(item => {
+      arr = timeData.filter((item) => {
         return !tagArrClone.includes(item.id);
       });
-      arr.forEach(item => {
+      arr.forEach((item) => {
         tagArrClone.push(item.id);
       });
     } else {
       // 取消全选
-      timeData.forEach(item => {
+      timeData.forEach((item) => {
         if (tagArrClone.includes(item.id)) {
           tagArrClone.splice(tagArrClone.indexOf(item.id), 1);
         }
@@ -169,7 +169,7 @@ function SelectTime(props: InitProps) {
           </h3>
           <div>
             {verArr(amTimeData) &&
-              amTimeData.map(item => (
+              amTimeData.map((item) => (
                 <Tag
                   color={tagArr.includes(item.id) ? '#1890ff' : ''}
                   style={{ marginBottom: '10px', cursor: 'pointer' }}
@@ -196,7 +196,7 @@ function SelectTime(props: InitProps) {
           </h3>
           <div>
             {verArr(pmTimeData) &&
-              pmTimeData.map(item => (
+              pmTimeData.map((item) => (
                 <Tag
                   color={tagArr.includes(item.id) ? '#1890ff' : ''}
                   style={{ marginBottom: '10px', cursor: 'pointer' }}

@@ -36,7 +36,7 @@ function PersonalInfo(props: InitProps) {
     const data = await getRequest('/api/get_single_table', null);
     const arr = data['data'];
     if (verArr(arr)) {
-      arr.forEach(item => {
+      arr.forEach((item) => {
         if (props.infoId === item.key) {
           setInfoData({ ...infoData, ...item });
         }

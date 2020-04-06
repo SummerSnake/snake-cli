@@ -36,7 +36,7 @@ const Statistics = (props: InitProp) => {
             </h4>
             {js &&
               verArr(js.list) &&
-              js.list.map(item => {
+              js.list.map((item) => {
                 return (
                   <p key={item.id}>
                     {item.name}
@@ -61,7 +61,7 @@ const Statistics = (props: InitProp) => {
             </h4>
             {array &&
               verArr(array.list) &&
-              array.list.map(item => {
+              array.list.map((item) => {
                 return (
                   <p key={item.id}>
                     {item.name}
@@ -84,7 +84,7 @@ const Statistics = (props: InitProp) => {
           <h3>js异步编程</h3>
           {async &&
             verArr(async.list) &&
-            async.list.map(item => (
+            async.list.map((item) => (
               <div key={item.id}>
                 <p>{item.name}</p>
                 <p>{item.description}</p>

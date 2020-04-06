@@ -144,8 +144,8 @@ export function isObj(obj) {
  * @param { number } timeout 要延迟的时间（毫秒）
  * @return { Promise }
  */
-export const delayFunc = timeout =>
-  new Promise(resolve => {
+export const delayFunc = (timeout) =>
+  new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
 
@@ -158,7 +158,7 @@ export const delayFunc = timeout =>
 export const debounce = (func, delay, immediate) => {
   let timeout = null;
 
-  return function() {
+  return function () {
     const context = this;
     const args = arguments;
 
@@ -172,7 +172,7 @@ export const debounce = (func, delay, immediate) => {
       }, delay);
       if (callNow) func.apply(context, args);
     } else {
-      timeout = setTimeout(function() {
+      timeout = setTimeout(function () {
         func.apply(context, args);
       }, delay);
     }
@@ -186,7 +186,7 @@ export const debounce = (func, delay, immediate) => {
  */
 export const throttle = (func, delay) => {
   let previous = 0;
-  return function() {
+  return function () {
     const now = Date.now();
     const context = this;
 
@@ -219,7 +219,7 @@ export const jsonString = (json = {}) => {
   if (isObj(json)) {
     for (const key in json) {
       if (verArr(json[key])) {
-        json[key].forEach(item => {
+        json[key].forEach((item) => {
           switch (item) {
             case moment(item, 'YYYY-MM-DD').isValid():
               let arr = [];

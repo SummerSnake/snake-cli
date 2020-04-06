@@ -28,7 +28,7 @@ function Login(props: InitProp) {
   return (
     <div
       className={styles.loginWrap}
-      onKeyDown={async e => {
+      onKeyDown={async (e) => {
         if (e.keyCode === 13) {
           handleSubmit();
         }
@@ -49,14 +49,14 @@ function Login(props: InitProp) {
               defaultValue={userName}
               prefix={<UserOutlined className={styles.iconDom} />}
               className={styles.inputDom}
-              onChange={e => setUserName(e.target.value)}
+              onChange={(e) => setUserName(e.target.value)}
               placeholder="请输入用户名"
             />
             <Input
               defaultValue={password}
               prefix={<LockOutlined className={styles.iconDom} />}
               className={styles.inputDom}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="请输入密码"
             />
             <Button type="primary" className={styles.btnDom} onClick={() => handleSubmit()}>

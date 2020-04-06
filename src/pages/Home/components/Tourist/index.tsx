@@ -92,7 +92,7 @@ function Tourist(props: InitProp) {
             <h4>今日省份统计</h4>
             <div>
               {verArr(provinceList) &&
-                provinceList.map(item => (
+                provinceList.map((item) => (
                   <div key={item.id}>
                     <i />
                     <div>

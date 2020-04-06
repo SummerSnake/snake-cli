@@ -25,7 +25,7 @@ function MenuManage() {
    */
   const recursion = (menuList = [], index: number) => {
     const arr = [];
-    menuList.forEach(item => {
+    menuList.forEach((item) => {
       if (item.parentId === index) {
         arr.push(
           <Tree.TreeNode

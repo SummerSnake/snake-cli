@@ -18,7 +18,7 @@ function InfoTable(props: InitProps) {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <span>{text}</span>,
+      render: (text) => <span>{text}</span>,
     },
     {
       title: 'Age',
@@ -34,9 +34,9 @@ function InfoTable(props: InitProps) {
       title: 'Tags',
       key: 'tags',
       dataIndex: 'tags',
-      render: tags => (
+      render: (tags) => (
         <span>
-          {tags.map(tag => {
+          {tags.map((tag) => {
             let color = tag.length > 5 ? 'geekblue' : 'green';
             if (tag === 'loser') {
               color = 'volcano';

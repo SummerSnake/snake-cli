@@ -8,7 +8,7 @@ function Feedback() {
    * @desc textArea 内容更新
    * @param { object } e event
    */
-  const handleAreaChange = e => {
+  const handleAreaChange = (e) => {
     console.log(e.target.value);
   };
 

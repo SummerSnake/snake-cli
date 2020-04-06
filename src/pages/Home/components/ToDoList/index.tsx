@@ -35,7 +35,7 @@ function ToDoList(props: InitProp) {
    * @desc tabs 选择
    * @param { string } key 当前选择的 tab
    */
-  const onTabChange = key => {
+  const onTabChange = (key) => {
     setAnimKey(key);
 
     setTimeout(() => {

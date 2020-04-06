@@ -26,7 +26,7 @@ class Details extends React.Component<InitProp, InitState> {
     return (
       <React.Fragment>
         <a
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             this.setState({ isShow: true });
           }}

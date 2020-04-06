@@ -10,10 +10,10 @@ export function getRequest(url, params) {
   return new Promise((resolve, reject) => {
     axios
       .get(url, params)
-      .then(response => {
+      .then((response) => {
         resolve(response);
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error);
       });
   });
@@ -29,10 +29,10 @@ export function postRequest(url, params) {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
-      .then(response => {
+      .then((response) => {
         resolve(response);
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error);
       });
   });

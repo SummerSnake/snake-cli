@@ -5,7 +5,7 @@ import moment from 'moment';
  * @param { string } day
  * @return { string }
  */
-export const weekFormat = function(day: string) {
+export const weekFormat = function (day: string) {
   switch (day) {
     case '1':
       return '星期一';
@@ -30,7 +30,7 @@ export const weekFormat = function(day: string) {
  * @param nowDate
  * @return { object }
  */
-export const calcWeek = function(nowDate) {
+export const calcWeek = function (nowDate) {
   return {
     // 当前月 + 当前日 的前一周
     lastWeek: moment(nowDate).subtract(1, 'weeks'),
@@ -44,7 +44,7 @@ export const calcWeek = function(nowDate) {
  * @param date
  * @return { array }
  */
-export const columnsJson = function(date) {
+export const columnsJson = function (date) {
   return [
     {
       id: 1,
@@ -53,69 +53,33 @@ export const columnsJson = function(date) {
     },
     {
       id: 2,
-      _date: moment(date)
-        .add(1, 'days')
-        .format('MM-DD'),
-      _day: weekFormat(
-        moment(date)
-          .add(1, 'days')
-          .format('d')
-      ),
+      _date: moment(date).add(1, 'days').format('MM-DD'),
+      _day: weekFormat(moment(date).add(1, 'days').format('d')),
     },
     {
       id: 3,
-      _date: moment(date)
-        .add(2, 'days')
-        .format('MM-DD'),
-      _day: weekFormat(
-        moment(date)
-          .add(2, 'days')
-          .format('d')
-      ),
+      _date: moment(date).add(2, 'days').format('MM-DD'),
+      _day: weekFormat(moment(date).add(2, 'days').format('d')),
     },
     {
       id: 4,
-      _date: moment(date)
-        .add(3, 'days')
-        .format('MM-DD'),
-      _day: weekFormat(
-        moment(date)
-          .add(3, 'days')
-          .format('d')
-      ),
+      _date: moment(date).add(3, 'days').format('MM-DD'),
+      _day: weekFormat(moment(date).add(3, 'days').format('d')),
     },
     {
       id: 5,
-      _date: moment(date)
-        .add(4, 'days')
-        .format('MM-DD'),
-      _day: weekFormat(
-        moment(date)
-          .add(4, 'days')
-          .format('d')
-      ),
+      _date: moment(date).add(4, 'days').format('MM-DD'),
+      _day: weekFormat(moment(date).add(4, 'days').format('d')),
     },
     {
       id: 6,
-      _date: moment(date)
-        .add(5, 'days')
-        .format('MM-DD'),
-      _day: weekFormat(
-        moment(date)
-          .add(5, 'days')
-          .format('d')
-      ),
+      _date: moment(date).add(5, 'days').format('MM-DD'),
+      _day: weekFormat(moment(date).add(5, 'days').format('d')),
     },
     {
       id: 7,
-      _date: moment(date)
-        .add(6, 'days')
-        .format('MM-DD'),
-      _day: weekFormat(
-        moment(date)
-          .add(6, 'days')
-          .format('d')
-      ),
+      _date: moment(date).add(6, 'days').format('MM-DD'),
+      _day: weekFormat(moment(date).add(6, 'days').format('d')),
     },
   ];
 };

@@ -68,10 +68,10 @@ function SiderMenu(props: InitProp) {
         defaultOpenKeys={defaultKeys}
       >
         {verArr(menu) &&
-          menu.map(item =>
+          menu.map((item) =>
             item && verArr(item['list']) ? (
               <Menu.SubMenu key={item.path} title={titleNode(item)}>
-                {item['list'].map(listItem => (
+                {item['list'].map((listItem) => (
                   <Menu.Item key={item.path + listItem.path}>
                     <span>{listItem.name}</span>
                   </Menu.Item>

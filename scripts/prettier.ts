@@ -40,7 +40,7 @@ files = files.concat(cssFiles);
 files = files.concat(eslint);
 
 if (files.length) {
-  files.forEach(file => {
+  files.forEach((file) => {
     const options = prettier.resolveConfig.sync(file, {
       config: prettierConfigPath,
     });

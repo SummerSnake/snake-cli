@@ -62,7 +62,7 @@ function Notice(props: InitProp) {
           useWindow={false}
         >
           {verArr(list) &&
-            list.map(item => (
+            list.map((item) => (
               <li key={item.id}>
                 <span>{item.title}</span>
                 <span>发布于 {item.sendDate}</span>
