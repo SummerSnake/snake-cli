@@ -1,4 +1,4 @@
-@import '../../../styles/mixin.less';
+@import '@/styles/mixin.less';
 
 .menuManageWrap {
   height: 100%;
@@ -39,6 +39,7 @@
     line-height: 24px;
     text-align: center;
     border: 1px solid #c5b4b4;
+    cursor: pointer;
   }
   .treeNodeActive {
     .wh(120%, 24px);
@@ -46,6 +47,7 @@
     text-align: center;
     color: #fff;
     background-color: @primaryColor;
+    cursor: pointer;
   }
   :global {
     .ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
