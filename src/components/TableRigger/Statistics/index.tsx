@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider } from 'antd';
 import { connect } from 'react-redux';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import { deepCompare, verArr } from '@utils/util';
 import styles from './index.less';
 import '../../../../mock/topListApi';

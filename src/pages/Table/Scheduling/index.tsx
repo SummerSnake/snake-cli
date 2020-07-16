@@ -4,7 +4,7 @@ const { Column, ColumnGroup } = Table;
 const { Option } = Select;
 import moment from 'moment';
 import { weekFormat, calcWeek, columnsJson } from '@utils/date';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import { verArr } from '@utils/util';
 import SelectTime from './components/SelectTime/index';
 import '../../../../mock/schedulingApi';

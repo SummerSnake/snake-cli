@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base.ts');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 module.exports = merge(baseConfig, {
   mode: 'development', // 开发模式

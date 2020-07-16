@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Tag, Drawer, Divider } from 'antd';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import PersonalInfo from './components/PersonalInfo/index';
 import styles from './index.less';
 import '../../../../mock/singleTableApi';

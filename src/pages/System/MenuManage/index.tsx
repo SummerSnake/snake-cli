@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { WindowsOutlined, TableOutlined, SettingOutlined, FolderOutlined } from '@ant-design/icons';
 import { Spin, Tree, Tag, Popconfirm } from 'antd';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import styles from './index.less';
 import '../../../../mock/menuManageApi';
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import { verArr, openNotificationWithIcon } from '@utils/util';
 import '../../../../../mock/noticeApi';
 import styles from './index.less';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Table, Button } from 'antd';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import {
   jsonString,
   verArr,

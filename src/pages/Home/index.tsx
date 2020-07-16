@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import ToDoList from './components/ToDoList';
 import Statistics from './components/Statistics';
 import Charts from './components/Charts';

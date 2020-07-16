@@ -9,7 +9,7 @@ import {
   TeamOutlined,
 } from '@ant-design/icons';
 
-import { getRequest } from '@services/api';
+import { getRequest } from '@utils/request';
 import { verArr } from '@utils/util';
 import InfoTable from './components/InfoTable';
 import styles from './index.less';
