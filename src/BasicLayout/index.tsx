@@ -7,7 +7,7 @@ import { verArr } from '@utils/util';
 import SiderMenu from './components/SiderMenu/index';
 import styles from './index.less';
 
-export default function BasicLayout() {
+function BasicLayout() {
   return (
     <Layout className={styles.layoutWrap}>
       <Sider className={styles.siderDom}>
@@ -27,3 +27,5 @@ export default function BasicLayout() {
     </Layout>
   );
 }
+
+export default BasicLayout;

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Echarts from 'echarts';
+import * as Echarts from 'echarts';
 import { verArr } from '@utils/util';
 import styles from './index.less';
 

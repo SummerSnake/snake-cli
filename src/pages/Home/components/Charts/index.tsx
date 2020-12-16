@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Echarts from 'echarts';
+import * as Echarts from 'echarts';
 import { verArr } from '@utils/util';
 import styles from './index.less';
 
@@ -38,7 +38,7 @@ function Charts(props: InitProp) {
       },
       tooltip: {
         type: 'showTip',
-        formatter(params) {
+        formatter(params: { name: any; value: any }) {
           return `<span>${params.name}:00</span><br/><span>游客数量：${params.value}</span>`;
         },
       },
