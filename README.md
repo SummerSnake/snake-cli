@@ -9,7 +9,7 @@ React + React-Router + Typescript + ant design + webpack4.0 脚手架
 
 # 注意事项
 
-1. webpack4中除了正常安装 webpack 之外，需要再单独安一个 webpack-cli
+1. webpack4 中除了正常安装 webpack 之外，需要再单独安一个 webpack-cli
 2. 启动 devServer 需要安装 webpack-dev-server
 3. TableRigger 为表格定制封装组件，整合表格、汇总、筛选、操作按钮、详情等组件
 
@@ -42,7 +42,7 @@ yarn build
     │   ├── webpack.dev.ts     // 开发时配置
     │   └── product.dev.js     // 打包时配置
     ├── mock                   // mock 数据
-    ├── script                  // node.js 脚本 
+    ├── script                  // node.js 脚本
     ├── src                    // 源码目录
     │   ├── BasicLayout             // 布局组件
     │   ├── components             // 公共组件
@@ -52,7 +52,6 @@ yarn build
     │   │       ├── index.tsx           // 页面逻辑
     │   │       ├── index.less         // 页面样式
     │   ├── router                  // 路由
-    │   ├── services                // ajax 封装
     │   ├── utils                   // 常用工具类
     │   ├── index.tsx               // 入口文件
     │   └── index.html

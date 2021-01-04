@@ -35,6 +35,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/interface-name-prefix': 0,
     // js 相关校验规则
     'no-console': 0, // 允许使用 console
     eqeqeq: ['warn', 'always'], // 要求使用 === 和 !==
