@@ -6,7 +6,7 @@
     // 在tsx文件里支持jsx
     "jsx": "react",
     // 指定生成哪个模块系统的代码
-    "module": "esNext",
+    // "module": "esNext",
     // 生成es5的js文件
     "target": "es5",
     // 决定如何处理模块

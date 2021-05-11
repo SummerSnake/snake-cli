@@ -1,3 +1,4 @@
+export {};
 const baseConfig = require('./webpack.base.ts');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');

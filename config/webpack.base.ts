@@ -1,3 +1,4 @@
+export {}; // 解决 'Cannot redeclare block-scoped variable'
 const { resolve } = require('path');
 const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -20,6 +21,12 @@ module.exports = {
       {
         // oneOf 规则数组，当规则匹配时，只使用第一个匹配规则
         oneOf: [
+          {
+            test: /\.m?js/,
+            resolve: {
+              fullySpecified: false,
+            },
+          },
           /**
            * 加入 html-loader 识别html文件
            */
