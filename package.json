@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --config ./config/webpack.dev.ts",
-    "dev": "webpack-dev-server --config ./config/webpack.dev.ts",
+    "dev": "webpack serve --config ./config/webpack.dev.ts",
     "build": "cross-env NODE_ENV=production webpack  --config  ./config/webpack.prod.ts",
     "lint": "eslint --ext .tsx,.ts --fix ./src",
     "prettier": "node scripts/prettier.ts"
