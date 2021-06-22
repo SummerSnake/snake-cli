@@ -1,5 +1,7 @@
 export {}; // 解决 'Cannot redeclare block-scoped variable'
 const { resolve } = require('path');
+const WebpackBar = require('webpackbar');
+
 const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9,12 +11,11 @@ module.exports = {
     app: ['./src/index.tsx'], // 入口文件
     vendors: ['react', 'react-dom', 'react-router-dom', 'echarts'], // 所引入的公共库
   },
-  output: {
-    // 对应于entry里面生成出来的文件名，
-    // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
-    filename: 'js/[name].[hash:6].js',
-    chunkFilename: 'js/[name]_chunk.[chunkhash:8].js',
-    path: resolve(__dirname, '../dist'), // 输出目录
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename],
+    },
   },
   module: {
     rules: [
@@ -134,6 +135,11 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[name].[contenthash:8].chunk.css',
+    }),
+    new WebpackBar({
+      name: 'Packing...',
+      color: '#6d9eeb',
     }),
   ],
   resolve: {

@@ -1,38 +1,47 @@
 {
   "version": "1.0.0",
   "compilerOptions": {
-    "outDir": "dist",
-    "baseUrl": "./",
-    // 在tsx文件里支持jsx
-    "jsx": "react",
-    // 指定生成哪个模块系统的代码
-    // "module": "esNext",
-    // 生成es5的js文件
-    "target": "es5",
-    // 决定如何处理模块
-    "moduleResolution": "node",
-    // 为 false 时，如果编译器无法根据变量的使用来判断类型时，将用 any 类型代替。为 true 时，进行强类型检查，会报错
-    "noImplicitAny": false,
-    // 编译 js 的时候，删除掉注释
-    "removeComments": true,
-    "preserveConstEnums": true,
-    // 允许编译js文件
-    "allowJs": true,
-    // 允许从没有设置默认导出的模块中默认导入
-    "esModuleInterop": true,
-    // 允许使用装饰器
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "typeRoots": ["node_modules/@types", "global.d.ts"],
-    "lib": ["dom", "esnext"],
-    // 解析非相对模块的基准目录
-    "paths": {
+    // 基本配置
+    "target": "ES5",                          // 编译成哪个版本的 es
+    // "module": "ESNext",                       // 指定生成哪个模块系统代码
+    "lib": ["dom", "dom.iterable", "esnext"], // 编译过程中需要引入的库文件的列表
+    "allowJs": true,                          // 允许编译 js 文件
+    "jsx": "react",                           // 在 .tsx 文件里支持 JSX
+    // "isolatedModules": true,				          // 提供额外的一些语法检查，如文件没有模块导出会报错
+    "strict": true,                           // 启用所有严格类型检查选项
+
+    // 模块解析选项
+    "moduleResolution": "node",               // 指定模块解析策略
+    "esModuleInterop": true,                  // 支持 CommonJS 和 ES 模块之间的互操作性
+    "resolveJsonModule": true,                // 支持导入 json 模块
+    "baseUrl": "./",                          // 根路径
+    "paths": {								                // 路径映射，与 baseUrl 关联
       // alias 路径映射，如在文件中使用‘@’相当于‘src/’
       "@": ["src/*"],
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"]
-    }
+    },
+
+    // 实验性选项
+    "experimentalDecorators": true,           // 启用实验性的ES装饰器
+    "emitDecoratorMetadata": true,            // 给源码里的装饰器声明加上设计类型元数据
+    
+    // 其他选项
+    "forceConsistentCasingInFileNames": true, // 禁止对同一个文件的不一致的引用
+    "skipLibCheck": true,                     // 忽略所有的声明文件（ *.d.ts）的类型检查
+    "allowSyntheticDefaultImports": true,     // 允许从没有设置默认导出的模块中默认导入
+    "noEmit": true,							              // 只想使用tsc的类型检查作为函数时（当其他工具（例如Babel实际编译）时）使用它
+        
+    "outDir": "dist",
+    // 为 false 时，如果编译器无法根据变量的使用来判断类型时，将用 any 类型代替。为 true 时，进行强类型检查，会报错
+    "noImplicitAny": false,
+    // 编译 js 的时候，删除掉注释
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types", "global.d.ts"],
+
   },
   "include": ["./src/**/*", "./global.d.ts"]
 }

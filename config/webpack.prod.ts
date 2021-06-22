@@ -1,13 +1,23 @@
 export {};
-const baseConfig = require('./webpack.base.ts');
+const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const baseConfig = require('./webpack.base.ts');
+
 module.exports = merge(baseConfig, {
   mode: 'production', // 生产模式
+  output: {
+    // 对应于entry里面生成出来的文件名，
+    // hash 标识，每次修改输出不同文件名，用于更新浏览器缓存文件，区分版本, 8 代表打包出来为 8位 字符串
+    path: resolve(__dirname, '../dist'), // 输出目录
+    filename: 'js/[name].[hash:6].js',
+    chunkFilename: 'js/[name]_chunk.[chunkhash:8].js',
+    assetModuleFilename: 'images/[name].[contenthash:8].[ext]',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       // 指定生成的文件所依赖哪一个html文件模板，模板类型可以是html、jade、ejs等
