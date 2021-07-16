@@ -13,6 +13,11 @@ const dvaApp = dva.createApp({
 
 const store = dvaApp.getStore();
 
+// 放置在你需要热加载的模块， 放在入口就行了
+if (module && module.hot) {
+  module.hot.accept();
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Routers />
