@@ -16,8 +16,8 @@ function Tourist(props: InitProp) {
   /**
    * @desc 图表初始化
    */
-  const init = () => {
-    const myChartOne = Echarts.init(document.getElementById('chartDom'));
+  const initChart = () => {
+    const myChartOne = Echarts.init(document.getElementById('chartDom') as HTMLElement);
     // 绘制图表
     myChartOne.setOption({
       color: [
@@ -74,11 +74,14 @@ function Tourist(props: InitProp) {
         },
       ],
     });
-    window.onresize = myChartOne.resize;
+
+    window.addEventListener('resize', () => {
+      myChartOne.resize();
+    });
   };
 
   useEffect(() => {
-    init();
+    initChart();
   }, [props.touristData]);
 
   const { provinceList, rankings } = props.touristData;

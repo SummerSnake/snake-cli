@@ -24,9 +24,9 @@ function Charts(props: InitProp) {
   /**
    * @desc 图表初始化
    */
-  const init = () => {
-    const myChartOne = Echarts.init(document.getElementById('charts_01'));
-    const myChartTwo = Echarts.init(document.getElementById('charts_02'));
+  const initChart = () => {
+    const myChartOne = Echarts.init(document.getElementById('charts_01') as HTMLElement);
+    const myChartTwo = Echarts.init(document.getElementById('charts_02') as HTMLElement);
     // 绘制图表1
     myChartOne.setOption({
       title: {
@@ -101,7 +101,6 @@ function Charts(props: InitProp) {
         },
       ],
     });
-    window.onresize = myChartOne.resize;
 
     // 绘制图表2
     myChartTwo.setOption({
@@ -173,11 +172,15 @@ function Charts(props: InitProp) {
         },
       ],
     });
-    window.onresize = myChartTwo.resize;
+
+    window.addEventListener('resize', () => {
+      myChartOne.resize();
+      myChartTwo.resize();
+    });
   };
 
   useEffect(() => {
-    init();
+    initChart();
   }, [props.chartsData]);
 
   const { sortList } = props.chartsData;

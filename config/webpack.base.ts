@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: {
     app: ['./src/index.tsx'], // 入口文件
-    vendors: ['react', 'react-dom', 'react-router-dom', 'echarts'], // 所引入的公共库
   },
   cache: {
     type: 'filesystem',
