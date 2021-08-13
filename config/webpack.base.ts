@@ -28,16 +28,12 @@ module.exports = {
               fullySpecified: false,
             },
           },
-          /**
-           * 加入 html-loader 识别html文件
-           */
+          // html-loader 识别html文件
           {
             test: /\.(html)$/,
             loader: 'html-loader',
           },
-          /**
-           * 加入 ts-loader 解析 TypeScript 文件
-           */
+          // ts-loader 解析 TypeScript 文件
           {
             test: /\.tsx?$/,
             use: [
@@ -92,37 +88,17 @@ module.exports = {
             ],
             include: /src/,
           },
-          /**
-           * 单独处理 ant design css
-           */
+          // 单独处理 ant design css
           {
             test: /\.css$/,
             use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
             include: /node_modules/,
           },
-          /**
-           * 加入 url-loader 将小于 8kb 的图片转化为 base64, 优化性能
-           * [ext] 表示是原文件的扩展名
-           */
+          // 处理静态资源 图片、视频、字体文件等
           {
             test: /\.(jpe?g|png|bmp|svg|gif|webp)$/,
-            loader: 'url-loader',
-            options: {
-              limit: 8 * 1024,
-              name: '[name].[hash:8].[ext]',
-            },
+            type: 'asset',
             include: /src/,
-          },
-          /**
-           * 将静态资源 图片、视频、字体文件等，在进行一些处理后（主要是文件名和路径），移动到打包后的目录中
-           */
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'asset/',
-              name: '[name].[hash].[ext]',
-            },
-            exclude: /\.(css|less|json|jsx?|tsx?)$/,
           },
         ],
       },

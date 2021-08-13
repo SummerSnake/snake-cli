@@ -18,9 +18,9 @@
     "paths": {								                // 路径映射，与 baseUrl 关联
       // alias 路径映射，如在文件中使用‘@’相当于‘src/’
       "@": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"],
-      "@utils/*": ["src/utils/*"]
+      "@components*": ["src/components*"],
+      "@config*": ["src/config*"],
+      "@utils*": ["src/utils*"]
     },
 
     // 实验性选项

@@ -20,7 +20,7 @@ module.exports = merge(baseConfig, {
   optimization: {
     // 当开启 HotModuleReplacementPlugin 的时候使用该插件直接返回更新文件名，而不是文件的id
     moduleIds: 'named',
-    runtimeChunk: 'single', // js 热更新暂时失效，css 有效
+    runtimeChunk: 'single',
   },
   devServer: {
     contentBase: resolve(__dirname, '../dist'),

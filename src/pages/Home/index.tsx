@@ -100,7 +100,11 @@ function Home(props: InitProp) {
 
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
-      props.history.push('/login');
+      const { history } = props;
+
+      if (history) {
+        history.push('/login');
+      }
     }
   }, []);
 
@@ -123,7 +127,7 @@ function Home(props: InitProp) {
    * @param { object } json loading状态对象
    */
   function loadingCall(json: CallJson): void {
-    setLoading(json['isLoading']);
+    setLoading(!!json?.isLoading);
   }
 
   const { todoListData, statisticsData, chartsData, touristData } = apiData;
